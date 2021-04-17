@@ -16,28 +16,26 @@
 </div>
 
 <div class="my-group-main btn-group btn-group-justified">
-    <a onclick="getTimetable(this)" class="btn btn-warning">MONDAY</a>
-    <a onclick="getTimetable(this)" class="btn btn-warning">TUESDAY</a>
-    <a onclick="getTimetable(this)" class="btn btn-warning">WEDNESDAY</a>
-    <a onclick="getTimetable(this)" class="btn btn-warning">TUESDAY</a>
+    <a onclick="getTimetable(this.innerText)" class="btn btn-warning">MONDAY</a>
+    <a onclick="getTimetable(this.innerText)" class="btn btn-warning">TUESDAY</a>
+    <a onclick="getTimetable(this.innerText)" class="btn btn-warning">WEDNESDAY</a>
+    <a onclick="getTimetable(this.innerText)" class="btn btn-warning">TUESDAY</a>
 
 </div>
 <div class="my-group-main-2 btn-group btn-group-justified">
-    <a onclick="getTimetable(this)" class="btn btn-warning">FRIDAY</a>
-    <a onclick="getTimetable(this)" class="btn btn-warning">SATURDAY</a>
-    <a onclick="getTimetable(this)" class="btn btn-warning">SUNDAY</a>
+    <a onclick="getTimetable(this.innerText)" class="btn btn-warning">FRIDAY</a>
+    <a onclick="getTimetable(this.innerText)" class="btn btn-warning">SATURDAY</a>
+    <a onclick="getTimetable(this.innerText)" class="btn btn-warning">SUNDAY</a>
 </div>
 
 <div class="info_container" id="info_container">
-<h3>Time</h3>
-    <h2>Name</h2>
-    <p>Trener</p>
+
 </div>
 
 <script>
 
     function formTableRow(el){
-        var time = el.time.substring(0, 6);
+        var time = el.time.substring(0, 5);
         return '<div class="group_training">' +
             '<h3>'+time+'</h3>' +
             '<h2>'+el.name+'</h2>' +
@@ -46,13 +44,13 @@
     }
 
     function getTimetable(t){
-        console.log(t.innerText);
+        console.log(t);
 
         var $container = $('#info_container');
-        $container.innerHTML='';
+        document.getElementById('info_container').innerHTML='';
 
         var data={
-            day_of_week: t.innerText
+            day_of_week: t
         };
 
         $.ajax({
@@ -65,7 +63,7 @@
                 xhr.setRequestHeader('Content-Type', 'application/json')
             },
             success: function (response) {
-                // console.log(response);
+                console.log("R"+response);
 
                 response.forEach(function (el) {
                     $container.append(formTableRow(el));
