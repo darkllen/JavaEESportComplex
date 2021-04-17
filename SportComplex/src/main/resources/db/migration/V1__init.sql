@@ -48,9 +48,9 @@ create table complex
 -- (CURRENT_DATE(), 2, null);
 
 
-insert into complex (`space`, floors_num, open_date, city) values
-(175, 2, CURRENT_DATE(), 'Kyiv'),
-(345, 4, null, 'Odessa');
+insert into complex (name, description, `space`, floors_num, open_date, city) values
+('wowC', null, 175, 2, CURRENT_DATE(), 'Kyiv'),
+('myC', 'super complex', 345, 4, null, 'Odessa');
 
 
 insert into users (login, password) values
