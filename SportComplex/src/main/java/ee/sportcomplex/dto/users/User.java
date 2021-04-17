@@ -20,7 +20,7 @@ import java.util.List;
         name="role",
         discriminatorType=DiscriminatorType.STRING
 )
-@DiscriminatorValue("USER")
+@DiscriminatorValue("not null")
 @Table(name = "users")
 @ToString
 public class User {
