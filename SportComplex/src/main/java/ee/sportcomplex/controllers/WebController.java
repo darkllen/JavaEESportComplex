@@ -4,26 +4,22 @@ import ee.sportcomplex.dto.schedules.ScheduleGroup;
 import ee.sportcomplex.dto.schedules.ScheduleInd;
 import ee.sportcomplex.repos.schedules.ScheduleGroupRepo;
 import ee.sportcomplex.repos.schedules.ScheduleIndRepo;
+import ee.sportcomplex.services.ScheduleService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class WebController {
-
-    @Autowired
-    ScheduleGroupRepo repo;
+    private final ScheduleService service;
 
 
     @RequestMapping(value = {"/", "/sport_club"}, method = RequestMethod.GET)
     public String index(){
-        repo.findAllByCoach_Id(2).forEach(System.out::println);
-//        System.out.println("SADSDA");
-//        System.out.println(service.findUserByLogin("admin"));
         return "index";
     }
 
@@ -45,15 +41,14 @@ public class WebController {
 
     @ResponseBody
     @RequestMapping(value = {"/get_schedule_by_day_of_week_with_trener"}, method = RequestMethod.GET)
-    public List<ScheduleGroup> get_schedule_by_day_of_week_with_trener(){
-        return repo.findAllByCoach_Id(2);
+    public List<ScheduleGroup> get_schedule_by_day_of_week_with_trener(@RequestParam String day_of_week){
+        return service.getScheduleByDay(ScheduleGroup.DayOfWeek.valueOf(day_of_week));
     }
 
 
     @ResponseBody
     @RequestMapping(value = {"/get_a"}, method = RequestMethod.GET)
     public List<ScheduleGroup> get_books(){
-        repo.findAllByCoach_Id(2).forEach(x->x.getCoach());
-        return repo.findAllByCoach_Id(2);
+        return service.getScheduleByDay(ScheduleGroup.DayOfWeek.MONDAY);
     }
 }
