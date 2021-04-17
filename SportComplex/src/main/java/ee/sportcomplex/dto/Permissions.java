@@ -25,7 +25,7 @@ public class Permissions {
 
     public enum PermissionName {
         ADMIN,
-        USER,
+        CLIENT,
         ADMINISTRATOR,
         COACH
     }
