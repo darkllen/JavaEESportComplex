@@ -3,7 +3,6 @@ package ee.sportcomplex.services.users;
 import ee.sportcomplex.dto.Permissions;
 import ee.sportcomplex.dto.users.AuthUser;
 import ee.sportcomplex.repos.users.AuthRepo;
-import ee.sportcomplex.repos.users.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

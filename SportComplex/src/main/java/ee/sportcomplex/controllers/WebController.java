@@ -1,14 +1,9 @@
 package ee.sportcomplex.controllers;
 
 import ee.sportcomplex.dto.schedules.ScheduleGroup;
-import ee.sportcomplex.dto.schedules.ScheduleInd;
-import ee.sportcomplex.repos.ComplexRepo;
-import ee.sportcomplex.repos.schedules.ScheduleGroupRepo;
-import ee.sportcomplex.repos.schedules.ScheduleIndRepo;
 import ee.sportcomplex.services.ComplexService;
 import ee.sportcomplex.services.ScheduleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
