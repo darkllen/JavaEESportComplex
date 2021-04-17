@@ -11,8 +11,10 @@
 <body>
 <div class = "header" th:insert="~{fragments/header :: head}"></div>
 
+<div class="info_container">
+    <h2 class="main_h2">Timetable</h2>
+</div>
 
-<h2 class="main_h2">Timetable</h2>
 <div class="my-group-main btn-group btn-group-justified">
     <a onclick="getTimetable(this)" class="btn btn-warning">MONDAY</a>
     <a onclick="getTimetable(this)" class="btn btn-warning">TUESDAY</a>
@@ -27,19 +29,26 @@
 </div>
 
 <div class="info_container" id="info_container">
-
+<h3>Time</h3>
+    <h2>Name</h2>
+    <p>Trener</p>
 </div>
 
 <script>
 
     function formTableRow(el){
-        return '<h3>'+el.+'</h3>';
+        return '<div class="group_training">' +
+            '<h3>'+el.time+'</h3>' +
+            '<h2>'+el.name+'</h2>' +
+            '<p>Trener: '+el.trener_name+'</p>' +
+            '</div>';
     }
 
     function getTimetable(t){
         console.log(t.innerText);
 
         var $container = $('#info_container');
+        $container.innerHTML='';
 
         var data={
             day_of_week: t.innerText
@@ -70,33 +79,7 @@
 
     }
     $(function () {
-
-
         getTimetable("MONDAY");
-
-
-
-        // function formTableRow(el){
-        //     return '<h2>'+el.name+'</h2>' +
-        //         '<p>'+el.description+'</p>' +
-        //         '<p>City: '+el.city+'</p>' +
-        //         '<p>Opened '+el.open_date+'</p>';
-        // }
-        //
-        // $.ajax({
-        //     type: 'GET',
-        //     url: '/get_all_complexes',
-        //
-        //     success: function (response) {
-        //         response.forEach(function (cat) {
-        //             $container.append(formTableRow(cat));
-        //         });
-        //     },
-        //     error: function(err){
-        //         console.log(err);
-        //     }
-        // });
-
     })
 </script>
 
