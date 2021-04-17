@@ -1,6 +1,8 @@
-package ee.sportcomplex.services;
+package ee.sportcomplex.services.users;
 
 import ee.sportcomplex.dto.Permissions;
+import ee.sportcomplex.dto.users.AuthUser;
+import ee.sportcomplex.repos.users.AuthRepo;
 import ee.sportcomplex.repos.users.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,11 +20,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserLoginService implements UserDetailsService {
 
-    private final UserRepo userAbstractRepository;
+    private final AuthRepo repo;
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        final ee.sportcomplex.dto.users.User user = userAbstractRepository.findUserByLogin(username)
+        final AuthUser user = repo.findUserByLogin(username)
                 .orElseThrow(() -> new UsernameNotFoundException("No user with login: " + username));
 
         user.getPermissions().forEach(System.out::println);
