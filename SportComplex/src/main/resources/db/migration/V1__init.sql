@@ -25,25 +25,27 @@ create table user_to_permissions
 create table complex
 (
     id         int primary key auto_increment,
+    name       varchar (25) not null,
+    description varchar (100) null,
     space      int not null,
     floors_num int not null,
     open_date  date null,
     city       varchar not null
 );
 
-create table schedule
-(
-    id              int primary key auto_increment,
-    schedule_date   date not null,
-    coach_id        int not null,
-    constraint fk_coach_to_schedule foreign key (coach_id) references users(id),
-    client_id       int null,
-    constraint fk_client_to_schedule foreign key (client_id) references users(id),
-);
-
-insert into schedule (schedule_date, coach_id, client_id) values
-(CURRENT_DATE(), 1, 1),
-(CURRENT_DATE(), 2, null);
+-- create table schedule
+-- (
+--     id              int primary key auto_increment,
+--     schedule_date   date not null,
+--     coach_id        int not null,
+--     constraint fk_coach_to_schedule foreign key (coach_id) references users(id),
+--     client_id       int null,
+--     constraint fk_client_to_schedule foreign key (client_id) references users(id),
+-- );
+--
+-- insert into schedule (schedule_date, coach_id, client_id) values
+-- (CURRENT_DATE(), 1, 1),
+-- (CURRENT_DATE(), 2, null);
 
 
 insert into complex (`space`, floors_num, open_date, city) values
@@ -59,8 +61,8 @@ insert into permissions (permission) values
 ('ADMIN'),
 ('ADMINISTRATOR'),
 ('COACH'),
-('USER');
+('CLIENT');
 
 insert into user_to_permissions (user_id, permission_id) values
 ((select id from users where login = 'admin'), (select id from permissions where permission = 'ADMIN')),
-((select id from users where login = 'user'), (select id from permissions where permission = 'USER'));
+((select id from users where login = 'user'), (select id from permissions where permission = 'CLIENT'));
