@@ -1,4 +1,4 @@
-package ee.sportcomplex.controllers;
+package ee.sportcomplex.controllers.rest;
 
 import ee.sportcomplex.repos.ComplexRepo;
 import ee.sportcomplex.repos.users.CoachRepo;
@@ -15,11 +15,11 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class RestUserController {
-    private final UserService service;
-
-    @ResponseBody
-    @RequestMapping(value = {"/get_all_coaches_short"}, method = RequestMethod.GET)
-    public List<CoachRepo.CoachShort> get_all_coaches_short(){
-        return service.getCoachesShort();
-    }
+//    private final UserService service;
+//
+//    @ResponseBody
+//    @RequestMapping(value = {"/get_all_coaches_short"}, method = RequestMethod.GET)
+//    public List<CoachRepo.CoachShort> get_all_coaches_short(){
+//        return service.getCoachesShort();
+//    }
 }

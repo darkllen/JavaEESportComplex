@@ -1,4 +1,4 @@
-package ee.sportcomplex.controllers;
+package ee.sportcomplex.controllers.web;
 
 import ee.sportcomplex.dto.schedules.ScheduleGroup;
 import ee.sportcomplex.services.ComplexService;
@@ -13,18 +13,10 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class WebController {
-    private final ScheduleService service;
-    private final ComplexService complexService;
 
     @RequestMapping(value = {"/", "/sport_club"}, method = RequestMethod.GET)
     public String index(){
         return "index";
-    }
-
-    @RequestMapping(value = {"/all_complexes"}, method = RequestMethod.GET)
-    public String all_complexes(Model model){
-        model.addAttribute("complexes", complexService.getComplexes());
-        return "all_complexes";
     }
 
     @RequestMapping(value = {"/timetable"}, method = RequestMethod.GET)
@@ -37,20 +29,9 @@ public class WebController {
         return "buy_abonement";
     }
 
-    @RequestMapping(value = {"/book_personal"}, method = RequestMethod.GET)
-    public String book_personal(){
-        return "client/book_personal";
-    }
-
     @RequestMapping(value = {"/show_personal"}, method = RequestMethod.GET)
     public String show_personal(){
         return "client/show_personal";
-    }
-
-    @ResponseBody
-    @RequestMapping(value = {"/get_schedule_by_day_of_week_with_trener"}, method = RequestMethod.GET)
-    public List<ScheduleGroup> get_schedule_by_day_of_week_with_trener(@RequestParam String day_of_week){
-        return service.getScheduleByDay(ScheduleGroup.DayOfWeek.valueOf(day_of_week));
     }
 
 }
