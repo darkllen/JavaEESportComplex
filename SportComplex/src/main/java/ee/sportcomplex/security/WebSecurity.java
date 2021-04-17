@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import ee.sportcomplex.repos.UserRepo;
-import ee.sportcomplex.services.UserService;
+import ee.sportcomplex.services.UserLoginService;
 
 @RequiredArgsConstructor
 @Configuration
@@ -34,6 +34,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     protected UserDetailsService userDetailsService() {
-        return new UserService(userRepository);
+        return new UserLoginService(userRepository);
     }
 }
