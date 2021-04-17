@@ -1,5 +1,6 @@
 package ee.sportcomplex.services.users;
 
+import ee.sportcomplex.dto.users.Coach;
 import ee.sportcomplex.repos.schedules.ScheduleGroupRepo;
 import ee.sportcomplex.repos.users.CoachRepo;
 import lombok.RequiredArgsConstructor;
@@ -14,5 +15,8 @@ public class UserService {
 
     public List<CoachRepo.CoachShort> getCoachesShort(){
         return coachRepo.getAllShort();
+    }
+    public List<Coach> getCoaches(){
+        return coachRepo.getAll();
     }
 }
