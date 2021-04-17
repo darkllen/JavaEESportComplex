@@ -30,11 +30,13 @@
 //
 // });
 //
-// // $(document).ready(function(){
+// $(document).ready(function(){
+//
+$(function(){
 
 
 var slideIndex = 1;
-// showSlides(slideIndex);
+ showSlides(slideIndex);
 
 // Next/previous controls
 function plusSlides(n) {
@@ -74,6 +76,7 @@ $(document).on('click','.next',function(){
     plusSlides(1);
 });
 
+});
 
 
 

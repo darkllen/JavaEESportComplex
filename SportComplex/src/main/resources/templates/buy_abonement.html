@@ -5,17 +5,16 @@
     <title>SportClub</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/index.css" type="text/css">
-    <link rel="stylesheet" href="/slideshow.css" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="js/slideshow.js"></script>
 
 </head>
 <body>
 <div class = "header" th:insert="~{fragments/header :: head}"></div>
 
+<div class="info_container">
 
-<form id="form">
-    <h2>Buy abonement</h2>
+    <form id="form">
+        <h2>Buy abonement</h2>
         <p>Type : </p>
         <select id='select_type' name='select_type'></select>
         <p>Duration : </p>
@@ -28,9 +27,11 @@
         <select id='select_complex' name='select_complex'></select>
         <p th:unless="${#authorization.expression('isAuthenticated()')}">Phone number : </p>
         <!--<input type="tel" placeholder="Phone number" name="phone" th:unless="${#authorization.expression('isAuthenticated()')}">-->
-        <button class="btn btn-success" type="submit">Add</button>
+        <button class="btn btn-success" type="submit">Buy</button>
 
-</form>
+    </form>
+</div>
+
 
 <script>
     $(function () {
@@ -40,12 +41,12 @@
             type: "get",
             success: function (response) {
 
-                document.getElementById("select_type").innerHTML= '';
+                document.getElementById("select_type").innerHTML = '';
                 response.forEach(function (el) {
-                    document.getElementById("select_type").innerHTML+= '<option value="'+el.id+'">'+el.name+'</option>';
+                    document.getElementById("select_type").innerHTML += '<option value="' + el.id + '">' + el.name + '</option>';
                 });
             },
-            error: function(err){
+            error: function (err) {
                 console.log(err);
             }
         });
@@ -55,53 +56,52 @@
             type: "get",
             success: function (response) {
 
-                document.getElementById("select_complex").innerHTML= '';
+                document.getElementById("select_complex").innerHTML = '';
                 response.forEach(function (el) {
-                    document.getElementById("select_complex").innerHTML+= '<option value="'+el.id+'">'+el.name+'</option>';
+                    document.getElementById("select_complex").innerHTML += '<option value="' + el.id + '">' + el.name + '</option>';
                 });
             },
-            error: function(err){
+            error: function (err) {
                 console.log(err);
             }
         });
 
 
-        $('#form').submit(function(e) {
+        $('#form').submit(function (e) {
             e.preventDefault();
 
 
-            var data = {type : $(this).find('[name=select_type]').val()
+            var data = {
+                type: $(this).find('[name=select_type]').val()
                 , duration: $(this).find('[name=select_duration]').val()
                 , complex: $(this).find('[name=complex]').val()
                 , phone: $(this).find('[name=phone]').val()
             };
-            console.log(data);
+            // console.log(data);
 
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: '/edit_store_product/'+id,
-        //         dataType: 'json',
-        //         data: JSON.stringify(data),
-        //
-        //         beforeSend: function (xhr) {
-        //             xhr.setRequestHeader('Content-Type', 'application/json')
-        //         },
-        //         success: function (response) {
-        //             alert("Success");
-        //
-        //         },
-        //         error: function (request, textStatus, errorThrown) {
-        //             alert(request.getResponseHeader('error'));
-        //         }
-        //     });
-        // });
+            //     $.ajax({
+            //         type: 'POST',
+            //         url: '/edit_store_product/'+id,
+            //         dataType: 'json',
+            //         data: JSON.stringify(data),
+            //
+            //         beforeSend: function (xhr) {
+            //             xhr.setRequestHeader('Content-Type', 'application/json')
+            //         },
+            //         success: function (response) {
+            //             alert("Success");
+            //
+            //         },
+            //         error: function (request, textStatus, errorThrown) {
+            //             alert(request.getResponseHeader('error'));
+            //         }
+            //     });
+            // });
 
 
-    })
+        });
+    });
 </script>
-
-<h3>Welcome to our Sport Club!</h3>
-<p>Here you can book trainings from the most popular trainers and enjoy our equipment</p>
 
 
 
