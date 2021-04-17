@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>SportClub</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/index.css" type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div class = "header" th:insert="~{fragments/header :: head}"></div>
+
+<div class="info_container">
+    <h2 class="main_h2">Personal trainings</h2>
+</div>
+
+
+<div class="info_container">
+    <h2 class="main_h2">Timetable</h2>
+</div>
+
+<div class="info_container" id="info_container">
+
+</div>
+
+<script>
+
+    function formTableRow(el){
+        var date = el.schedule_date.substring(0, 10);
+        var time = el.schedule_date.substring(11, 16);
+
+        return '<div class="group_training">' +
+            '<h3>'+date+' '+time+'</h3>' +
+            '<h2>'+el.name+'</h2>' +
+            '<p>Coach: '+el.coach.name+' '+el.coach.surname+'</p>' +
+            '<button class="form_btn btn btn-danger remove_button" type="submit">Remove</button>' +
+            '</div>';
+    }
+    //
+    // function getTimetable(t){
+    //
+    //     var $container = $('#info_container');
+    //     document.getElementById('info_container').innerHTML='';
+    //
+    //     var data={
+    //         day_of_week: t
+    //     };
+    //
+    //     $.ajax({
+    //         type: 'get',
+    //         url: '/get_schedule_by_day_of_week_with_trener',
+    //         dataType: 'json',
+    //         data: data,
+    //
+    //         beforeSend: function (xhr) {
+    //             xhr.setRequestHeader('Content-Type', 'application/json')
+    //         },
+    //         success: function (response) {
+    //
+    //             response.forEach(function (el) {
+    //                 $container.append(formTableRow(el));
+    //             });
+    //
+    //         },
+    //         error: function (err) {
+    //             console.log(err);
+    //         }
+    //     });
+    //
+    //
+    // }
+
+</script>
+
+
+
+</body>

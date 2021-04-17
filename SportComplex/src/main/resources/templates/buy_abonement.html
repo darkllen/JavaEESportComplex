@@ -11,61 +11,46 @@
 <body>
 <div class = "header" th:insert="~{fragments/header :: head}"></div>
 
-<div class="info_container">
+    <div class="col1" style="width:40%">
+        <form id="form">
+            <h2>Buy abonement</h2>
+            <p>Type : </p>
+            <select id='select_type' name='select_type'>
+                <div th:each="el: ${types}">
+                    <option th:value="${el.id}" th:text="${el.name}"></option>
+                </div>
+            </select>
+            <p>Duration : </p>
+            <select id='select_duration' name='select_duration'>
+                <option value="month">1 month</option>
+                <option value="6_months">6 months</option>
+                <option value="year">1 year</option>
+            </select>
+            <p>Complex : </p>
+            <select id='select_complex' name='select_complex'>
+                <div th:each="el: ${complexes}">
+                    <option th:value="${el.id}" th:text="${el.name}"></option>
+                </div>
+            </select>
+            <p th:unless="${#authorization.expression('isAuthenticated()')}">Phone number : </p>
+            <input type="tel" placeholder="Phone number" name="phone" th:unless="${#authorization.expression('isAuthenticated()')}">
+            <button class="form_btn btn btn-success" type="submit">Buy</button>
 
-    <form id="form">
-        <h2>Buy abonement</h2>
-        <p>Type : </p>
-        <select id='select_type' name='select_type'></select>
-        <p>Duration : </p>
-        <select id='select_duration' name='select_duration'>
-            <option value="month">1 month</option>
-            <option value="6_months">6 months</option>
-            <option value="year">1 year</option>
-        </select>
-        <p>Complex : </p>
-        <select id='select_complex' name='select_complex'></select>
-        <p th:unless="${#authorization.expression('isAuthenticated()')}">Phone number : </p>
-        <input type="tel" placeholder="Phone number" name="phone" th:unless="${#authorization.expression('isAuthenticated()')}">
-        <button class="form_btn btn btn-success" type="submit">Buy</button>
+        </form>
+    </div>
+    <div class="col2" style="width: 45%" th:if="${#authorization.expression('isAuthenticated()')}">
+        <h2>Add existing abonement to this account</h2>
+        <form id="form_existing">
+            <p>Abonement number : </p>
+            <input type="number" placeholder="Abonement number" name="number">
+            <button class="form_btn btn btn-success" type="submit">Add</button>
 
-    </form>
-</div>
+        </form>
 
+    </div>
 
 <script>
     $(function () {
-
-        $.ajax({
-            url: '/get_all_types_short',
-            type: "get",
-            success: function (response) {
-
-                document.getElementById("select_type").innerHTML = '';
-                response.forEach(function (el) {
-                    document.getElementById("select_type").innerHTML += '<option value="' + el.id + '">' + el.name + '</option>';
-                });
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
-
-        $.ajax({
-            url: '/get_all_complexes_short',
-            type: "get",
-            success: function (response) {
-
-                document.getElementById("select_complex").innerHTML = '';
-                response.forEach(function (el) {
-                    document.getElementById("select_complex").innerHTML += '<option value="' + el.id + '">' + el.name + '</option>';
-                });
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
-
 
         $('#form').submit(function (e) {
             e.preventDefault();
@@ -77,8 +62,6 @@
                 , complex: $(this).find('[name=select_complex]').val()
                 , phone: $(this).find('[name=phone]').val()
             };
-            // console.log(data);
-
                 $.ajax({
                     type: 'POST',
                     url: '/add_abonement',
@@ -97,6 +80,31 @@
                     }
                 });
             });
+
+        $('#form_existing').submit(function (e) {
+            e.preventDefault();
+
+            var data = {
+                id: $(this).find('[name=number]').val()
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/add_existing_abonement',
+                dataType: 'json',
+                data: JSON.stringify(data),
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    alert("Success");
+
+                },
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
+                }
+            });
+        });
 
 
     });
