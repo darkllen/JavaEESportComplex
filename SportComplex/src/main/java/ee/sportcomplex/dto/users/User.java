@@ -3,6 +3,7 @@ package ee.sportcomplex.dto.users;
 import ee.sportcomplex.dto.Permissions;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -15,10 +16,12 @@ import java.util.List;
 @Setter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(
-        name="discriminator",
+        name="role",
         discriminatorType=DiscriminatorType.STRING
 )
+@DiscriminatorValue("USER")
 @Table(name = "users")
+@ToString
 public class User {
 
     @Id

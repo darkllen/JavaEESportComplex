@@ -3,6 +3,7 @@ create table users
     id       int primary key auto_increment,
     login    varchar(30) not null,
     password varchar(40) not null,
+    role     varchar (10) not null,
     unique uniq_login (login)
 );
 
@@ -33,19 +34,26 @@ create table complex
     city       varchar not null
 );
 
--- create table schedule
--- (
---     id              int primary key auto_increment,
---     schedule_date   date not null,
---     coach_id        int not null,
---     constraint fk_coach_to_schedule foreign key (coach_id) references users(id),
---     client_id       int null,
---     constraint fk_client_to_schedule foreign key (client_id) references users(id),
--- );
---
--- insert into schedule (schedule_date, coach_id, client_id) values
--- (CURRENT_DATE(), 1, 1),
--- (CURRENT_DATE(), 2, null);
+create table schedule_ind
+(
+    id              int primary key auto_increment,
+    schedule_date   date not null,
+    coach_id        int not null,
+    constraint fk_coach_to_schedule_ind foreign key (coach_id) references users(id),
+    client_id       int not null,
+    constraint fk_client_to_schedule_ind foreign key (client_id) references users(id)
+);
+
+create table schedule_group
+(
+    id              int primary key auto_increment,
+    coach_id        int not null,
+    constraint fk_coach_to_schedule_group foreign key (coach_id) references users(id),
+    day_of_week     varchar (10) not null,
+    time            time not null
+);
+
+
 
 
 insert into complex (name, description, `space`, floors_num, open_date, city) values
@@ -53,15 +61,24 @@ insert into complex (name, description, `space`, floors_num, open_date, city) va
 ('myC', 'super complex', 345, 4, null, 'Odessa');
 
 
-insert into users (login, password) values
-('admin', 'admin'),
-('user', 'user');
+insert into users (login, password, role) values
+('admin', 'admin', 'ADMIN'),
+('coach', 'coach', 'COACH'),
+('user', 'user', 'CLIENT');
 
 insert into permissions (permission) values
 ('ADMIN'),
 ('ADMINISTRATOR'),
 ('COACH'),
 ('CLIENT');
+
+insert into schedule_ind (schedule_date, coach_id, client_id) values
+(CURRENT_DATE(), 2, 3),
+(CURRENT_DATE(), 2, 3);
+
+insert into schedule_group (coach_id, day_of_week, time) values
+(2, 'MONDAY', CURRENT_TIME()),
+(2, 'TUESDAY', CURRENT_TIME());
 
 insert into user_to_permissions (user_id, permission_id) values
 ((select id from users where login = 'admin'), (select id from permissions where permission = 'ADMIN')),
