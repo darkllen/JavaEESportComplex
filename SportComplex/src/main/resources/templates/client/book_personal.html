@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>SportClub</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/index.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div class = "header" th:insert="~{fragments/header :: head}"></div>
+
+<div class="info_container">
+
+    <form id="form">
+        <h2>Book personal training</h2>
+        <p>Coach : </p>
+        <select id='select_coach' name='select_coach'></select>
+        <p>Date : </p>
+        <input type="date" placeholder="Date" name="date">
+        <p>Time : </p>
+        <input type="time" placeholder="Time" name="time">
+        <button class="form_btn btn btn-success" type="submit">Book</button>
+
+    </form>
+</div>
+
+
+<script>
+    $(function () {
+
+        $.ajax({
+            url: '/get_all_coaches_short',
+            type: "get",
+            success: function (response) {
+
+                document.getElementById("select_coach").innerHTML = '';
+                response.forEach(function (el) {
+                    document.getElementById("select_coach").innerHTML += '<option value="' + el.id + '">' + el.name +' '+el.surname+ '</option>';
+                });
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+
+
+        $('#form').submit(function (e) {
+            e.preventDefault();
+
+            var date =  $(this).find('[name=date]').val();
+            var time =  $(this).find('[name=time]').val();
+            var date_time = date+'T'+time+':00.000+00:00';
+
+            console.log(date_time);
+
+            var current = new Date().toISOString().slice(0, 19)+':00.000+00:00';
+            console.log(current);
+            if(current>date_time)
+                alert("Date and time must be less than current date and time");
+            else{
+                var data = {
+                    coach_id: $(this).find('[name=select_coach]').val()
+                    , schedule_date: date_time
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/add_schedule_ind',
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Content-Type', 'application/json')
+                    },
+                    success: function (response) {
+                        alert("Success");
+
+                    },
+                    error: function (request, textStatus, errorThrown) {
+                        alert(request.getResponseHeader('error'));
+                    }
+                });
+
+            }
+
+        });
+
+    });
+</script>
+
+
+</body>
