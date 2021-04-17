@@ -27,35 +27,48 @@
     <h2 class="main_h2">Timetable</h2>
 </div>
 
-<div class="my-group-main btn-group btn-group-justified">
-    <a onclick="getTimetable(this.innerText)" class="btn btn-warning">MONDAY</a>
-    <a onclick="getTimetable(this.innerText)" class="btn btn-warning">TUESDAY</a>
-    <a onclick="getTimetable(this.innerText)" class="btn btn-warning">WEDNESDAY</a>
-    <a onclick="getTimetable(this.innerText)" class="btn btn-warning">TUESDAY</a>
+    <div class="my-group-main btn-group btn-group-justified">
+        <a onclick="getTimetable(this.innerText)" class="btn btn-warning">MONDAY</a>
+        <a onclick="getTimetable(this.innerText)" class="btn btn-warning">TUESDAY</a>
+        <a onclick="getTimetable(this.innerText)" class="btn btn-warning">WEDNESDAY</a>
+        <a onclick="getTimetable(this.innerText)" class="btn btn-warning">TUESDAY</a>
+    </div>
+    <div class="my-group-main-2 btn-group btn-group-justified">
+        <a onclick="getTimetable(this.innerText)" class="btn btn-warning">FRIDAY</a>
+        <a onclick="getTimetable(this.innerText)" class="btn btn-warning">SATURDAY</a>
+        <a onclick="getTimetable(this.innerText)" class="btn btn-warning">SUNDAY</a>
+    </div>
 
-</div>
-<div class="my-group-main-2 btn-group btn-group-justified">
-    <a onclick="getTimetable(this.innerText)" class="btn btn-warning">FRIDAY</a>
-    <a onclick="getTimetable(this.innerText)" class="btn btn-warning">SATURDAY</a>
-    <a onclick="getTimetable(this.innerText)" class="btn btn-warning">SUNDAY</a>
-</div>
+<div th:if="${#authorization.expression('hasAuthority(''COACH'')')}" id="is_coach"></div>
+
+
+<a th:if="${#authorization.expression('hasAuthority(''COACH'')')}"  href="/all_checks_with_all_promo_products_from_category" class="btn btn-warning">Get all checks with all promo products from category</a>
+
+
 
 <div class="info_container" id="info_container">
 
 </div>
 
+
 <script>
 
-    function formTableRow(el){
+
+    function formTableRow(el, is_coach){
         var time = el.time.substring(0, 5);
-        return '<div class="group_training">' +
+        var ans = '<div class="group_training">' +
             '<h3>'+time+'</h3>' +
-            '<h2>'+el.name+'</h2>' +
-            '<p>Coach: '+el.coach.name+' '+el.coach.surname+'</p>' +
-            '</div>';
+            '<h2>'+el.name+'</h2>';
+        if(!is_coach) ans+='<p>Coach: '+el.coach.name+' '+el.coach.surname+'</p>';
+        ans+='</div>';
+        return ans;
     }
 
     function getTimetable(t){
+        var is_coach= (document.getElementById("is_coach")!=null);
+        var url = '/get_schedule_by_day_of_week_with_trener';
+        if(is_coach)
+            url = '/get_schedule_by_day_of_week_by_trener';
 
         var $container = $('#info_container');
         document.getElementById('info_container').innerHTML='';
@@ -64,9 +77,10 @@
             day_of_week: t
         };
 
+
         $.ajax({
             type: 'get',
-            url: '/get_schedule_by_day_of_week_with_trener',
+            url: url,
             dataType: 'json',
             data: data,
 
@@ -76,7 +90,7 @@
             success: function (response) {
 
                 response.forEach(function (el) {
-                    $container.append(formTableRow(el));
+                    $container.append(formTableRow(el, is_coach));
                 });
 
             },
