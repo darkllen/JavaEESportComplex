@@ -15,4 +15,19 @@ public class WebController {
 //        System.out.println(service.loadUserByUsername("admin"));
         return "index";
     }
+
+    @RequestMapping(value = {"/all_complexes"}, method = RequestMethod.GET)
+    public String all_complexes(){
+        return "all_complexes";
+    }
+
+    @RequestMapping(value = {"/timetable"}, method = RequestMethod.GET)
+    public String timetable(){
+        return "timetable";
+    }
+
+    @RequestMapping(value = {"/buy_abonement"}, method = RequestMethod.GET)
+    public String buy_abonement(){
+        return "buy_abonement";
+    }
 }
