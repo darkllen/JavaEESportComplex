@@ -44,6 +44,13 @@ public class WebController {
 
 
     @ResponseBody
+    @RequestMapping(value = {"/get_schedule_by_day_of_week_with_trener"}, method = RequestMethod.GET)
+    public List<ScheduleGroup> get_schedule_by_day_of_week_with_trener(){
+        return repo.findAllByCoach_Id(2);
+    }
+
+
+    @ResponseBody
     @RequestMapping(value = {"/get_a"}, method = RequestMethod.GET)
     public List<ScheduleGroup> get_books(){
         repo.findAllByCoach_Id(2).forEach(x->x.getCoach());
