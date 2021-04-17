@@ -13,5 +13,4 @@ import javax.persistence.Table;
 @DiscriminatorValue("COACH")
 public class Coach extends User{
 
-
 }

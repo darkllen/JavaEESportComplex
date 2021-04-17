@@ -14,19 +14,8 @@ import java.util.Date;
 @Setter
 @Table(name = "schedule_ind")
 @ToString
-public class ScheduleInd {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="coach_id", nullable=false)
-    private Coach coach;
-
-
-
-    @ManyToOne(fetch = FetchType.LAZY)
+public class ScheduleInd extends Schedule {
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="client_id", nullable=false)
     private Client client;
 

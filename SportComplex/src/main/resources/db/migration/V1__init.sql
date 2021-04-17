@@ -2,6 +2,8 @@ create table users
 (
     id       int primary key auto_increment,
     login    varchar(30) not null,
+    name     varchar (20) not null,
+    surname  varchar (20) not null,
     password varchar(40) not null,
     role     varchar (10) not null,
     unique uniq_login (login)
@@ -62,10 +64,10 @@ insert into complex (name, description, `space`, floors_num, open_date, city) va
 ('myC', 'super complex', 345, 4, null, 'Odessa');
 
 
-insert into users (login, password, role) values
-('admin', 'admin', 'ADMIN'),
-('coach', 'coach', 'COACH'),
-('user', 'user', 'CLIENT');
+insert into users (login, name, surname, password, role) values
+('admin', 'Ihor', 'Yankin', 'admin', 'ADMIN'),
+('coach', 'Anna', 'Hinkul', 'coach', 'COACH'),
+('user', 'Angelina', 'Volkova', 'user', 'CLIENT');
 
 insert into permissions (permission) values
 ('ADMIN'),

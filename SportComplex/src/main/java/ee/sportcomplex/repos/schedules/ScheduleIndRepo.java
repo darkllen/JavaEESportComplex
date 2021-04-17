@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ScheduleRepo extends JpaRepository<ScheduleInd, Integer> {
+public interface ScheduleIndRepo extends JpaRepository<ScheduleInd, Integer> {
     List<ScheduleInd> findAllByCoach_Id(Integer coach_id);
 }

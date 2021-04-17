@@ -1,6 +1,7 @@
 package ee.sportcomplex.dto.users;
 
 import ee.sportcomplex.dto.Permissions;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -33,6 +34,16 @@ public class User {
     @NotEmpty
     @Length(min = 3, max = 15)
     private String login;
+
+    @Column(name = "name", unique = true)
+    @NotEmpty
+    @Length(min = 3, max = 15)
+    private String name;
+
+    @Column(name = "surname", unique = true)
+    @NotEmpty
+    @Length(min = 3, max = 15)
+    private String surname;
 
     @Column(name = "password")
     @NotEmpty
