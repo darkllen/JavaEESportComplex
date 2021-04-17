@@ -34,19 +34,17 @@ create table complex
     city       varchar not null
 );
 
--- create table schedule
--- (
---     id              int primary key auto_increment,
---     schedule_date   date not null,
---     coach_id        int not null,
---     constraint fk_coach_to_schedule foreign key (coach_id) references users(id),
---     client_id       int null,
---     constraint fk_client_to_schedule foreign key (client_id) references users(id),
--- );
---
--- insert into schedule (schedule_date, coach_id, client_id) values
--- (CURRENT_DATE(), 1, 1),
--- (CURRENT_DATE(), 2, null);
+create table schedule
+(
+    id              int primary key auto_increment,
+    schedule_date   date not null,
+    coach_id        int not null,
+    constraint fk_coach_to_schedule foreign key (coach_id) references users(id),
+    client_id       int null,
+    constraint fk_client_to_schedule foreign key (client_id) references users(id)
+);
+
+
 
 
 insert into complex (name, description, `space`, floors_num, open_date, city) values
@@ -63,6 +61,10 @@ insert into permissions (permission) values
 ('ADMINISTRATOR'),
 ('COACH'),
 ('CLIENT');
+
+insert into schedule (schedule_date, coach_id, client_id) values
+(CURRENT_DATE(), 1, 1),
+(CURRENT_DATE(), 2, null);
 
 insert into user_to_permissions (user_id, permission_id) values
 ((select id from users where login = 'admin'), (select id from permissions where permission = 'ADMIN')),
