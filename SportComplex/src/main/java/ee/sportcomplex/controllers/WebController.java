@@ -11,7 +11,7 @@ public class WebController {
 //    @Autowired
 //    UserService service;
 
-    @RequestMapping(value = {"/aa", "all_books"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/sport_club"}, method = RequestMethod.GET)
     public String index(){
 //        System.out.println("SADSDA");
 //        System.out.println(service.loadUserByUsername("admin"));
