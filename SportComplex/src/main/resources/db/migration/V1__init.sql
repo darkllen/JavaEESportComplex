@@ -21,6 +21,20 @@ create table user_to_permissions (
 );
 
 
+create table complex
+(
+    id         int primary key auto_increment,
+    space      int not null,
+    floors_num int not null,
+    open_date  date null,
+    city       varchar not null
+);
+
+insert into complex (space, floors_num, open_date, city) values
+(175, 2, CURRENT_DATE(), 'Kyiv'),
+(345, 4, null, 'Odessa');
+
+
 insert into users (login, password) values
 ('admin', 'admin'),
 ('user', 'user');
