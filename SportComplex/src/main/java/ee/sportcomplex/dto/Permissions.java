@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "permissions")
@@ -17,10 +18,12 @@ public class Permissions {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotEmpty
     private Integer id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "permission", unique = true)
+    @NotEmpty
     private PermissionName permission;
 
     public enum PermissionName {
