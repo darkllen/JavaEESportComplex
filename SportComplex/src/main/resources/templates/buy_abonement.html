@@ -26,7 +26,7 @@
         <p>Complex : </p>
         <select id='select_complex' name='select_complex'></select>
         <p th:unless="${#authorization.expression('isAuthenticated()')}">Phone number : </p>
-        <!--<input type="tel" placeholder="Phone number" name="phone" th:unless="${#authorization.expression('isAuthenticated()')}">-->
+        <input type="tel" placeholder="Phone number" name="phone" th:unless="${#authorization.expression('isAuthenticated()')}">
         <button class="btn btn-success" type="submit">Buy</button>
 
     </form>
@@ -74,32 +74,31 @@
             var data = {
                 type: $(this).find('[name=select_type]').val()
                 , duration: $(this).find('[name=select_duration]').val()
-                , complex: $(this).find('[name=complex]').val()
+                , complex: $(this).find('[name=select_complex]').val()
                 , phone: $(this).find('[name=phone]').val()
             };
             // console.log(data);
 
-            //     $.ajax({
-            //         type: 'POST',
-            //         url: '/edit_store_product/'+id,
-            //         dataType: 'json',
-            //         data: JSON.stringify(data),
-            //
-            //         beforeSend: function (xhr) {
-            //             xhr.setRequestHeader('Content-Type', 'application/json')
-            //         },
-            //         success: function (response) {
-            //             alert("Success");
-            //
-            //         },
-            //         error: function (request, textStatus, errorThrown) {
-            //             alert(request.getResponseHeader('error'));
-            //         }
-            //     });
-            // });
+                $.ajax({
+                    type: 'POST',
+                    url: '/add_abonement',
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Content-Type', 'application/json')
+                    },
+                    success: function (response) {
+                        alert("Success");
+
+                    },
+                    error: function (request, textStatus, errorThrown) {
+                        alert(request.getResponseHeader('error'));
+                    }
+                });
+            });
 
 
-        });
     });
 </script>
 

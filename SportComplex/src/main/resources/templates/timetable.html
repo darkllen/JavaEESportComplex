@@ -1,10 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SportClub</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/index.css" type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+<div class = "header" th:insert="~{fragments/header :: head}"></div>
+
+
+<h2 class="main_h2">Timetable</h2>
+<div class="my-group-main btn-group btn-group-justified">
+    <a onclick="getTimetable(this)" class="btn btn-warning">MONDAY</a>
+    <a onclick="getTimetable(this)" class="btn btn-warning">TUESDAY</a>
+    <a onclick="getTimetable(this)" class="btn btn-warning">WEDNESDAY</a>
+    <a onclick="getTimetable(this)" class="btn btn-warning">TUESDAY</a>
+
+</div>
+<div class="my-group-main-2 btn-group btn-group-justified">
+    <a onclick="getTimetable(this)" class="btn btn-warning">FRIDAY</a>
+    <a onclick="getTimetable(this)" class="btn btn-warning">SATURDAY</a>
+    <a onclick="getTimetable(this)" class="btn btn-warning">SUNDAY</a>
+</div>
+
+<div class="info_container" id="info_container">
+
+</div>
+
+<script>
+
+    function formTableRow(el){
+        return '<h3>'+el.+'</h3>';
+    }
+
+    function getTimetable(t){
+        console.log(t.innerText);
+
+        var $container = $('#info_container');
+
+        var data={
+            day_of_week: t.innerText
+        };
+
+        $.ajax({
+            type: 'get',
+            url: '/get_schedule_by_day_of_week_with_trener',
+            dataType: 'json',
+            data: data,
+
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Content-Type', 'application/json')
+            },
+            success: function (response) {
+                // console.log(response);
+
+                response.forEach(function (el) {
+                    $container.append(formTableRow(el));
+                });
+
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+
+
+    }
+    $(function () {
+
+
+        getTimetable("MONDAY");
+
+
+
+        // function formTableRow(el){
+        //     return '<h2>'+el.name+'</h2>' +
+        //         '<p>'+el.description+'</p>' +
+        //         '<p>City: '+el.city+'</p>' +
+        //         '<p>Opened '+el.open_date+'</p>';
+        // }
+        //
+        // $.ajax({
+        //     type: 'GET',
+        //     url: '/get_all_complexes',
+        //
+        //     success: function (response) {
+        //         response.forEach(function (cat) {
+        //             $container.append(formTableRow(cat));
+        //         });
+        //     },
+        //     error: function(err){
+        //         console.log(err);
+        //     }
+        // });
+
+    })
+</script>
+
+
 
 </body>
-</html>

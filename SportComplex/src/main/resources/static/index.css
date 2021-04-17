@@ -15,3 +15,27 @@
 .info_container{
     margin-left: 5%;
 }
+
+.my-group-main{
+    margin-left: 40px;
+}
+.my-group-main, .my-group-main-2{
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+ .my-group-main-2{
+    margin-left: -10px;
+}
+
+@media screen and (max-width: 700px) {
+
+    .my-group-main-2{
+        margin-left: 40px;
+        margin-top: -5px;
+    }
+
+    .col1, .col2 {
+        width: 95%;
+        margin-right: 5%;
+    }
+}
