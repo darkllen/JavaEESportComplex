@@ -38,13 +38,12 @@
 
         </form>
     </div>
-    <div class="col2" style="width: 45%">
+    <div class="col2" style="width: 45%" th:if="${#authorization.expression('isAuthenticated()')}">
         <h2>Add existing abonement to this account</h2>
         <form id="form_existing">
-            <p th:unless="${#authorization.expression('isAuthenticated()')}">Abonement number : </p>
-            <input type="number" placeholder="Abonement number" name="number" th:unless="${#authorization.expression('isAuthenticated()')}">
+            <p>Abonement number : </p>
+            <input type="number" placeholder="Abonement number" name="number">
             <button class="form_btn btn btn-success" type="submit">Add</button>
-            <!--todo th if-->
 
         </form>
 
