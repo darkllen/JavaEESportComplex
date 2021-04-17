@@ -63,7 +63,8 @@ insert into complex (name, description, `space`, floors_num, open_date, city) va
 
 insert into users (login, password, role) values
 ('admin', 'admin', 'ADMIN'),
-('user', 'user', 'USER');
+('coach', 'coach', 'COACH'),
+('user', 'user', 'CLIENT');
 
 insert into permissions (permission) values
 ('ADMIN'),
@@ -72,11 +73,11 @@ insert into permissions (permission) values
 ('CLIENT');
 
 insert into schedule_ind (schedule_date, coach_id, client_id) values
-(CURRENT_DATE(), 1, 1),
-(CURRENT_DATE(), 2, 1);
+(CURRENT_DATE(), 2, 3),
+(CURRENT_DATE(), 2, 3);
 
 insert into schedule_group (coach_id, day_of_week, time) values
-(1, 'MONDAY', CURRENT_TIME()),
+(2, 'MONDAY', CURRENT_TIME()),
 (2, 'TUESDAY', CURRENT_TIME());
 
 insert into user_to_permissions (user_id, permission_id) values

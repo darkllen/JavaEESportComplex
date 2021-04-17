@@ -5,13 +5,10 @@ import lombok.Setter;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
 @Getter
 @Setter
-@DiscriminatorValue("COACH")
-public class Coach extends User{
-
-
+@DiscriminatorValue("CLIENT")
+public class Client  extends User{
 }
