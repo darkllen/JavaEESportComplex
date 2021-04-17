@@ -2,6 +2,7 @@ package ee.sportcomplex.controllers;
 
 import ee.sportcomplex.dto.schedules.ScheduleGroup;
 import ee.sportcomplex.dto.schedules.ScheduleInd;
+import ee.sportcomplex.repos.ComplexRepo;
 import ee.sportcomplex.repos.schedules.ScheduleGroupRepo;
 import ee.sportcomplex.repos.schedules.ScheduleIndRepo;
 import ee.sportcomplex.services.ScheduleService;
@@ -16,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WebController {
     private final ScheduleService service;
-
 
     @RequestMapping(value = {"/", "/sport_club"}, method = RequestMethod.GET)
     public String index(){
@@ -45,10 +45,4 @@ public class WebController {
         return service.getScheduleByDay(ScheduleGroup.DayOfWeek.valueOf(day_of_week));
     }
 
-
-    @ResponseBody
-    @RequestMapping(value = {"/get_a"}, method = RequestMethod.GET)
-    public List<ScheduleGroup> get_books(){
-        return service.getScheduleByDay(ScheduleGroup.DayOfWeek.MONDAY);
-    }
 }
