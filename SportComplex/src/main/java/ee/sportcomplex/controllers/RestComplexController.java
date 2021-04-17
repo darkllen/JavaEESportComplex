@@ -5,6 +5,7 @@ import ee.sportcomplex.repos.ComplexRepo;
 import ee.sportcomplex.services.ComplexService;
 import ee.sportcomplex.services.ScheduleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,4 +23,5 @@ public class RestComplexController {
     public List<ComplexRepo.ComplexShort> get_all_complexes_short(){
         return service.getComplexesShort();
     }
+
 }

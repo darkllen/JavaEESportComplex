@@ -5,10 +5,12 @@ import ee.sportcomplex.dto.schedules.ScheduleInd;
 import ee.sportcomplex.repos.ComplexRepo;
 import ee.sportcomplex.repos.schedules.ScheduleGroupRepo;
 import ee.sportcomplex.repos.schedules.ScheduleIndRepo;
+import ee.sportcomplex.services.ComplexService;
 import ee.sportcomplex.services.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WebController {
     private final ScheduleService service;
+    private final ComplexService complexService;
 
     @RequestMapping(value = {"/", "/sport_club"}, method = RequestMethod.GET)
     public String index(){
@@ -24,7 +27,8 @@ public class WebController {
     }
 
     @RequestMapping(value = {"/all_complexes"}, method = RequestMethod.GET)
-    public String all_complexes(){
+    public String all_complexes(Model model){
+        model.addAttribute("complexes", complexService.getComplexes());
         return "all_complexes";
     }
 
