@@ -26,6 +26,7 @@ public class WebController {
         return "index";
     }
 
+    @ModelAttribute
     @RequestMapping(value = {"/all_complexes"}, method = RequestMethod.GET)
     public String all_complexes(Model model){
         model.addAttribute("complexes", complexService.getComplexes());
