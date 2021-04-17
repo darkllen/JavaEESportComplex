@@ -24,10 +24,7 @@ public class WebController {
         return "timetable";
     }
 
-    @RequestMapping(value = {"/buy_abonement"}, method = RequestMethod.GET)
-    public String buy_abonement(){
-        return "buy_abonement";
-    }
+
 
     @RequestMapping(value = {"/show_personal"}, method = RequestMethod.GET)
     public String show_personal(){

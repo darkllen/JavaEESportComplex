@@ -1,5 +1,8 @@
 package ee.sportcomplex.dto.schedules;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import ee.sportcomplex.dto.users.Coach;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -19,6 +22,9 @@ public abstract class Schedule {
     @NotEmpty
     private Integer id;
 
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="coach_id", nullable=false)
     @Getter(AccessLevel.PUBLIC)

@@ -9,6 +9,10 @@ import java.util.List;
 public interface CoachRepo extends JpaRepository<Coach, Integer> {
     @Query(value = "SELECT c from Coach c")
     List<CoachShort> getAllShort();
+
+    @Query(value = "SELECT c from Coach c")
+    List<Coach> getAll();
+
     public interface CoachShort{
         public int getId();
         public String getName();

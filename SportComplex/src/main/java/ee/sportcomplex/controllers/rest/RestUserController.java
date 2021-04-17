@@ -1,5 +1,6 @@
 package ee.sportcomplex.controllers.rest;
 
+import ee.sportcomplex.dto.users.Coach;
 import ee.sportcomplex.repos.ComplexRepo;
 import ee.sportcomplex.repos.users.CoachRepo;
 import ee.sportcomplex.services.ComplexService;
@@ -19,7 +20,8 @@ public class RestUserController {
 //
 //    @ResponseBody
 //    @RequestMapping(value = {"/get_all_coaches_short"}, method = RequestMethod.GET)
-//    public List<CoachRepo.CoachShort> get_all_coaches_short(){
-//        return service.getCoachesShort();
+//    public List<Coach> get_all_coaches_short(){
+//        service.getCoaches().forEach(System.out::println);
+//        return service.getCoaches();
 //    }
 }

@@ -9,6 +9,9 @@ create table users
     unique uniq_login (login)
 );
 
+
+
+
 create table permissions
 (
     id         int primary key auto_increment,
@@ -35,6 +38,29 @@ create table complex
     open_date  date null,
     city       varchar (20) not null
 );
+
+
+create table type
+(
+    id              int primary key auto_increment,
+    name            varchar (20) not null,
+    vip             bit not null
+);
+
+create table abonement
+(
+    id              int primary key auto_increment,
+    price           int not null,
+    time_in_month   int not null,
+    type_id         int not null,
+    constraint fk_abonement_to_type foreign key (type_id) references type(id),
+    complex_id      int not null,
+    constraint fk_abonement_to_complex foreign key (complex_id) references complex(id),
+    user_id         int null,
+    constraint fk_abonement_to_user foreign key (user_id) references users(id),
+    user_phone      varchar (13) null
+);
+
 
 create table schedule_ind
 (
@@ -64,6 +90,7 @@ insert into complex (name, description, `space`, floors_num, open_date, city) va
 ('myC', 'super complex', 345, 4, null, 'Odessa');
 
 
+
 insert into users (login, name, surname, password, role) values
 ('admin', 'Ihor', 'Yankin', 'admin', 'ADMIN'),
 ('coach', 'Anna', 'Hinkul', 'coach', 'COACH'),
@@ -74,6 +101,15 @@ insert into permissions (permission) values
 ('ADMINISTRATOR'),
 ('COACH'),
 ('CLIENT');
+
+
+insert into type (name, vip) values
+('usual', 0),
+('super', 1);
+
+insert into abonement (price, time_in_month, type_id, complex_id, user_id, user_phone) values
+(8000, 12, 1, 1,3, null),
+(1200, 6, 2, 2,null, '0661534986');
 
 insert into schedule_ind (schedule_date, coach_id, client_id) values
 (CURRENT_DATE(), 2, 3),
