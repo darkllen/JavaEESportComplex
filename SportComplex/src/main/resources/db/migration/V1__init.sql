@@ -47,6 +47,7 @@ create table schedule_ind
 create table schedule_group
 (
     id              int primary key auto_increment,
+    name            varchar (20) not null,
     coach_id        int not null,
     constraint fk_coach_to_schedule_group foreign key (coach_id) references users(id),
     day_of_week     varchar (10) not null,
@@ -76,9 +77,9 @@ insert into schedule_ind (schedule_date, coach_id, client_id) values
 (CURRENT_DATE(), 2, 3),
 (CURRENT_DATE(), 2, 3);
 
-insert into schedule_group (coach_id, day_of_week, time) values
-(2, 'MONDAY', CURRENT_TIME()),
-(2, 'TUESDAY', CURRENT_TIME());
+insert into schedule_group (name, coach_id, day_of_week, time) values
+('swimming', 2, 'MONDAY', CURRENT_TIME()),
+('skalolasing', 2, 'TUESDAY', CURRENT_TIME());
 
 insert into user_to_permissions (user_id, permission_id) values
 ((select id from users where login = 'admin'), (select id from permissions where permission = 'ADMIN')),
