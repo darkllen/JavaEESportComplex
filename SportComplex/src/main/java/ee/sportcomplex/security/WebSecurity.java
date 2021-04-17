@@ -1,20 +1,22 @@
 package ee.sportcomplex.security;
 
 import ee.sportcomplex.dto.Permissions;
+import ee.sportcomplex.dto.users.User;
+import ee.sportcomplex.repos.users.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import ee.sportcomplex.repos.UserRepo;
+
 import ee.sportcomplex.services.UserLoginService;
 
 @RequiredArgsConstructor
 @Configuration
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
-    private final UserRepo userRepository;
+    private final UserRepo userAbstractRepository;
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
@@ -34,6 +36,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     protected UserDetailsService userDetailsService() {
-        return new UserLoginService(userRepository);
+        return new UserLoginService(userAbstractRepository);
     }
 }
