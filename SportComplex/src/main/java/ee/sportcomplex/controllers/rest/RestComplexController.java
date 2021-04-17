@@ -1,4 +1,4 @@
-package ee.sportcomplex.controllers;
+package ee.sportcomplex.controllers.rest;
 
 import ee.sportcomplex.dto.schedules.ScheduleGroup;
 import ee.sportcomplex.repos.ComplexRepo;
@@ -16,12 +16,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class RestComplexController {
-    private final ComplexService service;
-
-    @ResponseBody
-    @RequestMapping(value = {"/get_all_complexes_short"}, method = RequestMethod.GET)
-    public List<ComplexRepo.ComplexShort> get_all_complexes_short(){
-        return service.getComplexesShort();
-    }
+//    private final ComplexService service;
+//
+//    @ResponseBody
+//    @RequestMapping(value = {"/get_all_complexes_short"}, method = RequestMethod.GET)
+//    public List<ComplexRepo.ComplexShort> get_all_complexes_short(){
+//        return service.getComplexesShort();
+//    }
 
 }

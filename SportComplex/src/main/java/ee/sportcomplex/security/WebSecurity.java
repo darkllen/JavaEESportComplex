@@ -2,7 +2,6 @@ package ee.sportcomplex.security;
 
 import ee.sportcomplex.dto.Permissions;
 import ee.sportcomplex.repos.users.AuthRepo;
-import ee.sportcomplex.repos.users.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
