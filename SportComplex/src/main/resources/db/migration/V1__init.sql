@@ -34,14 +34,23 @@ create table complex
     city       varchar not null
 );
 
-create table schedule
+create table schedule_ind
 (
     id              int primary key auto_increment,
     schedule_date   date not null,
     coach_id        int not null,
-    constraint fk_coach_to_schedule foreign key (coach_id) references users(id),
-    client_id       int null,
-    constraint fk_client_to_schedule foreign key (client_id) references users(id)
+    constraint fk_coach_to_schedule_ind foreign key (coach_id) references users(id),
+    client_id       int not null,
+    constraint fk_client_to_schedule_ind foreign key (client_id) references users(id)
+);
+
+create table schedule_group
+(
+    id              int primary key auto_increment,
+    coach_id        int not null,
+    constraint fk_coach_to_schedule_group foreign key (coach_id) references users(id),
+    day_of_week     varchar (10) not null,
+    time            time not null
 );
 
 
@@ -62,9 +71,13 @@ insert into permissions (permission) values
 ('COACH'),
 ('CLIENT');
 
-insert into schedule (schedule_date, coach_id, client_id) values
+insert into schedule_ind (schedule_date, coach_id, client_id) values
 (CURRENT_DATE(), 1, 1),
-(CURRENT_DATE(), 2, null);
+(CURRENT_DATE(), 2, 1);
+
+insert into schedule_group (coach_id, day_of_week, time) values
+(1, 'MONDAY', CURRENT_TIME()),
+(2, 'TUESDAY', CURRENT_TIME());
 
 insert into user_to_permissions (user_id, permission_id) values
 ((select id from users where login = 'admin'), (select id from permissions where permission = 'ADMIN')),
