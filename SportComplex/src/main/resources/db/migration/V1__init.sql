@@ -79,7 +79,8 @@ create table schedule_group
     coach_id        int not null,
     constraint fk_coach_to_schedule_group foreign key (coach_id) references users(id),
     day_of_week     varchar (10) not null,
-    time            time not null
+    time            time not null,
+    for_vip         bit not null
 );
 
 
@@ -115,10 +116,11 @@ insert into schedule_ind (schedule_date, coach_id, client_id) values
 (CURRENT_DATE(), 2, 3),
 (CURRENT_DATE(), 2, 3);
 
-insert into schedule_group (name, coach_id, day_of_week, time) values
-('swimming', 2, 'MONDAY', CURRENT_TIME()),
-('skalolasing', 2, 'TUESDAY', CURRENT_TIME());
+insert into schedule_group (name, coach_id, day_of_week, time,for_vip) values
+('swimming', 2, 'MONDAY', CURRENT_TIME(), 0),
+('skalolasing', 2, 'TUESDAY', CURRENT_TIME(), 1);
 
 insert into user_to_permissions (user_id, permission_id) values
 ((select id from users where login = 'admin'), (select id from permissions where permission = 'ADMIN')),
-((select id from users where login = 'user'), (select id from permissions where permission = 'CLIENT'));
+((select id from users where login = 'user'), (select id from permissions where permission = 'CLIENT')),
+((select id from users where login = 'coach'), (select id from permissions where permission = 'COACH'));
