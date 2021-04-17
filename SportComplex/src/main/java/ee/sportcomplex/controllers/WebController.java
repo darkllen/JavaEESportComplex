@@ -42,6 +42,15 @@ public class WebController {
         return "buy_abonement";
     }
 
+    @RequestMapping(value = {"/book_personal"}, method = RequestMethod.GET)
+    public String book_personal(){
+        return "client/book_personal";
+    }
+
+    @RequestMapping(value = {"/show_personal"}, method = RequestMethod.GET)
+    public String show_personal(){
+        return "client/show_personal";
+    }
 
     @ResponseBody
     @RequestMapping(value = {"/get_schedule_by_day_of_week_with_trener"}, method = RequestMethod.GET)

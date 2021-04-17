@@ -12,6 +12,18 @@
 <div class = "header" th:insert="~{fragments/header :: head}"></div>
 
 <div class="info_container">
+    <h2 class="main_h2">Personal trainings</h2>
+</div>
+
+<div class="my-group-main btn-group btn-group-justified">
+    <!--th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}"> todo-->
+    <a href="/book_personal" class="btn btn-warning">Book personal training</a>
+    <a href="/show_personal" class="btn btn-warning">Show personal trainings</a>
+</div>
+
+<br>
+
+<div class="info_container">
     <h2 class="main_h2">Timetable</h2>
 </div>
 
@@ -44,7 +56,6 @@
     }
 
     function getTimetable(t){
-        console.log(t);
 
         var $container = $('#info_container');
         document.getElementById('info_container').innerHTML='';
@@ -63,7 +74,6 @@
                 xhr.setRequestHeader('Content-Type', 'application/json')
             },
             success: function (response) {
-                console.log("R"+response);
 
                 response.forEach(function (el) {
                     $container.append(formTableRow(el));
