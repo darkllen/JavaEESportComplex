@@ -19,16 +19,17 @@ public class AuthUser {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotEmpty
     private Integer id;
 
     @Column(name = "login", unique = true)
     @NotEmpty
-    @Length(min = 3, max = 15)
+    @Length(min = 3, max = 30)
     private String login;
 
     @Column(name = "password")
     @NotEmpty
-    @Length(min = 6, max = 20)
+    @Length(min = 6, max = 40)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)

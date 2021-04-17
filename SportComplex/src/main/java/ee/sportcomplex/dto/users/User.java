@@ -28,16 +28,17 @@ public class User {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotEmpty
     private Integer id;
 
     @Column(name = "name", unique = true)
     @NotEmpty
-    @Length(min = 3, max = 15)
+    @Length(min = 3, max = 20)
     private String name;
 
     @Column(name = "surname", unique = true)
     @NotEmpty
-    @Length(min = 3, max = 15)
+    @Length(min = 3, max = 20)
     private String surname;
 
 }

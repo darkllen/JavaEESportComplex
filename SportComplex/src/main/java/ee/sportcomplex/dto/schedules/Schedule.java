@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -15,10 +16,12 @@ public abstract class Schedule {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Getter(AccessLevel.PUBLIC)
+    @NotEmpty
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="coach_id", nullable=false)
     @Getter(AccessLevel.PUBLIC)
+    @NotEmpty
     private Coach coach;
 }

@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Entity
@@ -17,8 +18,10 @@ import java.util.Date;
 public class ScheduleInd extends Schedule {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="client_id", nullable=false)
+    @NotEmpty
     private Client client;
 
     @Column(name = "schedule_date")
+    @NotEmpty
     private Date scheduleDate;
 }
