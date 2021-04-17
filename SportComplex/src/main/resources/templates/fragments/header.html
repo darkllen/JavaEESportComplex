@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="head">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/">SportClub</a>
+        <li class="nav-item" style="margin-left: 30px;"></li>
+        <a id="all_complexes" class="nav-link" href="/all_complexes" style="color: white">All complexes</a>
+
+        <form class="form-inline">
+            <a class="nav-link" href="/login" th:unless="${#authorization.expression('isAuthenticated()')}">Login</a>
+            <a class="nav-link" href="/signin" th:unless="${#authorization.expression('isAuthenticated()')}">Sign in</a>
+            <a class="nav-link" href="/logout" th:if="${#authorization.expression('isAuthenticated()')}">Logout</a>
+        </form>
+    </nav>
+</div>
+</body>
+</html>
