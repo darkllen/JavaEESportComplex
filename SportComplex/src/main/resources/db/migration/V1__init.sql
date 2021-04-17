@@ -33,7 +33,7 @@ create table complex
     space      int not null,
     floors_num int not null,
     open_date  date null,
-    city       varchar not null
+    city       varchar (20) not null
 );
 
 create table schedule_ind
