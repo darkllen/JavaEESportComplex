@@ -13,38 +13,13 @@
 
 
 <div class="info_container" id="info_container">
+    <div th:each="el: ${complexes}">
+        <h2 th:text="${el.name}"></h2>
+        <p th:text="${el.description}"></p>
+        <p th:text="'City: ' + ${el.city}"></p>
+        <p th:text="'Opened ' + ${el.open_date}"></p>
+    </div>
 
 </div>
-
-<script>
-    $(function () {
-
-        var $container = $('#info_container');
-
-        function formTableRow(el){
-            return '<h2>'+el.name+'</h2>' +
-                '<p>'+el.description+'</p>' +
-                '<p>City: '+el.city+'</p>' +
-                '<p>Opened '+el.open_date+'</p>';
-        }
-
-        $.ajax({
-            type: 'GET',
-            url: '/get_all_complexes',
-
-            success: function (response) {
-                response.forEach(function (el) {
-                    $container.append(formTableRow(el));
-                });
-            },
-            error: function(err){
-                console.log(err);
-            }
-        });
-        
-    })
-</script>
-
-
 
 </body>

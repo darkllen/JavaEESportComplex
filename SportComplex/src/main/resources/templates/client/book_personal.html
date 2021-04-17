@@ -16,7 +16,11 @@
     <form id="form">
         <h2>Book personal training</h2>
         <p>Coach : </p>
-        <select id='select_coach' name='select_coach'></select>
+        <select id='select_coach' name='select_coach'>
+            <div th:each="el: ${coaches}">
+                <option th:value="${el.id}" th:text="${el.name} +' ' + ${el.surname}"></option>
+            </div>
+        </select>
         <p>Date : </p>
         <input type="date" placeholder="Date" name="date">
         <p>Time : </p>
@@ -29,21 +33,6 @@
 
 <script>
     $(function () {
-
-        $.ajax({
-            url: '/get_all_coaches_short',
-            type: "get",
-            success: function (response) {
-
-                document.getElementById("select_coach").innerHTML = '';
-                response.forEach(function (el) {
-                    document.getElementById("select_coach").innerHTML += '<option value="' + el.id + '">' + el.name +' '+el.surname+ '</option>';
-                });
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
 
 
         $('#form').submit(function (e) {
