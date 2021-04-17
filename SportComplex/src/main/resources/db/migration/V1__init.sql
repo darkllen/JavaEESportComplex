@@ -3,6 +3,7 @@ create table users
     id       int primary key auto_increment,
     login    varchar(30) not null,
     password varchar(40) not null,
+    role     varchar (10) not null,
     unique uniq_login (login)
 );
 
@@ -53,9 +54,9 @@ insert into complex (name, description, `space`, floors_num, open_date, city) va
 ('myC', 'super complex', 345, 4, null, 'Odessa');
 
 
-insert into users (login, password) values
-('admin', 'admin'),
-('user', 'user');
+insert into users (login, password, role) values
+('admin', 'admin', 'ADMIN'),
+('user', 'user', 'USER');
 
 insert into permissions (permission) values
 ('ADMIN'),
