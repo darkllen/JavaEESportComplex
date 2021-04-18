@@ -13,8 +13,8 @@
 
 <div class="info_container" id="info_container">
     <div class="group_training" th:each="el: ${trainings}">
-        <h3 th:text="${el.schedule_date.substring(0, 10)}+' '+${el.schedule_date.substring(11,16)}"></h3>
-        <h2 th:text="${el.name}"></h2>
+        <!--<h3 th:text="${el.schedule_date.substring(0, 10)}+' '+${el.schedule_date.substring(11,16)}"></h3>-->
+        <!--<h2 th:text="${el.name}"></h2>-->
         <p th:text="'Coach: ' + ${el.coach.name}+' '+ ${el.coach.surname}"></p>
         <button class="form_btn btn btn-danger remove_button" type="submit" value="${el.id}">Remove</button>
     </div>
