@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.sql.Time;
+import java.time.LocalTime;
 
 @Entity
 @Getter
@@ -25,8 +26,9 @@ public class ScheduleGroup extends Schedule{
     @Column(name = "day_of_week")
     DayOfWeek dayOfWeek;
 
+
     @Column(name = "time")
-    Time time;
+    LocalTime time;
 
     @Column(name = "for_vip", unique = true)
     private boolean for_vip;

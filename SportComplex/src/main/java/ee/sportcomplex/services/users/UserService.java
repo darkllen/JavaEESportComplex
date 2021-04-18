@@ -42,4 +42,5 @@ public class UserService {
     public List<CoachRepo.CoachShort> getCoachesShortPossibleByAbonements(List<Abonement> abonements) {
         return coachRepo.getAllShortPossibleByAbonements(abonements.stream().map(Abonement::getComplex).collect(Collectors.toList()));
     }
+
 }
