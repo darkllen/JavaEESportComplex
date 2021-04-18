@@ -20,7 +20,7 @@ public class WebCoachController {
 
     @RequestMapping(value = {"/coaches"}, method = RequestMethod.GET)
     public String all_complexes(Model model, Principal principal){
-        model.addAttribute("complexes", complexService.getComplexesShort());
+//        model.addAttribute("complexes", complexService.getComplexesShort());
         model.addAttribute("coaches", userService.getAdminByLogin(principal.getName()).orElse(null).getComplex().getCoaches());
         return "admin/coaches";
     }

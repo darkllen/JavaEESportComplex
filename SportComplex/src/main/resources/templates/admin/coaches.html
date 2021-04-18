@@ -16,11 +16,11 @@
     <form id="form">
         <h2>Add trener</h2>
         <p>Complex : </p>
-        <select id='select_complex' name='select_complex'>
-            <div th:each="el: ${complexes}">
-                <option th:value="${el.id}" th:text="${el.name}"></option>
-            </div>
-        </select>
+        <!--<select id='select_complex' name='select_complex'>-->
+            <!--<div th:each="el: ${complexes}">-->
+                <!--<option th:value="${el.id}" th:text="${el.name}"></option>-->
+            <!--</div>-->
+        <!--</select>-->
         <button class="form_btn btn btn-success" type="submit">Generate code</button>
     </form>
 
@@ -56,7 +56,6 @@
 
 
             var data = {
-                complex: $(this).find('[name=select_complex]').val(),
                 role: "COACH"
             };
             $.ajax({
