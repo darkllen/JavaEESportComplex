@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>SportClub</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/index.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div class = "header" th:insert="~{fragments/header :: head}"></div>
+
+<div class="info_container" style="width:40%">
+    <form id="form">
+        <h2>Generate code</h2>
+        <p>Role : </p>
+        <select id='select_type' name='select_role'>
+            <option th:value="COACH">COACH</option>
+            <option th:value="ADMIN">ADMIN</option>
+        </select>
+        <p>Complex : </p>
+        <select id='select_complex' name='select_complex'>
+            <div th:each="el: ${complexes}">
+                <option th:value="${el.id}" th:text="${el.name}"></option>
+            </div>
+        </select>
+        <button class="form_btn btn btn-success" type="submit">Generate</button>
+
+    </form>
+
+    <h2 id="code"></h2>
+
+</div>
+
+<script>
+    $(function () {
+        $('#form').submit(function (e) {
+            e.preventDefault();
+
+
+            var data = {
+                complex: $(this).find('[name=select_complex]').val(),
+                role: $(this).find('[name=select_role]').val()
+            };
+            console.log(data);
+            $.ajax({
+                type: 'POST',
+                url: '/generate_code',
+                dataType: 'json',
+                data: JSON.stringify(data),
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    document.getElementById('trener_code').innerText="New code for employee is "+ response;
+                },
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
+                }
+            });
+        });
+
+    });
+</script>
+
+
+
+
+</body>

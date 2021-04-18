@@ -37,4 +37,10 @@ public class WebComplexController {
 
         return "admin/edit_complex";
     }
+
+    @RequestMapping(value = {"/complexes_info"}, method = RequestMethod.GET)
+    public String complexes_info(Model model){
+        model.addAttribute("complexes", complexService.getComplexes());
+        return "owner/complexes_info";
+    }
 }

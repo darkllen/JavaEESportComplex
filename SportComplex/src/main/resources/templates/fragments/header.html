@@ -6,11 +6,15 @@
         <a class="navbar-brand" href="/">SportClub</a>
         <!--<li class="nav-item" style="margin-left: 30px;"></li>-->
         <a th:unless="${#authorization.expression('hasAuthority(''COACH'')||hasAuthority(''ADMIN'')||hasAuthority(''OWNER'')')}" id="all_complexes" class="nav-link" href="/all_complexes" style="color: white">All complexes</a>
-        <a id="timetable" class="nav-link" href="/timetable" style="color: white">Timetable</a>
+        <a th:unless="${#authorization.expression('hasAuthority(''OWNER'')')}" id="timetable" class="nav-link" href="/timetable" style="color: white">Timetable</a>
         <a th:unless="${#authorization.expression('hasAuthority(''COACH'')||hasAuthority(''ADMIN'')||hasAuthority(''OWNER'')')}" id="buy_abonement" class="nav-link" href="/buy_abonement" style="color: white">Buy abonement</a>
 
         <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" id="edit_complex" class="nav-link" href="/edit_complex" style="color: white">Edit complex</a>
         <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" id="coaches" class="nav-link" href="/coaches" style="color: white">Coaches</a>
+
+        <a th:if="${#authorization.expression('hasAuthority(''OWNER'')')}" id="complexes" class="nav-link" href="/complexes_info" style="color: white">Complexes info</a>
+        <a th:if="${#authorization.expression('hasAuthority(''OWNER'')')}" id="code" class="nav-link" href="/generate_code" style="color: white">Generate registration code</a>
+
         <a th:if="${#authorization.expression('isAuthenticated()')}" id="settings" class="nav-link" href="/settings" style="color: white">Other info</a>
 
         <form class="form-inline">
