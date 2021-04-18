@@ -5,9 +5,9 @@
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="/">SportClub</a>
         <!--<li class="nav-item" style="margin-left: 30px;"></li>-->
-        <a id="all_complexes" class="nav-link" href="/all_complexes" style="color: white">All complexes</a>
+        <a th:unless="${#authorization.expression('hasAuthority(''COACH'')')}" id="all_complexes" class="nav-link" href="/all_complexes" style="color: white">All complexes</a>
         <a id="timetable" class="nav-link" href="/timetable" style="color: white">Timetable</a>
-        <a id="buy_abonement" class="nav-link" href="/buy_abonement" style="color: white">Buy abonement</a>
+        <a th:unless="${#authorization.expression('hasAuthority(''COACH'')')}" id="buy_abonement" class="nav-link" href="/buy_abonement" style="color: white">Buy abonement</a>
 
         <form class="form-inline">
             <a class="nav-link" href="/login" th:unless="${#authorization.expression('isAuthenticated()')}">Login</a>

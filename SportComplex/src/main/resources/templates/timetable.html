@@ -41,18 +41,11 @@
 
 <div th:if="${#authorization.expression('hasAuthority(''COACH'')')}" id="is_coach"></div>
 
-
-<a th:if="${#authorization.expression('hasAuthority(''COACH'')')}"  href="/all_checks_with_all_promo_products_from_category" class="btn btn-warning">Get all checks with all promo products from category</a>
-
-
-
 <div class="info_container" id="info_container">
 
 </div>
 
-
 <script>
-
 
     function formTableRow(el, is_coach){
         var time = el.time.substring(0, 5);
@@ -92,6 +85,8 @@
                 response.forEach(function (el) {
                     $container.append(formTableRow(el, is_coach));
                 });
+                if(response.length==0)
+                    $container.append('<h3>No trainings this day</h3>');
 
             },
             error: function (err) {
