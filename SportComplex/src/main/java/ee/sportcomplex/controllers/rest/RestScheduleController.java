@@ -55,7 +55,13 @@ public class RestScheduleController {
 
     @ResponseBody
     @RequestMapping(value = {"/edit_schedule_group"}, method = RequestMethod.POST)
-    public ScheduleGroup edit_complex(@RequestBody @Valid ScheduleGroup group){
+    public ScheduleGroup edit_schedule_group(@RequestBody @Valid ScheduleGroup group){
+        return service.editGroup(group);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = {"/add_schedule_group"}, method = RequestMethod.POST)
+    public ScheduleGroup add_schedule_group(@RequestBody @Valid ScheduleGroup group){
         return service.editGroup(group);
     }
 
