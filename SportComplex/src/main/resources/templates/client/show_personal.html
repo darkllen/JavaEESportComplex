@@ -12,11 +12,25 @@
 <div class = "header" th:insert="~{fragments/header :: head}"></div>
 
 <div class="info_container" id="info_container">
+    <h2>My trainings</h2>
+
+    <div>
+        <input type="checkbox" onclick="showOld()">
+        <label>Show happened trainings</label>
+    </div>
+
+    <div id="old" style="display:none;">
+        <div class="group_training" th:each="el: ${old_trainings}">
+            <h3 th:text="${#dates.format(el.scheduleDate, 'dd-MM-yyyy HH:mm')}"></h3>
+            <p th:text="'Coach: ' + ${el.coach.name}+' '+ ${el.coach.surname}"></p>
+            <button class="form_btn btn btn-danger remove_button" type="submit" th:value="${el.id}">Remove</button>
+        </div>
+    </div>
+
     <div class="group_training" th:each="el: ${trainings}">
-        <!--<h3 th:text="${el.schedule_date.substring(0, 10)}+' '+${el.schedule_date.substring(11,16)}"></h3>-->
-        <!--<h2 th:text="${el.name}"></h2>-->
+        <h3 th:text="${#dates.format(el.scheduleDate, 'dd-MM-yyyy HH:mm')}"></h3>
         <p th:text="'Coach: ' + ${el.coach.name}+' '+ ${el.coach.surname}"></p>
-        <button class="form_btn btn btn-danger remove_button" type="submit" value="${el.id}">Remove</button>
+        <button class="form_btn btn btn-danger remove_button" type="submit" th:value="${el.id}">Remove</button>
     </div>
 
 </div>
@@ -25,26 +39,34 @@
 
 <script>
 
+    var isShowing=-1;
+
+    function showOld(){
+        if(isShowing==-1)
+            document.getElementById('old').style.display='block';
+        else
+            document.getElementById('old').style.display='none';
+        isShowing*=-1;
+    }
+
     $(function () {
 
+
+
+
             $(document).on("click",".remove_button",function(e) {
-                // var rowNum = e.target.parentNode.parentNode.rowIndex;
-                // e.preventDefault();
-
-                //get id - get parent
-
-
+                var id = e.target.value;
                 var data = {
-                    id : $(this).val()
+                    id : id
                 };
-
                 $.ajax({
-                    url: '/remove_',
+                    url: '/remove_schedule_ind',
                     type: "post",
                     dataType: 'json',
                     data: JSON.stringify(data),
                     success: function (response) {
-                        //remove parent
+                        e.target.parentNode.remove();
+
                     },
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader('Content-Type', 'application/json')
