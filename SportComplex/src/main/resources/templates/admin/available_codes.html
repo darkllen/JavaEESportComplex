@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>SportClub</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/index.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div class = "header" th:insert="~{fragments/header :: head}"></div>
+
+<div class="col2">
+    <table id="my_table" class="table table-hover table-bordered">
+        <thead>
+        <th>Complex name</th>
+        <th>Role</th>
+        <th>Code</th>
+        <th>Remove</th>
+        </thead>
+        <tbody id="table_body">
+        <tr class = "table_row" th:each="el: ${codes}">
+            <td th:text="${el.name}"></td>
+            <td th:text="${el.role}"></td>
+            <td th:text="${el.id}"></td>
+            <td><button class="form_btn form_btn_first btn btn-danger remove_button" type="submit" th:value="${el.id}">Remove</button></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+<script>
+
+    $(function() {
+
+        $(document).on("click",".remove_button",function(e) {
+            var id = e.target.value;
+            var data = {
+                id : id
+            };
+            console.log(id);
+            $.ajax({
+                url: '/remove_code',
+                type: "post",
+                dataType: 'json',
+                data: JSON.stringify(data),
+                success: function (response) {
+                    e.target.parentNode.remove();
+                },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
+                }
+            });
+
+        });
+
+    });
+
+
+</script>
+
+
+</body>
+</html>
+

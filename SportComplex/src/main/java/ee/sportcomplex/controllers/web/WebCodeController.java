@@ -21,4 +21,10 @@ public class WebCodeController {
         model.addAttribute("complexes", complexService.getComplexes());
         return "owner/generate_code";
     }
+    @RequestMapping(value = {"/available_codes"}, method = RequestMethod.GET)
+    public String available_codes(Model model){
+        model.addAttribute("codes", complexService.getComplexes());//todo - return all available codes
+        return "admin/available_codes";
+    }
+
 }
