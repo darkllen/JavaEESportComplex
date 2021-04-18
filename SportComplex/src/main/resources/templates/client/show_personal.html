@@ -11,32 +11,66 @@
 <body>
 <div class = "header" th:insert="~{fragments/header :: head}"></div>
 
-<div class="info_container">
-    <h2 class="main_h2">Personal trainings</h2>
-</div>
-
-
-<div class="info_container">
-    <h2 class="main_h2">Timetable</h2>
-</div>
-
 <div class="info_container" id="info_container">
+    <div class="group_training" th:each="el: ${trainings}">
+        <h3 th:text="${el.schedule_date.substring(0, 10)}+' '+${el.schedule_date.substring(11,16)}"></h3>
+        <h2 th:text="${el.name}"></h2>
+        <p th:text="'Coach: ' + ${el.coach.name}+' '+ ${el.coach.surname}"></p>
+        <button class="form_btn btn btn-danger remove_button" type="submit" value="${el.id}">Remove</button>
+    </div>
 
 </div>
+
+
 
 <script>
 
-    function formTableRow(el){
-        var date = el.schedule_date.substring(0, 10);
-        var time = el.schedule_date.substring(11, 16);
+    $(function () {
 
-        return '<div class="group_training">' +
-            '<h3>'+date+' '+time+'</h3>' +
-            '<h2>'+el.name+'</h2>' +
-            '<p>Coach: '+el.coach.name+' '+el.coach.surname+'</p>' +
-            '<button class="form_btn btn btn-danger remove_button" type="submit">Remove</button>' +
-            '</div>';
-    }
+            $(document).on("click",".remove_button",function(e) {
+                // var rowNum = e.target.parentNode.parentNode.rowIndex;
+                // e.preventDefault();
+
+                //get id - get parent
+
+
+                var data = {
+                    id : $(this).val()
+                };
+
+                $.ajax({
+                    url: '/remove_',
+                    type: "post",
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    success: function (response) {
+                        //remove parent
+                    },
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Content-Type', 'application/json')
+                    },
+                    error: function (request, textStatus, errorThrown) {
+                        alert(request.getResponseHeader('error'));
+                    }
+                });
+
+            });
+
+    });
+
+    // function formTableRow(el){
+    //     var date = el.schedule_date.substring(0, 10);
+    //     var time = el.schedule_date.substring(11, 16);
+    //
+    //     return '<div class="group_training">' +
+    //         '<h3>'+date+' '+time+'</h3>' +
+    //         '<h2>'+el.name+'</h2>' +
+    //         '<p>Coach: '+el.coach.name+' '+el.coach.surname+'</p>' +
+    //         '<button class="form_btn btn btn-danger remove_button" type="submit">Remove</button>' +
+    //         '</div>';
+    // }
+
+
     //
     // function getTimetable(t){
     //
