@@ -12,22 +12,25 @@
 <body>
 <div class = "header" th:insert="~{fragments/header :: head}"></div>
 
-<form id="form" th:name="${complex.id}">
-    <h2>Edit complex</h2>
-    <p>Complex name : </p>
-    <input type="text" placeholder="Complex name" name="name" th:text="${complex.name}">
-    <p>Description : </p>
-    <textarea type="text" placeholder="Description" name="description" th:text="${complex.description}"></textarea>
-    <p>Space : </p>
-    <input type="number" min="1" placeholder="Space" name="space" th:text="${complex.space}">
-    <p>Floors : </p>
-    <input type="number" min="1" placeholder="Floors" name="floors" th:text="${complex.floors_num}">
-    <p>Open date : </p>
-    <input type="date" name="date" th:text="${complex.open_date}">
-    <p>City : </p>
-    <input type="text" placeholder="City" name="city" th:text="${complex.city}">
-    <button class="btn btn-success" type="submit">Edit</button>
-</form>
+<div class="info_container">
+    <form id="form" th:name="${complex.id}">
+        <h2>Edit complex</h2>
+        <p>Complex name : </p>
+        <input type="text" placeholder="Complex name" name="name" th:value="${complex.name}">
+        <p>Description : </p>
+        <textarea type="text" placeholder="Description" name="description" th:value="${complex.description}"></textarea>
+        <p>Space : </p>
+        <input type="number" min="1" placeholder="Space" name="space" th:value="${complex.space}">
+        <p>Floors : </p>
+        <input type="number" min="1" placeholder="Floors" name="floors" th:value="${complex.floors_num}">
+        <p>Open date : </p>
+        <input type="date" name="date" th:value="${complex.open_date}">
+        <p>City : </p>
+        <input type="text" placeholder="City" name="city" th:value="${complex.city}">
+        <button class="btn btn-success" type="submit">Edit</button>
+    </form>
+</div>
+
 
 <script>
 
