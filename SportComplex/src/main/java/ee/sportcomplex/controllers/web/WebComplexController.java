@@ -41,6 +41,6 @@ public class WebComplexController {
     @RequestMapping(value = {"/complexes_info"}, method = RequestMethod.GET)
     public String complexes_info(Model model){
         model.addAttribute("complexes", complexService.getComplexes());
-        return "owner/complexes_info";
+        return "owner/complexes";
     }
 }

@@ -19,6 +19,6 @@ public class WebCodeController {
     @RequestMapping(value = {"/generate_code"}, method = RequestMethod.GET)
     public String generate_code(Model model){
         model.addAttribute("complexes", complexService.getComplexes());
-        return "ownew/generate_code";
+        return "owner/generate_code";
     }
 }
