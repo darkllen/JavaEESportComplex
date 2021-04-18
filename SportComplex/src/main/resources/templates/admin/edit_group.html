@@ -24,7 +24,7 @@
             </div>
         </select>
         <p>Day of week : </p>
-        <select id='select_day' name='select_day' th:value="${training.dayOfWeek}">
+        <select id='select_day' name='select_day' th:day="${training.dayOfWeek}">
             <option value="MONDAY">MONDAY</option>
             <option value="TUESDAY">TUESDAY</option>
             <option value="WEDNESDAY">WEDNESDAY</option>
@@ -35,7 +35,7 @@
 <!--todo - set selected-->
         </select>
         <p>Time : </p>
-        <input type="time" placeholder="Time" name="time" th:value="${training.time}">
+        <input type="time" placeholder="Time" name="time" th:value="${#dates.format(training.time, 'HH:mm')}">
         <p>Is VIP : </p>
         <select id='select_vip' name='select_vip'>
             <option th:selected="${training.for_vip}==true" value="true">Yes</option>
@@ -51,6 +51,8 @@
     $(function() {
         var id = document.getElementById("form").getAttribute("name");
 
+        var day = document.getElementById("select_day").getAttribute("day");
+        document.getElementById("select_day").value = day;
 
 
         $('#form').submit(function(e) {
