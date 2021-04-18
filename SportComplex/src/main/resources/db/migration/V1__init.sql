@@ -109,12 +109,15 @@ insert into users (login, name, surname, password, role) values
 ('user', 'Angelina', 'Volkova', 'user', 'CLIENT'),
 ('coach2', 'Ira', 'Linki', 'coach2', 'COACH'),
 ('coach3', 'Inna', 'Ugan', 'coach3', 'COACH');
+('owner', 'Maria', 'Kovaleva', 'owner', 'OWNER');
+
 
 insert into permissions (permission) values
 ('ADMIN'),
 ('ADMINISTRATOR'),
 ('COACH'),
-('CLIENT');
+('CLIENT'),
+('OWNER');
 
 
 insert into complex (name, description, `space`, floors_num, open_date, city, admin_id) values
