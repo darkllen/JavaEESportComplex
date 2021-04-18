@@ -2,6 +2,7 @@ package ee.sportcomplex.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ee.sportcomplex.dto.users.Admin;
+import ee.sportcomplex.dto.users.Coach;
 import ee.sportcomplex.dto.users.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -54,5 +56,14 @@ public class Complex {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admin_id", referencedColumnName = "id")
     private User admin;
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "complex_coach",
+            joinColumns = @JoinColumn(name = "complex_id"),
+            inverseJoinColumns = @JoinColumn(name = "coach_id")
+    )
+    private List<Coach> coaches;
 
 }
