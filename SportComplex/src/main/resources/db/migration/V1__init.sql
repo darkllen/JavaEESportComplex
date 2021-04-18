@@ -98,7 +98,12 @@ create table complex_coach
 );
 
 
-
+create table codes
+(
+    id          varchar (20) primary key,
+    role        varchar (10) not null,
+    complex     int not null
+);
 
 
 
@@ -152,4 +157,5 @@ insert into user_to_permissions (user_id, permission_id) values
 ((select id from users where login = 'user'), (select id from permissions where permission = 'CLIENT')),
 ((select id from users where login = 'coach'), (select id from permissions where permission = 'COACH')),
 ((select id from users where login = 'coach2'), (select id from permissions where permission = 'COACH')),
-((select id from users where login = 'coach3'), (select id from permissions where permission = 'COACH'));
+((select id from users where login = 'coach3'), (select id from permissions where permission = 'COACH')),
+((select id from users where login = 'owner'), (select id from permissions where permission = 'OWNER'));
