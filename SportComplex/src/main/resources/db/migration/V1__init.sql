@@ -113,7 +113,7 @@ insert into users (login, name, surname, password, role) values
 ('coach', 'Anna', 'Hinkul', 'coach', 'COACH'),
 ('user', 'Angelina', 'Volkova', 'user', 'CLIENT'),
 ('coach2', 'Ira', 'Linki', 'coach2', 'COACH'),
-('coach3', 'Inna', 'Ugan', 'coach3', 'COACH');
+('coach3', 'Inna', 'Ugan', 'coach3', 'COACH'),
 ('owner', 'Maria', 'Kovaleva', 'owner', 'OWNER');
 
 
