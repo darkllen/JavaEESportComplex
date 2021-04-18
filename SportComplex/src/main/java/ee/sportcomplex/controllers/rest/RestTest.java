@@ -17,12 +17,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class RestTest {
-    private final ScheduleService service;
+    private final AbonementService service;
     private final UserService userService;
 
     @ResponseBody
     @RequestMapping(value = {"/ga"}, method = RequestMethod.GET)
-    public List<ScheduleInd> ga(Principal principal){
-        return service.findAllByClientAndScheduleDateBefore(userService.getClientByLogin(principal.getName()).get(), new java.util.Date());
+    public Integer ga(@RequestParam int t, @RequestParam int m){
+        return service.getPriceByTypeAndTime(t, m).orElse(0);
     }
 }

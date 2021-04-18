@@ -58,6 +58,7 @@
             , duration: $(this).find('[name=select_duration]').val()
         };
 
+        console.log(data)
         $.ajax({
             type: 'GET',
             url: '/get_abonement_price_by_type_and_duration',

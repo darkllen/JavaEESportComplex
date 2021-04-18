@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,5 +21,9 @@ public class AbonementService {
 
     public List<Abonement> getAbonements(){
         return repo.getAll();
+    }
+
+    public Optional<Integer> getPriceByTypeAndTime(int type, int monthes){
+        return repo.getPriceByTypeAndTime(type,monthes);
     }
 }
