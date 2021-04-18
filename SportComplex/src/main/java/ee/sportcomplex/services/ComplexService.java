@@ -27,4 +27,9 @@ public class ComplexService {
     public Complex getById(int id){
         return repo.getOne(id);
     }
+
+    public Complex editComplex(Complex complex) {
+        repo.saveAndFlush(complex);
+        return complex;
+    }
 }

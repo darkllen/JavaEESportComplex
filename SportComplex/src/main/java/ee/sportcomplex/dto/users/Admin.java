@@ -20,6 +20,5 @@ public class Admin extends User{
 
     @JsonIgnore
     @OneToOne(mappedBy = "admin", fetch = FetchType.LAZY)
-    @NotEmpty
     private Complex complex;
 }

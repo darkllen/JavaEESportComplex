@@ -28,7 +28,6 @@ public class User {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotEmpty
     private Integer id;
 
     @Column(name = "login", unique = true)

@@ -21,7 +21,6 @@ public class Complex {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotEmpty
     private Integer id;
 
     @Column(name = "name", unique = true)
@@ -30,18 +29,15 @@ public class Complex {
     private String name;
 
     @Column(name = "description", unique = true)
-    @NotEmpty
-    @Length(min = 3, max = 100)
+    @Length(max = 100)
     private String description;
 
     @Column(name = "space", unique = true)
-    @NotEmpty
     @Min(10)
     @Max(10000)
     private int space;
 
     @Column(name = "floors_num", unique = true)
-    @NotEmpty
     @Min(1)
     @Max(10)
     private int floors_num;

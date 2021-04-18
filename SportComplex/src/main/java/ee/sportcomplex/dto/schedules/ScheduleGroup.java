@@ -23,15 +23,12 @@ public class ScheduleGroup extends Schedule{
 
     @Enumerated(EnumType.STRING)
     @Column(name = "day_of_week")
-    @NotEmpty
     DayOfWeek dayOfWeek;
 
     @Column(name = "time")
-    @NotEmpty
     Time time;
 
     @Column(name = "for_vip", unique = true)
-    @NotEmpty
     private boolean for_vip;
 
     public enum DayOfWeek {
