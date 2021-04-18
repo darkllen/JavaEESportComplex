@@ -35,4 +35,8 @@ public class ScheduleService {
     public List<ScheduleInd> findAllByCoachAndScheduleDateAfter(Coach coach, Date date){
         return indRepo.findAllByCoachAndScheduleDateAfter(coach,date);
     };
+
+    public List<ScheduleGroup> getScheduleByDayByCoach(ScheduleGroup.DayOfWeek day, Coach coach) {
+        return groupRepo.findAllByDayOfWeekAndCoach(day, coach);
+    }
 }
