@@ -13,14 +13,57 @@
 <div class = "header" th:insert="~{fragments/header :: head}"></div>
 
 <div class="col1">
-    <h2>Add trener</h2>
+    <form id="form">
+        <h2>Add trener</h2>
+        <p>Complex : </p>
+        <select id='select_complex' name='select_complex'>
+            <div th:each="el: ${complexes}">
+                <option th:value="${el.id}" th:text="${el.name}"></option>
+            </div>
+        </select>
+        <button class="form_btn btn btn-success" type="submit">Buy</button>
+    </form>
 
+    <h2 id="trener_code"></h2>
 </div>
 
 <div class="col2">
 
 </div>
 
+<script>
+
+    $(function () {
+
+        $('#form').submit(function (e) {
+            e.preventDefault();
+
+
+            var data = {
+                complex: $(this).find('[name=select_complex]').val(),
+                role: "TRENER"
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/generate_code',
+                dataType: 'json',
+                data: JSON.stringify(data),
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    document.getElementById('trener_code').innerText="New code for trener is "+ response;
+
+                },
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
+                }
+            });
+        });
+
+    });
+</script>
 
 
 </body>

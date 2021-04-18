@@ -22,6 +22,6 @@ public class WebCoachController {
     public String all_complexes(Model model, Principal principal){
         model.addAttribute("complexes", complexService.getComplexesShort());
         model.addAttribute("coaches", userService.getAdminByLogin(principal.getName()).orElse(null).getComplex().getCoaches());
-        return "coaches";
+        return "admin/coaches";
     }
 }
