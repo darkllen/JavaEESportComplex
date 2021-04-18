@@ -39,4 +39,8 @@ public class ScheduleService {
     public List<ScheduleGroup> getScheduleByDayByCoach(ScheduleGroup.DayOfWeek day, Coach coach) {
         return groupRepo.findAllByDayOfWeekAndCoach(day, coach);
     }
+
+    public void removeIndById(int id){
+        indRepo.removeById(id);
+    }
 }
