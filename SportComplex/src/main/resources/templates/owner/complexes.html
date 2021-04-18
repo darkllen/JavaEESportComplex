@@ -32,6 +32,22 @@
 </div>
 
 <div class="col2">
+    <table id="my_table" class="table table-hover table-bordered">
+        <thead>
+        <th>Complex name</th>
+        <th>City</th>
+        <th>Edit</th>
+        <th>Remove</th>
+        </thead>
+        <tbody id="table_body">
+        <tr class = "table_row" th:each="el: ${complexes}">
+            <td th:text="${el.name}"></td>
+            <td th:text="${el.city}"></td>
+            <td><button class="form_btn form_btn_first btn btn-success edit_button" type="submit" th:value="${el.id}">Edit</button></td>
+            <td><button class="form_btn form_btn_first btn btn-danger remove_button" type="submit" th:value="${el.id}">Remove</button></td>
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 
@@ -69,6 +85,37 @@
                 }
             });
         });
+
+        $(document).on("click",".remove_button",function(e) {
+            var id = e.target.value;
+            var data = {
+                id : id
+            };
+            console.log(id);
+            $.ajax({
+                url: '/remove_complex',
+                type: "post",
+                dataType: 'json',
+                data: JSON.stringify(data),
+                success: function (response) {
+                    e.target.parentNode.remove();
+                },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
+                }
+            });
+
+        });
+
+        $(document).on("click",".edit_button",function(e) {
+            var id = e.target.value;
+            console.log(id);
+            window.location.href = "edit_complex?id="+id;
+        });
+
 
 
     });
