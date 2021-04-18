@@ -16,9 +16,12 @@
 </div>
 
 <div class="my-group-main btn-group btn-group-justified">
-    <!--th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}"> todo-->
-    <a href="/book_personal" class="btn btn-warning">Book personal training</a>
-    <a href="/show_personal" class="btn btn-warning">Show personal trainings</a>
+    <a th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}" href="/book_personal" class="btn btn-warning">Book personal training</a>
+    <a th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}" href="/show_personal" class="btn btn-warning">Show personal trainings</a>
+
+    <a th:if="${#authorization.expression('hasAuthority(''COACH'')')}" href="/show_personal_coach" class="btn btn-warning">Show personal trainings</a>
+
+
 </div>
 
 <br>

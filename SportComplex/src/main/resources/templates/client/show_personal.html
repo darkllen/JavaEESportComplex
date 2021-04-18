@@ -22,15 +22,17 @@
     <div id="old" style="display:none;">
         <div class="group_training" th:each="el: ${old_trainings}">
             <h3 th:text="${#dates.format(el.scheduleDate, 'dd-MM-yyyy HH:mm')}"></h3>
-            <p th:text="'Coach: ' + ${el.coach.name}+' '+ ${el.coach.surname}"></p>
-            <button class="form_btn btn btn-danger remove_button" type="submit" th:value="${el.id}">Remove</button>
+            <p th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}" th:text="'Coach: ' + ${el.coach.name}+' '+ ${el.coach.surname}"></p>
+            <p th:if="${#authorization.expression('hasAuthority(''COACH'')')}" th:text="'Client: ' + ${el.client.name}+' '+ ${el.client.surname}"></p>
+            <button th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}" class="form_btn btn btn-danger remove_button" type="submit" th:value="${el.id}">Remove</button>
         </div>
     </div>
 
     <div class="group_training" th:each="el: ${trainings}">
         <h3 th:text="${#dates.format(el.scheduleDate, 'dd-MM-yyyy HH:mm')}"></h3>
-        <p th:text="'Coach: ' + ${el.coach.name}+' '+ ${el.coach.surname}"></p>
-        <button class="form_btn btn btn-danger remove_button" type="submit" th:value="${el.id}">Remove</button>
+        <p th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}" th:text="'Coach: ' + ${el.coach.name}+' '+ ${el.coach.surname}"></p>
+        <p th:if="${#authorization.expression('hasAuthority(''COACH'')')}" th:text="'Client: ' + ${el.client.name}+' '+ ${el.client.surname}"></p>
+        <button th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}" class="form_btn btn btn-danger remove_button" type="submit" th:value="${el.id}">Remove</button>
     </div>
 
 </div>
