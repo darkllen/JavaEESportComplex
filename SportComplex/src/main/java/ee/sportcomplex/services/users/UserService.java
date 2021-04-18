@@ -1,8 +1,10 @@
 package ee.sportcomplex.services.users;
 
+import ee.sportcomplex.dto.users.Admin;
 import ee.sportcomplex.dto.users.Client;
 import ee.sportcomplex.dto.users.Coach;
 import ee.sportcomplex.repos.schedules.ScheduleGroupRepo;
+import ee.sportcomplex.repos.users.AdminRepo;
 import ee.sportcomplex.repos.users.ClientRepo;
 import ee.sportcomplex.repos.users.CoachRepo;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,7 @@ import java.util.Optional;
 public class UserService {
     private final CoachRepo coachRepo;
     private final ClientRepo clientRepo;
+    private final AdminRepo adminRepo;
 
     public List<CoachRepo.CoachShort> getCoachesShort(){
         return coachRepo.getAllShort();
@@ -28,5 +31,9 @@ public class UserService {
     }
     public Optional<Coach> getCoachByLogin(String login){
         return coachRepo.findCoachByLogin(login);
+    }
+
+    public Optional<Admin> getAdminByLogin(String login){
+        return adminRepo.findAdminByLogin(login);
     }
 }

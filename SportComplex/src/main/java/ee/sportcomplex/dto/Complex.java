@@ -1,5 +1,8 @@
 package ee.sportcomplex.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import ee.sportcomplex.dto.users.Admin;
+import ee.sportcomplex.dto.users.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
@@ -50,5 +53,10 @@ public class Complex {
     @NotEmpty
     @Length(min = 3, max = 20)
     private String city;
+
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "admin_id", referencedColumnName = "id")
+    private User admin;
 
 }

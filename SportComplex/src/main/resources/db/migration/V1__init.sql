@@ -37,7 +37,7 @@ create table complex
     floors_num int not null,
     open_date  date null,
     city       varchar (20) not null,
-    admin_id   int not null,
+    admin_id   int null,
     constraint fk_complex_to_user foreign key (admin_id) references users(id)
 );
 
@@ -107,7 +107,7 @@ insert into permissions (permission) values
 
 insert into complex (name, description, `space`, floors_num, open_date, city, admin_id) values
 ('wowC', null, 175, 2, CURRENT_DATE(), 'Kyiv', 1),
-('myC', 'super complex', 345, 4, null, 'Odessa', 1);
+('myC', 'super complex', 345, 4, null, 'Odessa', null);
 
 insert into type (name, vip, price) values
 ('usual', 0, 2000),
