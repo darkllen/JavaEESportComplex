@@ -87,6 +87,16 @@ create table schedule_group
 );
 
 
+create table complex_coach
+(
+    id          int primary key auto_increment,
+    coach_id    int not null,
+    constraint fk_complex_coach_coach foreign key (coach_id) references users(id),
+    unique uniq_coach (coach_id),
+    complex_id  int not null,
+    constraint fk_complex_coach_complex foreign key (complex_id) references complex(id)
+);
+
 
 
 
