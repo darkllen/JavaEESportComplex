@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,10 +30,10 @@ public class RestScheduleController {
     }
 
     @ResponseBody
-    @RequestMapping(value = {"/remove_schedule_ind"}, method = RequestMethod.GET)
-    public ResponseEntity<String> remove_schedule_ind(@RequestParam int id){
+    @RequestMapping(value = {"/remove_schedule_ind"}, method = RequestMethod.POST)
+    public ResponseEntity<String> remove_schedule_ind(@RequestBody Map<String, Integer> map){
         try{
-            service.removeIndById(id);
+            service.removeIndById(map.get("id"));
             return ResponseEntity.ok().body("removed");
         } catch (Exception e){
             return ResponseEntity.badRequest().header("error", "error").body("error");

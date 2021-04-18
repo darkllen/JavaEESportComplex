@@ -114,7 +114,7 @@ insert into abonement (price, time_in_month, type_id, complex_id, user_id, user_
 (1200, 6, 2, 2,null, '0661534986');
 
 insert into schedule_ind (schedule_date, coach_id, client_id) values
-(CURRENT_DATE(), 2, 3),
+('2021-09-12', 2, 3),
 (CURRENT_DATE(), 2, 3);
 
 insert into schedule_group (name, coach_id, day_of_week, time,for_vip) values
