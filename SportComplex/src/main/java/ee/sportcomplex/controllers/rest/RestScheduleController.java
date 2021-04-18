@@ -34,9 +34,9 @@ public class RestScheduleController {
     public ResponseEntity<String> remove_schedule_ind(@RequestBody Map<String, Integer> map){
         try{
             service.removeIndById(map.get("id"));
-            return ResponseEntity.ok().body("removed");
+            return ResponseEntity.ok().body("{\"removed\":\"removed\"}");
         } catch (Exception e){
-            return ResponseEntity.badRequest().header("error", "error").body("error");
+            return ResponseEntity.badRequest().header("error", "error").body("{\"removed\":\"removed\"}");
         }
     }
 }
