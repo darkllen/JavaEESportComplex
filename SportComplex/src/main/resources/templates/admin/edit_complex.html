@@ -1,10 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit category</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/main.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
+<div th:insert="~{fragments/header :: head}"></div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+<!--<div th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" class="btn-group btn-group-justified">-->
+<!--<div data-toggle="buttons">-->
+
+
+<form id="category" th:name="${cat_id}">
+    <h2>Edit category</h2>
+    <div class="col1">
+        <p>Category name : </p>
+        <input type="text" placeholder="Category name" name="cat_name">
+        <button class="btn btn-success" type="submit">Edit</button>
+    </div>
+</form>
+
+<script>
+
+
+
+
+    $(function() {
+        var id = document.getElementById("category").getAttribute("name");
+
+
+        var data = {
+            category_number: id,
+        };
+
+        $.ajax({
+            type: 'get',
+            url: '/get_category_by_category_number',
+            dataType: 'json',
+            data: data,
+
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Content-Type', 'application/json')
+            },
+            success: function (response) {
+                $("input[name='cat_name']").val(response.category_name);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+
+        $('#category').submit(function(e) {
+            e.preventDefault();
+
+            var data = {
+                category_number: id,
+                category_name: $(this).find('[name=cat_name]').val()
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/edit_category',
+                dataType: 'json',
+                data: JSON.stringify(data),
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    alert("Success");
+
+                },
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
+                }
+            });
+        });
+
+
+    });
+
+
+</script>
+
 
 </body>
 </html>
+
