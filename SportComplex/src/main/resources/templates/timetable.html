@@ -58,11 +58,11 @@
             '<h3>'+time+'</h3>' +
             '<h2>'+el.name+'</h2>';
         if(!is_coach) ans+='<p>Coach: '+el.coach.name+' '+el.coach.surname+'</p>';
+        if(el.for_vip) ans+='<p>(Only for VIP abonements)</p>';
         if(is_admin){
             ans+='<button class="form_btn form_btn_first btn btn-success edit_button" type="submit" value="'+el.id+'">Edit</button>';
             ans+='<button class="form_btn form_btn_first btn btn-danger remove_button" type="submit" value="'+el.id+'">Remove</button>';
         }
-        if(el.for_vip) ans+='<p>(Only for VIP abonements)</p>';
         ans+='</div>';
         return ans;
     }

@@ -20,10 +20,16 @@ public class WebScheduleController {
     private final UserService userService;
 
     @RequestMapping(value = {"/edit_schedule_group"}, method = RequestMethod.GET)
-    public String timetable(@RequestParam Integer id, Model model, Principal principal){
+    public String edit_schedule_group(@RequestParam Integer id, Model model, Principal principal){
         model.addAttribute("training", scheduleService.getGroupById(id));
         model.addAttribute("coaches", userService.getAdminByLogin(principal.getName()).orElse(null).getComplex().getCoaches());
         return "admin/edit_group";
+    }
+
+    @RequestMapping(value = {"/add_schedule_group"}, method = RequestMethod.GET)
+    public String add_schedule_group(Model model, Principal principal){
+        model.addAttribute("coaches", userService.getAdminByLogin(principal.getName()).orElse(null).getComplex().getCoaches());
+        return "admin/add_group";
     }
 
 }
