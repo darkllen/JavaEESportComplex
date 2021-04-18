@@ -1,12 +1,9 @@
 package ee.sportcomplex.controllers.rest;
 
 import ee.sportcomplex.dto.Complex;
-import ee.sportcomplex.dto.schedules.ScheduleGroup;
-import ee.sportcomplex.repos.ComplexRepo;
 import ee.sportcomplex.services.ComplexService;
 import ee.sportcomplex.services.ScheduleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
