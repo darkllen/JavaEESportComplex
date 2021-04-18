@@ -17,4 +17,11 @@ public class WebComplexController {
         model.addAttribute("complexes", complexService.getComplexes());
         return "all_complexes";
     }
+
+    @RequestMapping(value = {"/edit_complex"}, method = RequestMethod.GET)
+    public String edit_complex(Model model){
+        //todo return admin complex (id=-1) or find by id
+        //model.addAttribute("complex", complexService.getComplexes());
+        return "edit_complex";
+    }
 }
