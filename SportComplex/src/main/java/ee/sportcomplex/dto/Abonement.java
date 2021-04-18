@@ -1,6 +1,7 @@
 package ee.sportcomplex.dto;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import ee.sportcomplex.dto.users.Client;
 import ee.sportcomplex.dto.users.Coach;
@@ -37,6 +38,7 @@ public class Abonement {
     @Max(36)
     private int time_in_month;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="type_id", nullable=false)
     @NotEmpty

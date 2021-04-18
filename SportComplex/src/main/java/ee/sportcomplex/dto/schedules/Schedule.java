@@ -1,6 +1,7 @@
 package ee.sportcomplex.dto.schedules;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import ee.sportcomplex.dto.users.Coach;

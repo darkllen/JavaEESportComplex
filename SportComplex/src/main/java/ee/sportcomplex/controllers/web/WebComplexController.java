@@ -21,7 +21,7 @@ public class WebComplexController {
     @RequestMapping(value = {"/edit_complex"}, method = RequestMethod.GET)
     public String edit_complex(Model model){
         //todo return in model admin complex(no json) or find by id
-        //model.addAttribute("complex", complexService.getComplexes());
+        model.addAttribute("complex", complexService.getComplexes());
         return "admin/edit_complex";
     }
 }
