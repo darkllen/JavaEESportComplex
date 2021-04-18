@@ -60,4 +60,15 @@ public class WebUserController {
                                 new java.util.Date()));
         return "client/show_personal";
     }
+
+    @RequestMapping(value = {"/settings"}, method = RequestMethod.GET)
+    public String settings(){
+        //todo return "abonement"  in model attribute (if user=client)
+        return "client/settings";
+    }
+
+    @RequestMapping(value = {"/change_login_password"}, method = RequestMethod.GET)
+    public String change_login_password(){
+        return "client/change_login_password";
+    }
 }

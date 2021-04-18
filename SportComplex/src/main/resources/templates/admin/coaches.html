@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>SportClub</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/index.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div class = "header" th:insert="~{fragments/header :: head}"></div>
+
+<div class="col1">
+    <form id="form">
+        <h2>Add trener</h2>
+        <p>Complex : </p>
+        <select id='select_complex' name='select_complex'>
+            <div th:each="el: ${complexes}">
+                <option th:value="${el.id}" th:text="${el.name}"></option>
+            </div>
+        </select>
+        <button class="form_btn btn btn-success" type="submit">Generate code</button>
+    </form>
+
+    <h2 id="trener_code"></h2>
+</div>
+
+<div class="col2">
+    <table id="my_table" class="table table-hover table-bordered">
+        <thead>
+        <th>Coach name</th>
+        <th>Coach surname</th>
+        <th>Edit</th>
+        <th>Remove</th>
+        </thead>
+        <tbody id="table_body">
+        <tr class = "table_row" th:each="el: ${coaches}">
+            <td th:text="${el.name}"></td>
+            <td th:text="${el.surname}"></td>
+            <td><button class="form_btn form_btn_first btn btn-success edit_button" type="submit" th:value="${el.id}">Edit</button></td>
+            <td><button class="form_btn form_btn_first btn btn-danger remove_button" type="submit" th:value="${el.id}">Remove</button></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+
+    $(function () {
+
+        $('#form').submit(function (e) {
+            e.preventDefault();
+
+
+            var data = {
+                complex: $(this).find('[name=select_complex]').val(),
+                role: "TRENER"
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/generate_code',
+                dataType: 'json',
+                data: JSON.stringify(data),
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    document.getElementById('trener_code').innerText="New code for trener is "+ response;
+
+                },
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
+                }
+            });
+        });
+
+
+        $(document).on("click",".remove_button",function(e) {
+            var id = e.target.value;
+            var data = {
+                id : id
+            };
+            console.log(id);
+            $.ajax({
+                url: '/remove_coach',
+                type: "post",
+                dataType: 'json',
+                data: JSON.stringify(data),
+                success: function (response) {
+                    e.target.parentNode.remove();
+                },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
+                }
+            });
+
+        });
+
+        $(document).on("click",".edit_button",function(e) {
+            var id = e.target.value;
+            console.log(id);
+            window.location.href = "edit_coach?id="+id;
+        });
+
+    });
+</script>
+
+
+</body>
+</html>
+
