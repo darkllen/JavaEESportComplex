@@ -2,6 +2,7 @@ package ee.sportcomplex.services;
 
 import ee.sportcomplex.dto.Abonement;
 import ee.sportcomplex.dto.Complex;
+import ee.sportcomplex.dto.users.Client;
 import ee.sportcomplex.repos.AbonementRepo;
 import ee.sportcomplex.repos.ComplexRepo;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,11 @@ public class AbonementService {
 
     public Optional<Integer> getPriceByTypeAndTime(int type, int monthes){
         return repo.getPriceByTypeAndTime(type,monthes);
+    }
+
+    public void addExistingAbonement(int id, Client client){
+        if (repo.getOne(id).getClient() == null)
+        repo.addExistingAbonement(id, client);
+        else throw new IllegalArgumentException("has client");
     }
 }
