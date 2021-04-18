@@ -1,10 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SportClub</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/index.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <body>
+<div class = "header" th:insert="~{fragments/header :: head}"></div>
+
+<div class="col1">
+    <form id="form">
+        <h2>Add complex</h2>
+        <p>Complex name : </p>
+        <input type="text" placeholder="Complex name" name="name">
+        <p>Description : </p>
+        <textarea type="text" placeholder="Description" name="description"></textarea>
+        <p>Space : </p>
+        <input type="number" min="1" placeholder="Space" name="space">
+        <p>Floors : </p>
+        <input type="number" min="1" placeholder="Floors" name="floors_num">
+        <p>Open date : </p>
+        <input type="date" name="date">
+        <p>City : </p>
+        <input type="text" placeholder="City" name="city">
+        <button class="form_btn btn btn-success" type="submit">Add</button>
+    </form>
+</div>
+
+<div class="col2">
+
+</div>
+
+
+<script>
+
+    $(function() {
+
+        $('#form').submit(function(e) {
+            e.preventDefault();
+
+            var data = {
+                name: $(this).find('[name=name]').val(),
+                description: $(this).find('[name=description]').val(),
+                space: $(this).find('[name=space]').val(),
+                floors_num: $(this).find('[name=floors_num]').val(),
+                open_date: $(this).find('[name=open_date]').val(),
+                city: $(this).find('[name=city]').val()
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/add_complex',
+                dataType: 'json',
+                data: JSON.stringify(data),
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    $(this).closest('form').find("input, textarea").val("");
+                    alert("Success");
+                },
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
+                }
+            });
+        });
+
+
+    });
+
+
+</script>
+
 
 </body>
 </html>
+
