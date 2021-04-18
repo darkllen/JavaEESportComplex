@@ -15,8 +15,8 @@ public interface AbonementRepo extends JpaRepository<Abonement, Integer> {
     @Query("SELECT a from Abonement a")
     List<Abonement> getAll();
 
-    @Query("SELECT a.price from Abonement a WHERE a.type.id=?1 and a.time_in_month=?2")
-    Optional<Integer> getPriceByTypeAndTime(int type_id, int monthes);
+    @Query("SELECT a.price from Type a WHERE a.id=?1")
+    Optional<Integer> getPriceByTypeAndTime(int type_id);
 
     @Modifying
     @Transactional

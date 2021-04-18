@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 @Getter
@@ -26,4 +27,9 @@ public class Type {
     @Column(name = "vip", unique = true)
     @NotEmpty
     private boolean vip;
+
+    @Column(name = "price", unique = true)
+    @NotEmpty
+    @Min(0)
+    private int price;
 }

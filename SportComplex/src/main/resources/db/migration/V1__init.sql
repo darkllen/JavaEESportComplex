@@ -44,7 +44,8 @@ create table type
 (
     id              int primary key auto_increment,
     name            varchar (20) not null,
-    vip             bit not null
+    vip             bit not null,
+    price           int not null
 );
 
 create table abonement
@@ -104,9 +105,9 @@ insert into permissions (permission) values
 ('CLIENT');
 
 
-insert into type (name, vip) values
-('usual', 0),
-('super', 1);
+insert into type (name, vip, price) values
+('usual', 0, 2000),
+('super', 1, 4000);
 
 insert into abonement (price, time_in_month, type_id, complex_id, user_id, user_phone) values
 (8000, 12, 1, 1,3, null),
