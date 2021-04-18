@@ -17,4 +17,6 @@ public interface ScheduleIndRepo extends JpaRepository<ScheduleInd, Integer> {
 
     List<ScheduleInd> findAllByCoachAndScheduleDateBefore(Coach coach, Date date);
     List<ScheduleInd> findAllByCoachAndScheduleDateAfter(Coach coach, Date date);
+
+    void removeById(int id);
 }

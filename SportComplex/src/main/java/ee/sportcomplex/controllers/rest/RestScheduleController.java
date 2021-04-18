@@ -4,6 +4,7 @@ import ee.sportcomplex.dto.schedules.ScheduleGroup;
 import ee.sportcomplex.services.ScheduleService;
 import ee.sportcomplex.services.users.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -25,5 +26,16 @@ public class RestScheduleController {
     @RequestMapping(value = {"/get_shedule_by_day_of_week_by_trener"}, method = RequestMethod.GET)
     public List<ScheduleGroup> get_schedule_by_day_of_week_with_trener(Principal principal, @RequestParam String day_of_week){
         return service.getScheduleByDayByCoach(ScheduleGroup.DayOfWeek.valueOf(day_of_week), userService.getCoachByLogin(principal.getName()).orElse(null));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = {"/remove_ind_by_id"}, method = RequestMethod.GET)
+    public ResponseEntity<String> remove_ind_by_id(@RequestParam int id){
+        try{
+            service.removeIndById(id);
+            return ResponseEntity.ok().body("removed");
+        } catch (Exception e){
+            return ResponseEntity.badRequest().header("error", "error").body("error");
+        }
     }
 }
