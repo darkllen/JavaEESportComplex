@@ -24,4 +24,6 @@ public class WebController {
         return "timetable";
     }
 
+
+
 }

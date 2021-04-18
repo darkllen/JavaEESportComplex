@@ -11,6 +11,7 @@
 
         <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" id="edit_complex" class="nav-link" href="/edit_complex" style="color: white">Edit complex</a>
         <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" id="coaches" class="nav-link" href="/coaches" style="color: white">Coaches</a>
+        <a th:if="${#authorization.expression('isAuthenticated()')}" id="settings" class="nav-link" href="/settings" style="color: white">Other info</a>
 
         <form class="form-inline">
             <a class="nav-link" href="/login" th:unless="${#authorization.expression('isAuthenticated()')}">Login</a>
