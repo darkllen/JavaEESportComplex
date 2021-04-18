@@ -35,11 +35,11 @@
 <!--todo - set selected-->
         </select>
         <p>Time : </p>
-        <input type="time" placeholder="Time" name="time" th:value="${#dates.format(training.time, 'HH:mm')}">
+        <input type="time" placeholder="Time" name="time" th:value="${#temporals.format(training.time, 'HH:mm')}">
         <p>Is VIP : </p>
         <select id='select_vip' name='select_vip'>
             <option th:selected="${training.for_vip}==true" value="true">Yes</option>
-            <option th:selected="${training.for_vip}==false" value="true">False</option>
+            <option th:selected="${training.for_vip}==false" value="false">No</option>
         </select>
         <button class="form_btn btn btn-success" type="submit">Edit</button>
     </form>
@@ -57,15 +57,19 @@
 
         $('#form').submit(function(e) {
             e.preventDefault();
+            // var for_vip = $(this).find('[name=select_vip]').val();
+            // if(for_vip=='true') for_vip=true;
+            //     else for_vip=false;
 
             var data = {
                 id: id,
                 name: $(this).find('[name=name]').val(),
-                coach_id: $(this).find('[name=select_coach]').val(),
-                day_of_week: $(this).find('[name=select_day]').val(),
+                coach: $(this).find('[name=select_coach]').val(),
+                dayOfWeek: $(this).find('[name=select_day]').val(),
                 time: $(this).find('[name=time]').val(),
-                for_vip: $(this).find('[name=select_vip]').val(),
+                for_vip: $(this).find('[name=select_vip]').val()
             };
+            console.log(data)
             $.ajax({
                 type: 'POST',
                 url: '/edit_schedule_group',

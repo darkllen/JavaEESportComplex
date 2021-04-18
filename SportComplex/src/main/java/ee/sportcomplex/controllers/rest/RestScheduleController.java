@@ -22,12 +22,15 @@ public class RestScheduleController {
     @ResponseBody
     @RequestMapping(value = {"/get_schedule_by_day_of_week_with_trener"}, method = RequestMethod.GET)
     public List<ScheduleGroup> get_schedule_by_day_of_week_with_trener(@RequestParam String day_of_week){
+        List<ScheduleGroup> scheduleGroups= service.getScheduleByDay(ScheduleGroup.DayOfWeek.valueOf(day_of_week));
+        System.out.println(scheduleGroups);
         return service.getScheduleByDay(ScheduleGroup.DayOfWeek.valueOf(day_of_week));
     }
 
     @ResponseBody
     @RequestMapping(value = {"/get_schedule_by_day_of_week_by_trener"}, method = RequestMethod.GET)
     public List<ScheduleGroup> get_schedule_by_day_of_week_by_trener(Principal principal, @RequestParam String day_of_week){
+        List<ScheduleGroup> scheduleGroups= service.getScheduleByDay(ScheduleGroup.DayOfWeek.valueOf(day_of_week));
         return service.getScheduleByDayByCoach(ScheduleGroup.DayOfWeek.valueOf(day_of_week), userService.getCoachByLogin(principal.getName()).orElse(null));
     }
 

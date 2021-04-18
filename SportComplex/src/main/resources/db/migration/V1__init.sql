@@ -106,7 +106,9 @@ create table complex_coach
 insert into users (login, name, surname, password, role) values
 ('admin', 'Ihor', 'Yankin', 'admin', 'ADMIN'),
 ('coach', 'Anna', 'Hinkul', 'coach', 'COACH'),
-('user', 'Angelina', 'Volkova', 'user', 'CLIENT');
+('user', 'Angelina', 'Volkova', 'user', 'CLIENT'),
+('coach2', 'Ira', 'Linki', 'coach2', 'COACH'),
+('coach3', 'Inna', 'Ugan', 'coach3', 'COACH');
 
 insert into permissions (permission) values
 ('ADMIN'),
@@ -133,12 +135,18 @@ insert into schedule_ind (schedule_date, coach_id, client_id) values
 
 insert into schedule_group (name, coach_id, day_of_week, time,for_vip) values
 ('swimming', 2, 'MONDAY', CURRENT_TIME(), 0),
-('skalolasing', 2, 'TUESDAY', CURRENT_TIME(), 1);
+('skalolasing', 2, 'TUESDAY', CURRENT_TIME(), 1),
+('swimming', 5, 'TUESDAY', CURRENT_TIME(), 1),
+('skalolasing', 4, 'FRIDAY', CURRENT_TIME(), 1);
 
 insert into complex_coach (coach_id, complex_id) values
-(2, 1);
+(2, 1),
+(5,1),
+(4, 1);
 
 insert into user_to_permissions (user_id, permission_id) values
 ((select id from users where login = 'admin'), (select id from permissions where permission = 'ADMIN')),
 ((select id from users where login = 'user'), (select id from permissions where permission = 'CLIENT')),
-((select id from users where login = 'coach'), (select id from permissions where permission = 'COACH'));
+((select id from users where login = 'coach'), (select id from permissions where permission = 'COACH')),
+((select id from users where login = 'coach2'), (select id from permissions where permission = 'COACH')),
+((select id from users where login = 'coach3'), (select id from permissions where permission = 'COACH'));

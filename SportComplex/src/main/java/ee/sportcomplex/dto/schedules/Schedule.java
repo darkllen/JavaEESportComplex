@@ -1,13 +1,15 @@
 package ee.sportcomplex.dto.schedules;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
+import ee.sportcomplex.EntityIdResolver;
 import ee.sportcomplex.dto.users.Coach;
+import ee.sportcomplex.dto.users.User;
+import ee.sportcomplex.services.users.UserService;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -24,9 +26,12 @@ public abstract class Schedule {
 
     @JsonIdentityInfo(
             generator = ObjectIdGenerators.PropertyGenerator.class,
-            property = "id")
+            resolver = EntityIdResolver.class,
+            property = "id",
+            scope=Coach.class)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="coach_id", nullable=false)
     @Getter(AccessLevel.PUBLIC)
     private Coach coach;
+
 }
