@@ -39,4 +39,15 @@ public class RestScheduleController {
             return ResponseEntity.badRequest().header("error", "error").body("{\"removed\":\"removed\"}");
         }
     }
+
+    @ResponseBody
+    @RequestMapping(value = {"/remove_schedule_group"}, method = RequestMethod.POST)
+    public ResponseEntity<String> remove_schedule_group(@RequestBody Map<String, Integer> map){
+        try{
+            service.removeGroupById(map.get("id"));
+            return ResponseEntity.ok().body("{\"removed\":\"removed\"}");
+        } catch (Exception e){
+            return ResponseEntity.badRequest().header("error", "error").body("{\"removed\":\"removed\"}");
+        }
+    }
 }

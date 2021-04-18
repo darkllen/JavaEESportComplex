@@ -43,4 +43,8 @@ public class ScheduleService {
     public void removeIndById(int id){
         indRepo.removeById(id);
     }
+
+    public void removeGroupById(Integer id) {
+        groupRepo.removeById(id);
+    }
 }
