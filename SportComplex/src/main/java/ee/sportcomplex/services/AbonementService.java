@@ -24,8 +24,8 @@ public class AbonementService {
         return repo.getAll();
     }
 
-    public Optional<Integer> getPriceByTypeAndTime(int type, int monthes){
-        return repo.getPriceByTypeAndTime(type,monthes);
+    public Integer getPriceByTypeAndTime(int type, int monthes){
+        return (int)((monthes*repo.getPriceByTypeAndTime(type).orElse(0))*(1-(monthes-monthes%5)/100.0));
     }
 
     public void addExistingAbonement(int id, Client client){

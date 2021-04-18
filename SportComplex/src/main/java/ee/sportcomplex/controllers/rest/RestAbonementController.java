@@ -18,7 +18,7 @@ public class RestAbonementController {
     @ResponseBody
     @RequestMapping(value = {"/get_abonement_price_by_type_and_duration"}, method = RequestMethod.GET)
     public Integer get_abonement_price_by_type_and_duration(@RequestParam int type, @RequestParam int duration){
-        return service.getPriceByTypeAndTime(type, duration).orElse(0);
+        return service.getPriceByTypeAndTime(type, duration);
     }
 
     @ResponseBody

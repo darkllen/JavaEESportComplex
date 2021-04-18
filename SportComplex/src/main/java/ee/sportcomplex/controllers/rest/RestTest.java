@@ -20,9 +20,9 @@ public class RestTest {
     private final AbonementService service;
     private final UserService userService;
 
-    @ResponseBody
-    @RequestMapping(value = {"/ga"}, method = RequestMethod.GET)
-    public Integer ga(@RequestParam int t, @RequestParam int m){
-        return service.getPriceByTypeAndTime(t, m).orElse(0);
-    }
+//    @ResponseBody
+//    @RequestMapping(value = {"/ga"}, method = RequestMethod.GET)
+//    public Integer ga(@RequestParam int t, @RequestParam int m){
+//        return service.getPriceByTypeAndTime(t, m).orElse(0);
+//    }
 }
