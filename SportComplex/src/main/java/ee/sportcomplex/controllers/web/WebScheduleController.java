@@ -1,6 +1,7 @@
 package ee.sportcomplex.controllers.web;
 
 import ee.sportcomplex.dto.schedules.ScheduleGroup;
+import ee.sportcomplex.dto.users.Admin;
 import ee.sportcomplex.services.ComplexService;
 import ee.sportcomplex.services.ScheduleService;
 import ee.sportcomplex.services.users.UserService;
@@ -20,11 +21,8 @@ public class WebScheduleController {
 
     @RequestMapping(value = {"/edit_schedule_group"}, method = RequestMethod.GET)
     public String timetable(@RequestParam Integer id, Model model, Principal principal){
-        //todo - add model attribute - name = training - get by id
         model.addAttribute("training", scheduleService.getGroupById(id));
-        //todo - add model attribute - name = coaches - list of all coaches from complex where admin belongs
-        model.addAttribute("coaches", userService.getAdminByLogin(principal.getName()).orElse(null).getComplex());
-
+        model.addAttribute("coaches", userService.getAdminByLogin(principal.getName()).orElse(null).getComplex().getCoaches());
         return "admin/edit_group";
     }
 
