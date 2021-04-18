@@ -25,7 +25,6 @@ public class WebComplexController {
 
     @RequestMapping(value = {"/edit_complex"}, method = RequestMethod.GET)
     public String edit_complex(Principal principal, Model model, @RequestParam(required = false) Integer id){
-        //todo return in model admin complex(no json) or find by id
         if (id != null){
             model.addAttribute("complex", complexService.getById(id));
         }else{
