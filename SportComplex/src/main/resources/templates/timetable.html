@@ -52,7 +52,7 @@
 
 <script>
 
-    function formTableRow(el, is_coach){
+    function formTableRow(el, is_coach, is_admin){
         var time = el.time.substring(0, 5);
         var ans = '<div class="group_training">' +
             '<h3>'+time+'</h3>' +
@@ -62,13 +62,14 @@
             ans+='<button class="form_btn form_btn_first btn btn-success edit_button" type="submit" value="'+el.id+'">Edit</button>';
             ans+='<button class="form_btn form_btn_first btn btn-danger remove_button" type="submit" value="'+el.id+'">Remove</button>';
         }
+        if(el.for_vip) ans+='<p>(Only for VIP abonements)</p>';
         ans+='</div>';
         return ans;
     }
 
     function getTimetable(t){
         var is_coach= (document.getElementById("is_coach")!=null);
-        var is_admin= (document.getElementById("is_admin")!=null);
+        var is_admin = (document.getElementById("is_admin")!=null);
         var url = '/get_schedule_by_day_of_week_with_trener';
         if(is_coach)
             url = '/get_schedule_by_day_of_week_by_trener';
@@ -93,7 +94,7 @@
             success: function (response) {
 
                 response.forEach(function (el) {
-                    $container.append(formTableRow(el, is_coach));
+                    $container.append(formTableRow(el, is_coach, is_admin));
                 });
                 if(response.length==0)
                     $container.append('<h3>No trainings this day</h3>');
