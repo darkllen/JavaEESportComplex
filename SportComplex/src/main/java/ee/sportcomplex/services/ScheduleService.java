@@ -3,6 +3,7 @@ package ee.sportcomplex.services;
 import ee.sportcomplex.dto.schedules.ScheduleGroup;
 import ee.sportcomplex.dto.schedules.ScheduleInd;
 import ee.sportcomplex.dto.users.Client;
+import ee.sportcomplex.dto.users.Coach;
 import ee.sportcomplex.repos.schedules.ScheduleGroupRepo;
 import ee.sportcomplex.repos.schedules.ScheduleIndRepo;
 import lombok.RequiredArgsConstructor;
@@ -22,10 +23,16 @@ public class ScheduleService {
     }
 
     public List<ScheduleInd> findAllByClientAndScheduleDateBefore(Client client, Date date){
-        System.out.println(indRepo.findAllByClientAndScheduleDateBefore(client,date));
         return indRepo.findAllByClientAndScheduleDateBefore(client,date);
     };
     public List<ScheduleInd> findAllByClientAndScheduleDateAfter(Client client, Date date){
         return indRepo.findAllByClientAndScheduleDateAfter(client,date);
+    };
+
+    public List<ScheduleInd> findAllByCoachAndScheduleDateBefore(Coach coach, Date date){
+        return indRepo.findAllByCoachAndScheduleDateBefore(coach,date);
+    };
+    public List<ScheduleInd> findAllByCoachAndScheduleDateAfter(Coach coach, Date date){
+        return indRepo.findAllByCoachAndScheduleDateAfter(coach,date);
     };
 }
