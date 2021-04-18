@@ -23,9 +23,6 @@ public class RestTest {
     @ResponseBody
     @RequestMapping(value = {"/ga"}, method = RequestMethod.GET)
     public List<ScheduleInd> ga(Principal principal){
-        System.out.println(principal.getName());
-        System.out.println(userService.getClientByLogin(principal.getName()).get());
-        System.out.println(service.findAllByClientAndScheduleDateBefore(userService.getClientByLogin(principal.getName()).get(), new java.util.Date()));
         return service.findAllByClientAndScheduleDateBefore(userService.getClientByLogin(principal.getName()).get(), new java.util.Date());
     }
 }

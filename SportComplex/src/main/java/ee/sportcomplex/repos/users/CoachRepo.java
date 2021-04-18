@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CoachRepo extends JpaRepository<Coach, Integer> {
     @Query(value = "SELECT c from Coach c")
@@ -12,6 +13,8 @@ public interface CoachRepo extends JpaRepository<Coach, Integer> {
 
     @Query(value = "SELECT c from Coach c")
     List<Coach> getAll();
+
+    Optional<Coach> findCoachByLogin(String login);
 
     public interface CoachShort{
         public int getId();

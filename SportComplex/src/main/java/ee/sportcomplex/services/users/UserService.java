@@ -26,4 +26,7 @@ public class UserService {
     public Optional<Client> getClientByLogin(String login){
         return clientRepo.findClientsByLogin(login);
     }
+    public Optional<Coach> getCoachByLogin(String login){
+        return coachRepo.findCoachByLogin(login);
+    }
 }

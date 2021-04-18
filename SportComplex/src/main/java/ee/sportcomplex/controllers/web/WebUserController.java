@@ -36,4 +36,19 @@ public class WebUserController {
                                 new java.util.Date()));
         return "client/show_personal";
     }
+
+    @RequestMapping(value = {"/show_personal_coach"}, method = RequestMethod.GET)
+    public String show_personal_coach(Model model, Principal principal){
+        model.addAttribute("trainings",
+                scheduleService.
+                        findAllByCoachAndScheduleDateAfter(
+                                userService.getCoachByLogin(principal.getName()).get(),
+                                new java.util.Date()));
+        model.addAttribute("old_trainings",
+                scheduleService.
+                        findAllByCoachAndScheduleDateBefore(
+                                userService.getCoachByLogin(principal.getName()).get(),
+                                new java.util.Date()));
+        return "client/show_personal";
+    }
 }
