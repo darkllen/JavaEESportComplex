@@ -58,12 +58,7 @@ public class Complex {
     private User admin;
 
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "complex_coach",
-            joinColumns = @JoinColumn(name = "complex_id"),
-            inverseJoinColumns = @JoinColumn(name = "coach_id")
-    )
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="complex")
     private List<Coach> coaches;
 
 }

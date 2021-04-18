@@ -17,8 +17,17 @@ public class WebUserController {
     private final ScheduleService scheduleService;
 
     @RequestMapping(value = {"/book_personal"}, method = RequestMethod.GET)
-    public String book_personal(Model model){
-        model.addAttribute("coaches", userService.getCoachesShort());
+    public String book_personal(Model model, Principal principal){
+        if (principal.getName() == null)
+            model.addAttribute("coaches", userService.getCoachesShort());
+        if (userService.getClientByLogin(principal.getName()).orElse(null).getAbonements().isEmpty())
+            model.addAttribute("coaches", userService.getCoachesShort());
+        else{
+            model.addAttribute("coaches",
+                    userService.getCoachesShortPossibleByAbonements(
+                            userService.getClientByLogin(
+                                    principal.getName()).orElse(null).getAbonements()));
+        }
         return "client/book_personal";
     }
 
