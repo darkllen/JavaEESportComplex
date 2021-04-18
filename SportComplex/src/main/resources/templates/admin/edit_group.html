@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>SportClub</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/index.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div class = "header" th:insert="~{fragments/header :: head}"></div>
+
+<div class="info_container">
+    <form id="form" th:name="${training.id}">
+        <h2>Edit group training</h2>
+        <p>Training name : </p>
+        <input type="text" placeholder="Training name" name="name" th:value="${training.name}">
+        <p>Coach : </p>
+        <select id='select_coach' name='select_coach'>
+            <div th:each="el: ${coaches}">
+                <option th:selected="${el.id}==${training.coach.id}" th:value="${el.id}" th:text="${el.name} +' ' + ${el.surname}"></option>
+            </div>
+        </select>
+        <p>Day of week : </p>
+        <select id='select_day' name='select_day' th:value="${training.day_of_week}">
+            <option value="MONDAY">MONDAY</option>
+            <option value="MONDAY">MONDAY</option>
+            <option value="MONDAY">MONDAY</option>
+<!--todo-->
+        </select>
+        <p>Time : </p>
+        <input type="time" placeholder="Time" name="time" th:value="${training.time}">
+        <p>Is VIP : </p>
+        <select id='select_vip' name='select_vip'>
+            <option th:selected="${training.for_vip}==true" value="true">Yes</option>
+            <option th:selected="${training.for_vip}==false" value="true">False</option>
+        </select>
+        <button class="btn btn-success" type="submit">Edit</button>
+    </form>
+</div>
+
+
+<script>
+
+    $(function() {
+        var id = document.getElementById("form").getAttribute("name");
+
+
+
+        $('#form').submit(function(e) {
+            e.preventDefault();
+
+            var data = {
+                id: id,
+                name: $(this).find('[name=name]').val(),
+                coach_id: $(this).find('[name=select_coach]').val(),
+                day_of_week: $(this).find('[name=select_day]').val(),
+                time: $(this).find('[name=time]').val(),
+                for_vip: $(this).find('[name=select_vip]').val(),
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/edit_schedule_group',
+                dataType: 'json',
+                data: JSON.stringify(data),
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    alert("Success");
+                },
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
+                }
+            });
+        });
+
+
+    });
+
+
+</script>
+
+
+</body>
+</html>
+
