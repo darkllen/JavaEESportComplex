@@ -51,11 +51,10 @@
     </div>
 
 <script>
-
     function recalculatePrice(){
         var data = {
-            type: $(this).find('[name=select_type]').val()
-            , duration: $(this).find('[name=select_duration]').val()
+            type:  document.getElementById('select_type').value
+            , duration:  document.getElementById('select_duration').value
         };
 
         console.log(data)
@@ -77,7 +76,11 @@
         });
 
     }
+
     $(function () {
+
+        recalculatePrice();
+
 
         $('#form').submit(function (e) {
             e.preventDefault();
