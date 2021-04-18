@@ -23,10 +23,8 @@ public class ScheduleInd extends Schedule {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="client_id", nullable=false)
-    @NotEmpty
     private Client client;
 
     @Column(name = "schedule_date")
-    @NotEmpty
     private Date scheduleDate;
 }

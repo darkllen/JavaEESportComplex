@@ -20,7 +20,6 @@ public abstract class Schedule {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Getter(AccessLevel.PUBLIC)
-    @NotEmpty
     private Integer id;
 
     @JsonIdentityInfo(
@@ -29,6 +28,5 @@ public abstract class Schedule {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="coach_id", nullable=false)
     @Getter(AccessLevel.PUBLIC)
-    @NotEmpty
     private Coach coach;
 }

@@ -16,7 +16,6 @@ public class Type {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotEmpty
     private Integer id;
 
     @Column(name = "name", unique = true)
@@ -25,11 +24,9 @@ public class Type {
     private String name;
 
     @Column(name = "vip", unique = true)
-    @NotEmpty
     private boolean vip;
 
     @Column(name = "price", unique = true)
-    @NotEmpty
     @Min(0)
     private int price;
 }

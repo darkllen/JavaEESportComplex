@@ -24,16 +24,13 @@ public class Abonement {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotEmpty
     private Integer id;
 
     @Column(name = "price", unique = true)
-    @NotEmpty
     @Min(0)
     private int price;
 
     @Column(name = "time_in_month", unique = true)
-    @NotEmpty
     @Min(1)
     @Max(36)
     private int time_in_month;
@@ -41,17 +38,14 @@ public class Abonement {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="type_id", nullable=false)
-    @NotEmpty
     private Type type;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="complex_id", nullable=false)
-    @NotEmpty
     private Complex complex;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id", nullable=true)
-    @NotEmpty
     private Client client;
 
     @Column(name = "user_phone", unique = true)
