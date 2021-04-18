@@ -21,7 +21,7 @@
 
     <a th:if="${#authorization.expression('hasAuthority(''COACH'')')}" href="/show_personal_coach" class="btn btn-warning">Show personal trainings</a>
 
-    <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" href="/add_group" class="btn btn-warning">Add group training</a>
+    <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" href="/add_schedule_group" class="btn btn-warning">Add group training</a>
 
 </div>
 

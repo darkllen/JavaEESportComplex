@@ -13,18 +13,18 @@
 <div class = "header" th:insert="~{fragments/header :: head}"></div>
 
 <div class="info_container">
-    <form id="form" th:name="${training.id}">
-        <h2>Edit group training</h2>
+    <form id="form">
+        <h2>Add group training</h2>
         <p>Training name : </p>
-        <input type="text" placeholder="Training name" name="name" th:value="${training.name}">
+        <input type="text" placeholder="Training name" name="name">
         <p>Coach : </p>
         <select id='select_coach' name='select_coach'>
             <div th:each="el: ${coaches}">
-                <option th:selected="${el.id}==${training.coach.id}" th:value="${el.id}" th:text="${el.name} +' ' + ${el.surname}"></option>
+                <option th:value="${el.id}" th:text="${el.name} +' ' + ${el.surname}"></option>
             </div>
         </select>
         <p>Day of week : </p>
-        <select id='select_day' name='select_day' th:value="${training.day_of_week}">
+        <select id='select_day' name='select_day'>
             <option value="MONDAY">MONDAY</option>
             <option value="TUESDAY">TUESDAY</option>
             <option value="WEDNESDAY">WEDNESDAY</option>
@@ -32,14 +32,13 @@
             <option value="FRIDAY">FRIDAY</option>
             <option value="SATURDAY">SATURDAY</option>
             <option value="SUNDAY">SUNDAY</option>
-<!--todo - set selected-->
         </select>
         <p>Time : </p>
-        <input type="time" placeholder="Time" name="time" th:value="${training.time}">
+        <input type="time" placeholder="Time" name="time">
         <p>Is VIP : </p>
         <select id='select_vip' name='select_vip'>
-            <option th:selected="${training.for_vip}==true" value="true">Yes</option>
-            <option th:selected="${training.for_vip}==false" value="true">False</option>
+            <option value="true">Yes</option>
+            <option value="true">False</option>
         </select>
         <button class="btn btn-success" type="submit">Edit</button>
     </form>
@@ -57,7 +56,6 @@
             e.preventDefault();
 
             var data = {
-                id: id,
                 name: $(this).find('[name=name]').val(),
                 coach_id: $(this).find('[name=select_coach]').val(),
                 day_of_week: $(this).find('[name=select_day]').val(),
@@ -66,7 +64,7 @@
             };
             $.ajax({
                 type: 'POST',
-                url: '/edit_schedule_group',
+                url: '/add_schedule_group',
                 dataType: 'json',
                 data: JSON.stringify(data),
 
