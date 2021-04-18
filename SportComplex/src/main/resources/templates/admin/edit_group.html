@@ -24,7 +24,7 @@
             </div>
         </select>
         <p>Day of week : </p>
-        <select id='select_day' name='select_day' th:value="${training.day_of_week}">
+        <select id='select_day' name='select_day' th:value="${training.dayOfWeek}">
             <option value="MONDAY">MONDAY</option>
             <option value="TUESDAY">TUESDAY</option>
             <option value="WEDNESDAY">WEDNESDAY</option>
@@ -41,7 +41,7 @@
             <option th:selected="${training.for_vip}==true" value="true">Yes</option>
             <option th:selected="${training.for_vip}==false" value="true">False</option>
         </select>
-        <button class="btn btn-success" type="submit">Edit</button>
+        <button class="form_btn btn btn-success" type="submit">Edit</button>
     </form>
 </div>
 
