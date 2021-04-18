@@ -31,6 +31,11 @@ public class User {
     @NotEmpty
     private Integer id;
 
+    @Column(name = "login", unique = true)
+    @NotEmpty
+    @Length(min = 3, max = 20)
+    private String login;
+
     @Column(name = "name", unique = true)
     @NotEmpty
     @Length(min = 3, max = 20)

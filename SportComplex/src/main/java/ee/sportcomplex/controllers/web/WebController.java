@@ -24,11 +24,4 @@ public class WebController {
         return "timetable";
     }
 
-
-
-    @RequestMapping(value = {"/show_personal"}, method = RequestMethod.GET)
-    public String show_personal(){
-        return "client/show_personal";
-    }
-
 }
