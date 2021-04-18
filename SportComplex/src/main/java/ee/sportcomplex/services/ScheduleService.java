@@ -47,4 +47,8 @@ public class ScheduleService {
     public void removeGroupById(Integer id) {
         groupRepo.removeById(id);
     }
+
+    public ScheduleGroup getGroupById(Integer id) {
+        return groupRepo.getOne(id);
+    }
 }
