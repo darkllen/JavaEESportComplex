@@ -37,6 +37,12 @@
      margin-top: 15px;
  }
 
+ .form_btn_first{
+     display: inline-block;
+     margin-right: 10px;
+     margin-bottom: 10px;
+ }
+
  textarea{
      resize: none;
      height: 50px;
