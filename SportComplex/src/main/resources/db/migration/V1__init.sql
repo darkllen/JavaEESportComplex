@@ -36,7 +36,9 @@ create table complex
     space      int not null,
     floors_num int not null,
     open_date  date null,
-    city       varchar (20) not null
+    city       varchar (20) not null,
+    admin_id   int not null,
+    constraint fk_complex_to_user foreign key (admin_id) references users(id)
 );
 
 
@@ -87,9 +89,7 @@ create table schedule_group
 
 
 
-insert into complex (name, description, `space`, floors_num, open_date, city) values
-('wowC', null, 175, 2, CURRENT_DATE(), 'Kyiv'),
-('myC', 'super complex', 345, 4, null, 'Odessa');
+
 
 
 
@@ -104,6 +104,10 @@ insert into permissions (permission) values
 ('COACH'),
 ('CLIENT');
 
+
+insert into complex (name, description, `space`, floors_num, open_date, city, admin_id) values
+('wowC', null, 175, 2, CURRENT_DATE(), 'Kyiv', 1),
+('myC', 'super complex', 345, 4, null, 'Odessa', 1);
 
 insert into type (name, vip, price) values
 ('usual', 0, 2000),
