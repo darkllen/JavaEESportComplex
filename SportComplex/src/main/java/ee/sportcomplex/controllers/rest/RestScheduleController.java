@@ -29,8 +29,8 @@ public class RestScheduleController {
     }
 
     @ResponseBody
-    @RequestMapping(value = {"/remove_ind_by_id"}, method = RequestMethod.GET)
-    public ResponseEntity<String> remove_ind_by_id(@RequestParam int id){
+    @RequestMapping(value = {"/remove_schedule_ind"}, method = RequestMethod.GET)
+    public ResponseEntity<String> remove_schedule_ind(@RequestParam int id){
         try{
             service.removeIndById(id);
             return ResponseEntity.ok().body("removed");
