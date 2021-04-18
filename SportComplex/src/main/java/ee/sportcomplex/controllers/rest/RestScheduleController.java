@@ -1,5 +1,6 @@
 package ee.sportcomplex.controllers.rest;
 
+import ee.sportcomplex.dto.Complex;
 import ee.sportcomplex.dto.schedules.ScheduleGroup;
 import ee.sportcomplex.services.ScheduleService;
 import ee.sportcomplex.services.users.UserService;
@@ -7,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
@@ -50,4 +52,11 @@ public class RestScheduleController {
             return ResponseEntity.badRequest().header("error", "error").body("{\"removed\":\"removed\"}");
         }
     }
+
+    @ResponseBody
+    @RequestMapping(value = {"/edit_schedule_group"}, method = RequestMethod.POST)
+    public ScheduleGroup edit_complex(@RequestBody @Valid ScheduleGroup group){
+        return service.editGroup(group);
+    }
+
 }

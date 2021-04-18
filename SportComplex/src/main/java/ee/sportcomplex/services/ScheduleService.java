@@ -1,5 +1,6 @@
 package ee.sportcomplex.services;
 
+import ee.sportcomplex.dto.Complex;
 import ee.sportcomplex.dto.schedules.ScheduleGroup;
 import ee.sportcomplex.dto.schedules.ScheduleInd;
 import ee.sportcomplex.dto.users.Client;
@@ -50,5 +51,10 @@ public class ScheduleService {
 
     public ScheduleGroup getGroupById(Integer id) {
         return groupRepo.getOne(id);
+    }
+
+    public ScheduleGroup editGroup(ScheduleGroup group) {
+        groupRepo.saveAndFlush(group);
+        return group;
     }
 }
