@@ -98,7 +98,7 @@
                 dataType: 'json',
                 data: JSON.stringify(data),
                 success: function (response) {
-                    e.target.parentNode.remove();
+                    e.target.parentNode.parentNode.remove();
                 },
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Content-Type', 'application/json')
