@@ -15,7 +15,7 @@
 <div class="col1">
     <form id="form">
         <h2>Add trener</h2>
-        <p>Complex : </p>
+        <!--<p>Complex : </p>-->
         <!--<select id='select_complex' name='select_complex'>-->
             <!--<div th:each="el: ${complexes}">-->
                 <!--<option th:value="${el.id}" th:text="${el.name}"></option>-->
@@ -24,7 +24,7 @@
         <button class="form_btn btn btn-success" type="submit">Generate code</button>
     </form>
 
-    <h2 id="trener_code"></h2>
+    <div id="result" style="display:none" th:insert="~{fragments/code_generation_result :: code}"></div>
 </div>
 
 <div class="col2">
@@ -68,7 +68,8 @@
                     xhr.setRequestHeader('Content-Type', 'application/json')
                 },
                 success: function (response) {
-                    document.getElementById('trener_code').innerText="New code for trener is "+ response;
+                    document.getElementById('trener_code').innerText=response;
+                    document.getElementById('result').style.display='block';
 
                 },
                 error: function (request, textStatus, errorThrown) {
