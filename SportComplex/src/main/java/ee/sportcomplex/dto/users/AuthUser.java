@@ -27,8 +27,6 @@ public class AuthUser {
     private String login;
 
     @Column(name = "password")
-    @NotEmpty
-    @Length(min = 6, max = 40)
     private String password;
 
     @Column(name = "role")

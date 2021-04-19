@@ -2,6 +2,7 @@ package ee.sportcomplex.controllers.rest;
 
 import ee.sportcomplex.dto.Codes;
 import ee.sportcomplex.dto.schedules.ScheduleGroup;
+import ee.sportcomplex.dto.users.AuthUser;
 import ee.sportcomplex.dto.users.Coach;
 import ee.sportcomplex.dto.users.User;
 import ee.sportcomplex.repos.ComplexRepo;
@@ -47,6 +48,12 @@ public class RestUserController {
     public Coach edit_schedule_group(@RequestBody @Valid Coach coach){
         //TODO test
         return userService.editCoach(coach);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = {"/change_user_info"}, method = RequestMethod.POST)
+    public AuthUser change_user_info(@RequestBody @Valid AuthUser user){
+        return userService.editAuthUser(user);
     }
 
 //    private final UserService service;

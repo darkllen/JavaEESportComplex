@@ -78,4 +78,13 @@ public class UserService {
     public Coach getCoachByID(Integer id) {
         return coachRepo.getOne(id);
     }
+
+    public AuthUser editAuthUser(AuthUser user) {
+        authRepo.saveAndFlush(user);
+        return user;
+    }
+
+    public AuthUser getAuthByLogin(String name) {
+        return authRepo.findUserByLogin(name).orElse(null);
+    }
 }

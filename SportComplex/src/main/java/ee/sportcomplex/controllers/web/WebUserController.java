@@ -62,14 +62,14 @@ public class WebUserController {
     }
 
     @RequestMapping(value = {"/settings"}, method = RequestMethod.GET)
-    public String settings(){
+    public String settings(Model model){
         //todo return "abonement"  in model attribute (if user=client)
         return "client/settings";
     }
 
     @RequestMapping(value = {"/change_user_info"}, method = RequestMethod.GET)
-    public String change_user_info(){
-        //todo - add model attribute - user
+    public String change_user_info(Principal principal, Model model){
+        model.addAttribute("user", userService.getAuthByLogin(principal.getName()));
         return "client/change_user_info";
     }
 }
