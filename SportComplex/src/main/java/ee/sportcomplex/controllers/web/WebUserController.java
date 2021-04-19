@@ -18,7 +18,7 @@ public class WebUserController {
 
     @RequestMapping(value = {"/book_personal"}, method = RequestMethod.GET)
     public String book_personal(Model model, Principal principal){
-        if (principal.getName() == null)
+        if (principal == null)
             model.addAttribute("coaches", userService.getCoachesShort());
         if (userService.getClientByLogin(principal.getName()).orElse(null).getAbonements().isEmpty())
             model.addAttribute("coaches", userService.getCoachesShort());
