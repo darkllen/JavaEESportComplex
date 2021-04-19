@@ -32,4 +32,16 @@ public class WebScheduleController {
         return "admin/add_group";
     }
 
+    @RequestMapping(value = {"/timetable"}, method = RequestMethod.GET)
+    public String timetable(Model model){
+        model.addAttribute("trainings", List.of(
+                scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.MONDAY),
+                scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.TUESDAY),
+                scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.WEDNESDAY),
+                scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.THURSDAY),
+                scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.FRIDAY),
+                scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.SATURDAY),
+                scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.SUNDAY)));
+        return "timetable";
+    }
 }

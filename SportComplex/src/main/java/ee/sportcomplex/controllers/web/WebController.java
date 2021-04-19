@@ -19,10 +19,7 @@ public class WebController {
         return "index";
     }
 
-    @RequestMapping(value = {"/timetable"}, method = RequestMethod.GET)
-    public String timetable(){
-        return "timetable";
-    }
+
 
 
 
