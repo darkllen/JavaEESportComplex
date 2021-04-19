@@ -14,21 +14,23 @@ import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
-public class WebCoachController {
+public class WebAdminController {
     private final UserService userService;
     private final ComplexService complexService;
 
-    @RequestMapping(value = {"/coaches"}, method = RequestMethod.GET)
-    public String coaches(Model model, Principal principal){
+    @RequestMapping(value = {"/admins"}, method = RequestMethod.GET)
+    public String admins(Model model, Principal principal){
         model.addAttribute("complexes", complexService.getComplexesShort());
-        //todo
-        model.addAttribute("coaches", userService.getAdminByLogin(principal.getName()).orElse(null).getComplex().getCoaches());
-        return "admin/coaches";
+        //todo - return admins, not coaches
+        model.addAttribute("admins", userService.getAdminByLogin(principal.getName()).orElse(null).getComplex().getCoaches());
+        return "owner/admins";
     }
 
-    @RequestMapping(value = {"/edit_coach"}, method = RequestMethod.GET)
-    public String edit_coach(@RequestParam Integer id, Model model){
-        model.addAttribute("coach", userService.getCoachByID(id));
-        return "admin/edit_coach";
+    @RequestMapping(value = {"/edit_admin"}, method = RequestMethod.GET)
+    public String edit_admin(@RequestParam Integer id, Model model){
+        //todo - get admin by id, not coach
+        model.addAttribute("admin", userService.getCoachByID(id));
+        return "admin/edit_admin";
     }
+
 }
