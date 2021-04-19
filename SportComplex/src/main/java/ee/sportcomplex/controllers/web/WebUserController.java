@@ -67,8 +67,9 @@ public class WebUserController {
         return "client/settings";
     }
 
-    @RequestMapping(value = {"/change_login_password"}, method = RequestMethod.GET)
-    public String change_login_password(){
-        return "client/change_login_password";
+    @RequestMapping(value = {"/change_user_info"}, method = RequestMethod.GET)
+    public String change_user_info(){
+        //todo - add model attribute - user
+        return "client/change_user_info";
     }
 }

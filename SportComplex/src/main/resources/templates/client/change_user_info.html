@@ -16,7 +16,11 @@
     <form id="form">
         <h2>Change login or password</h2>
         <p>Login : </p>
-        <input type="text" placeholder="Login" name="login" th:text="${login}">
+        <input type="text" placeholder="Login" name="login" th:text="${user.login}">
+        <p>Name : </p>
+        <input type="text" placeholder="Name" name="name" th:text="${user.name}">
+        <p>Surname : </p>
+        <input type="text" placeholder="Surname" name="surname" th:text="${user.surname}">
         <p>Password (leave the field blank if you don't want to change it) : </p>
         <input type="password" placeholder="Password" name="password">
         <button class="form_btn btn btn-success" type="submit">Change</button>
@@ -35,12 +39,14 @@
 
             var data = {
                 login: $(this).find('[name=login]').val(),
+                name: $(this).find('[name=name]').val(),
+                surname: $(this).find('[name=surname]').val()
             };
             if(password!='') data["password"] = password;
 
             $.ajax({
                 type: 'POST',
-                url: '/change_login_password',
+                url: '/change_user_info',
                 dataType: 'json',
                 data: JSON.stringify(data),
 

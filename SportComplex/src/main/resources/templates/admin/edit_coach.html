@@ -13,7 +13,7 @@
 <div class = "header" th:insert="~{fragments/header :: head}"></div>
 
 <div class="info_container">
-    <form id="form" th:name="${coach.id}">
+    <form id="form" th:name="${coach.id}" th:login="${coach.login}">
         <h2>Edit coach</h2>
         <p>Name : </p>
         <input type="text" placeholder="Coach name" name="name" th:value="${coach.name}">
