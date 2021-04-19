@@ -21,4 +21,8 @@ public class CodeService {
     public List<Codes> getAll(){
         return repo.getAll();
     }
+
+    public void removeById(String id) {
+        repo.deleteById(id);
+    }
 }
