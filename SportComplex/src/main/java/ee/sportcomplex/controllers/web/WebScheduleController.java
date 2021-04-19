@@ -40,7 +40,7 @@ public class WebScheduleController {
 
     @RequestMapping(value = {"/timetable"}, method = RequestMethod.GET)
     public String timetable(Principal principal, Model model){
-        if (principal.getName().isBlank()){
+        if (principal.getName().isEmpty()){
             model.addAttribute("trainings", List.of(
                     scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.MONDAY),
                     scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.TUESDAY),
