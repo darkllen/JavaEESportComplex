@@ -32,90 +32,48 @@
 </div>
 
     <div class="my-group-main btn-group btn-group-justified">
-        <a onclick="getTimetable(this.innerText)" class="btn btn-warning">MONDAY</a>
-        <a onclick="getTimetable(this.innerText)" class="btn btn-warning">TUESDAY</a>
-        <a onclick="getTimetable(this.innerText)" class="btn btn-warning">WEDNESDAY</a>
-        <a onclick="getTimetable(this.innerText)" class="btn btn-warning">TUESDAY</a>
+        <a onclick="getTimetable(0)" class="btn btn-warning">MONDAY</a>
+        <a onclick="getTimetable(1)" class="btn btn-warning">TUESDAY</a>
+        <a onclick="getTimetable(2)" class="btn btn-warning">WEDNESDAY</a>
+        <a onclick="getTimetable(3)" class="btn btn-warning">TUESDAY</a>
     </div>
     <div class="my-group-main-2 btn-group btn-group-justified">
-        <a onclick="getTimetable(this.innerText)" class="btn btn-warning">FRIDAY</a>
-        <a onclick="getTimetable(this.innerText)" class="btn btn-warning">SATURDAY</a>
-        <a onclick="getTimetable(this.innerText)" class="btn btn-warning">SUNDAY</a>
+        <a onclick="getTimetable(4)" class="btn btn-warning">FRIDAY</a>
+        <a onclick="getTimetable(5)" class="btn btn-warning">SATURDAY</a>
+        <a onclick="getTimetable(6)" class="btn btn-warning">SUNDAY</a>
     </div>
 
 <div th:if="${#authorization.expression('hasAuthority(''COACH'')')}" id="is_coach"></div>
 <div th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" id="is_admin"></div>
 
-<div class="info_container" id="info_container">
+<div th:each="trainings_day,iter : ${trainings}" class="info_container" th:id="'info_container_'+${iter.index}" style="display: none">
+    <div th:each="el : ${trainings_day}">
+        <div class="group_training">
+            <h3 th:text="${#temporals.format(el.time, 'HH:mm')}"></h3>
+            <h2 th:text="${el.name}"></h2>
+            <p th:unless="${#authorization.expression('hasAuthority(''COACH'')')}" th:text="'Coach: '+${el.coach.name}+' '+${el.coach.surname}"></p>
+            <p th:if="${el.for_vip}">(Only for VIP abonements)</p>
+            <button th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" class="form_btn form_btn_first btn btn-success edit_button" type="submit" th:value="${el.id}">Edit</button>
+            <button th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" class="form_btn form_btn_first btn btn-danger remove_button" type="submit" th:value="${el.id}">Remove</button>
+        </div>
+    </div>
+    <br>
+    <h3 th:if="${#lists.size(trainings_day)}==0">No trainings this day</h3>
 
 </div>
 
 <script>
 
 
-
-    function formTableRow(el){
-        var is_coach = "[[${#authorization.expression('hasAuthority(''COACH'')')}]]";
-        var is_admin = "[[${#authorization.expression('hasAuthority(''ADMIN'')')}]]";
-
-        var time = el.time.substring(0, 5);
-        var ans = '<div class="group_training">' +
-            '<h3>'+time+'</h3>' +
-            '<h2>'+el.name+'</h2>';
-        if(!is_coach) ans+='<p>Coach: '+el.coach.name+' '+el.coach.surname+'</p>';
-        if(el.for_vip) ans+='<p>(Only for VIP abonements)</p>';
-        if(is_admin){
-            ans+='<button class="form_btn form_btn_first btn btn-success edit_button" type="submit" value="'+el.id+'">Edit</button>';
-            ans+='<button class="form_btn form_btn_first btn btn-danger remove_button" type="submit" value="'+el.id+'">Remove</button>';
-        }
-        ans+='</div>';
-        return ans;
-    }
-
     function getTimetable(t){
-        var is_coach = "[[${#authorization.expression('hasAuthority(''COACH'')')}]]";
-        var is_admin = "[[${#authorization.expression('hasAuthority(''ADMIN'')')}]]";
-
-        var url = '/get_schedule_by_day_of_week_with_trener';
-        if(is_coach)
-            url = '/get_schedule_by_day_of_week_by_trener';
-
-        var $container = $('#info_container');
-        document.getElementById('info_container').innerHTML='';
-
-        var data={
-            day_of_week: t
-        };
-
-
-        $.ajax({
-            type: 'get',
-            url: url,
-            dataType: 'json',
-            data: data,
-
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Content-Type', 'application/json')
-            },
-            success: function (response) {
-                console.log(response);
-
-                response.forEach(function (el) {
-                    $container.append(formTableRow(el));
-                });
-                if(response.length==0)
-                    $container.append('<h3>No trainings this day</h3>');
-
-            },
-            error: function (err) {
-                console.log(err);
-            }
+        document.querySelectorAll('.info_container').forEach(function(el) {
+            el.style.display='none';
         });
 
-
+        document.getElementById('info_container_'+t).style.display='block';
     }
     $(function () {
-        getTimetable("MONDAY");
+         getTimetable(0);
 
         $(document).on("click",".remove_button",function(e) {
             var id = e.target.value;
