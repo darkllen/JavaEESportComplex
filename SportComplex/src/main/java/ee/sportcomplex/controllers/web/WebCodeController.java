@@ -29,7 +29,7 @@ public class WebCodeController {
     }
     @RequestMapping(value = {"/available_codes"}, method = RequestMethod.GET)
     public String available_codes(Principal principal, Model model){
-        if (principal.getName().isBlank()){
+        if (principal == null){
             model.addAttribute("codes", codeService.getAll());
             return "admin/available_codes";
         }
