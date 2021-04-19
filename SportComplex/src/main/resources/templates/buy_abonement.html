@@ -89,8 +89,9 @@
 
             var data = {
                 type: $(this).find('[name=select_type]').val()
-                , duration: $(this).find('[name=select_duration]').val()
+                , time_in_month: $(this).find('[name=select_duration]').val()
                 , complex: $(this).find('[name=select_complex]').val()
+                , user_phone: $(this).find('[name=phone]').val()
             };
             if(document.getElementById('phone')!=null) data["phone"] = $(this).find('[name=phone]').val();
 

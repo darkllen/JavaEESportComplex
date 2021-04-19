@@ -51,9 +51,9 @@ public class RestUserController {
 
     @ResponseBody
     @RequestMapping(value = {"/edit_coach"}, method = RequestMethod.POST)
-    public Coach edit_schedule_group(@RequestBody @Valid Coach coach){
+    public AuthUser edit_coach(@RequestBody @Valid AuthUser user){
         //TODO test
-        return userService.editCoach(coach);
+        return userService.editAuthUser(user);
     }
 
     @ResponseBody
@@ -69,7 +69,7 @@ public class RestUserController {
             userService.upgradeUser(userService.getAuthByLogin(principal.getName()), map.get("code"));
             return ResponseEntity.ok().body("{\"upgraded\":\"upgraded\"}");
         } catch (Exception e){
-            return ResponseEntity.badRequest().header("error", "error").body("{\"error\":\"error\"}");
+            return ResponseEntity.badRequest().header("error", e.getMessage()).body("{\"error\":\"error\"}");
         }
     }
 
