@@ -17,7 +17,7 @@
         <h2 th:text="${el.name}"></h2>
         <p th:text="${el.description}"></p>
         <p th:text="'City: ' + ${el.city}"></p>
-        <p th:text="'Opened ' + ${el.open_date}"></p>
+        <p th:unless="${el.open_date}==null" th:text="'Opened ' + ${#dates.format(el.open_date, 'dd-MM-yyyy')}"></p>
     </div>
 
 </div>
