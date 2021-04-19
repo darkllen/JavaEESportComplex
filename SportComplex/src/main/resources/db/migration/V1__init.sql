@@ -58,7 +58,7 @@ create table abonement
     type_id         int not null,
     constraint fk_abonement_to_type foreign key (type_id) references type(id),
     complex_id      int not null,
-    constraint fk_abonement_to_complex foreign key (complex_id) references complex(id),
+    constraint fk_abonement_to_complex foreign key (complex_id) references complex(id) ON DELETE CASCADE,
     user_id         int null,
     constraint fk_abonement_to_user foreign key (user_id) references users(id) ON DELETE CASCADE ,
     user_phone      varchar (13) null
@@ -94,7 +94,7 @@ create table complex_coach
     constraint fk_complex_coach_coach foreign key (coach_id) references users(id) ON DELETE CASCADE,
     unique uniq_coach (coach_id),
     complex_id  int not null,
-    constraint fk_complex_coach_complex foreign key (complex_id) references complex(id)
+    constraint fk_complex_coach_complex foreign key (complex_id) references complex(id) ON DELETE CASCADE
 );
 
 
@@ -103,7 +103,7 @@ create table codes
     id          varchar (40) primary key,
     role        varchar (10) not null,
     complex     int not null,
-    constraint fk_codes_complex foreign key (complex) references complex(id)
+    constraint fk_codes_complex foreign key (complex) references complex(id) ON DELETE CASCADE
 );
 
 

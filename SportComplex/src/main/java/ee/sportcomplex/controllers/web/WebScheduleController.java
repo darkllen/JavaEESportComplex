@@ -40,15 +40,18 @@ public class WebScheduleController {
 
     @RequestMapping(value = {"/timetable"}, method = RequestMethod.GET)
     public String timetable(Principal principal, Model model){
-        if (principal.getName().isBlank())
-        model.addAttribute("trainings", List.of(
-                scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.MONDAY),
-                scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.TUESDAY),
-                scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.WEDNESDAY),
-                scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.THURSDAY),
-                scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.FRIDAY),
-                scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.SATURDAY),
-                scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.SUNDAY)));
+        if (principal.getName().isBlank()){
+            model.addAttribute("trainings", List.of(
+                    scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.MONDAY),
+                    scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.TUESDAY),
+                    scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.WEDNESDAY),
+                    scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.THURSDAY),
+                    scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.FRIDAY),
+                    scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.SATURDAY),
+                    scheduleService.getScheduleByDay(ScheduleGroup.DayOfWeek.SUNDAY)));
+            return "timetable";
+        }
+
 
         Optional<Coach> coach = userService.getCoachByLogin(principal.getName());
         coach.ifPresent(value -> model.addAttribute("trainings", List.of(

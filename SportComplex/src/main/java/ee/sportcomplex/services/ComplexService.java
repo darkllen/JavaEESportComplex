@@ -32,4 +32,8 @@ public class ComplexService {
         repo.saveAndFlush(complex);
         return complex;
     }
+
+    public void removeComplexById(Integer id) {
+        repo.deleteById(id);
+    }
 }

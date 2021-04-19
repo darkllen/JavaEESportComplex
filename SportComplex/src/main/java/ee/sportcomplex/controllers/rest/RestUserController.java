@@ -68,6 +68,17 @@ public class RestUserController {
         }
     }
 
+    @ResponseBody
+    @RequestMapping(value = {"/remove_code"}, method = RequestMethod.POST)
+    public ResponseEntity<String> remove_code(@RequestBody Map<String, String> map){
+        try{
+            codeService.removeById(map.get("id"));
+            return ResponseEntity.ok().body("{\"removed\":\"removed\"}");
+        } catch (Exception e){
+            return ResponseEntity.badRequest().header("error", "error").body("{\"removed\":\"removed\"}");
+        }
+    }
+
 
 
 //    private final UserService service;

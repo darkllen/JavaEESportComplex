@@ -11,4 +11,6 @@ public interface CodesRepo extends JpaRepository<Codes, String> {
 
     @Query("SELECT c from Codes c")
     List<Codes> getAll();
+
+    List<Codes> getAllByRole(String role);
 }
