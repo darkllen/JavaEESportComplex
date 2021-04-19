@@ -72,4 +72,9 @@ public class WebUserController {
         model.addAttribute("user", userService.getAuthByLogin(principal.getName()));
         return "client/change_user_info";
     }
+
+    @RequestMapping(value = {"/signup"}, method = RequestMethod.GET)
+    public String signup(){
+        return "signup";
+    }
 }
