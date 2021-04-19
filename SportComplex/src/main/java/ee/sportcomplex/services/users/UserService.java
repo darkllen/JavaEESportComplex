@@ -99,6 +99,10 @@ public class UserService {
     public void upgradeUser(AuthUser old, String code) {
         Codes codes = codesRepo.getOne(code);
 
+        if (codes.getRole().equals("ADMIN") && codes.getComplex().getAdmin()!=null){
+            throw new IllegalArgumentException("Wrong complex");
+        }
+
         AuthUser user = new AuthUser();
         user.setId(old.getId());
         user.setLogin(old.getLogin());
@@ -118,9 +122,12 @@ public class UserService {
             coachRepo.saveAndFlush(coach);
         }else {
             Admin admin = adminRepo.findAdminByLogin(user.getLogin()).get();
+
             Complex complex = codes.getComplex();
             complex.setAdmin(admin);
+            admin.setComplex(complex);
             complexRepo.saveAndFlush(complex);
+            adminRepo.saveAndFlush(admin);
         }
         codesRepo.delete(codes);
         Admin admin = adminRepo.findAdminByLogin(user.getLogin()).get();

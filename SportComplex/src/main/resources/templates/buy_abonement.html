@@ -87,9 +87,9 @@
 
             var data = {
                 type: $(this).find('[name=select_type]').val()
-                , duration: $(this).find('[name=select_duration]').val()
+                , time_in_month: $(this).find('[name=select_duration]').val()
                 , complex: $(this).find('[name=select_complex]').val()
-                , phone: $(this).find('[name=phone]').val()
+                , user_phone: $(this).find('[name=phone]').val()
             };
                 $.ajax({
                     type: 'POST',

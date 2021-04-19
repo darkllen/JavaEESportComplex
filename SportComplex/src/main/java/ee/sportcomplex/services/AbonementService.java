@@ -33,4 +33,10 @@ public class AbonementService {
         repo.addExistingAbonement(id, client);
         else throw new IllegalArgumentException("has client");
     }
+
+    public int addAbonement(Abonement abonement) {
+        abonement.setPrice(this.getPriceByTypeAndTime(abonement.getType().getId(), abonement.getTime_in_month()));
+        repo.saveAndFlush(abonement);
+        return abonement.getId();
+    }
 }
