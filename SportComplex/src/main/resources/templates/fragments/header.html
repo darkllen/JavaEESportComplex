@@ -21,7 +21,7 @@
 
         <form class="form-inline">
             <a class="nav-link" href="/login" th:unless="${#authorization.expression('isAuthenticated()')}">Login</a>
-            <a class="nav-link" href="/signin" th:unless="${#authorization.expression('isAuthenticated()')}">Sign in</a>
+            <a class="nav-link" href="/signup" th:unless="${#authorization.expression('isAuthenticated()')}">Sign up</a>
             <a class="nav-link" href="/logout" th:if="${#authorization.expression('isAuthenticated()')}">Logout</a>
         </form>
     </nav>
