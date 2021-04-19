@@ -30,7 +30,7 @@ public class WebAdminController {
     public String edit_admin(@RequestParam Integer id, Model model){
         //todo - get admin by id, not coach
         model.addAttribute("admin", userService.getCoachByID(id));
-        return "admin/edit_admin";
+        return "owner/edit_admin";
     }
 
 }
