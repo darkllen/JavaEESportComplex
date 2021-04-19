@@ -10,10 +10,12 @@
         <a th:unless="${#authorization.expression('hasAuthority(''COACH'')||hasAuthority(''ADMIN'')||hasAuthority(''OWNER'')')}" id="buy_abonement" class="nav-link" href="/buy_abonement" style="color: white">Buy abonement</a>
 
         <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" id="edit_complex" class="nav-link" href="/edit_complex" style="color: white">Edit complex</a>
-        <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" id="coaches" class="nav-link" href="/coaches" style="color: white">Coaches</a>
+        <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')||hasAuthority(''OWNER'')')}" id="coaches" class="nav-link" href="/coaches" style="color: white">Coaches</a>
+
+        <a th:if="${#authorization.expression('hasAuthority(''OWNER'')')}" id="admins" class="nav-link" href="/admins" style="color: white">Admins</a>
 
         <a th:if="${#authorization.expression('hasAuthority(''OWNER'')')}" id="complexes" class="nav-link" href="/complexes_info" style="color: white">Complexes info</a>
-        <a th:if="${#authorization.expression('hasAuthority(''OWNER'')')}" id="gen_code" class="nav-link" href="/generate_code" style="color: white">Generate registration code</a>
+        <!--<a th:if="${#authorization.expression('hasAuthority(''OWNER'')')}" id="gen_code" class="nav-link" href="/generate_code" style="color: white">Generate registration code</a>-->
 
         <a th:if="${#authorization.expression('hasAuthority(''OWNER'')||hasAuthority(''ADMIN'')')}" id="avail_code" class="nav-link" href="/available_codes" style="color: white">Show all available codes</a>
 

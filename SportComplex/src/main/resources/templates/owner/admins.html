@@ -14,9 +14,9 @@
 
 <div class="col1">
     <form id="form">
-        <h2>Add trener</h2>
-        <p th:if="${#authorization.expression('hasAuthority(''OWNER'')')}">Complex : </p>
-        <select th:if="${#authorization.expression('hasAuthority(''OWNER'')')}" id='select_complex' name='select_complex'>
+        <h2>Add admin</h2>
+        <p>Complex : </p>
+        <select id='select_complex' name='select_complex'>
             <div th:each="el: ${complexes}">
                 <option th:value="${el.id}" th:text="${el.name}"></option>
             </div>
@@ -30,13 +30,13 @@
 <div class="col2">
     <table id="my_table" class="table table-hover table-bordered">
         <thead>
-        <th>Coach name</th>
-        <th>Coach surname</th>
+        <th>Admin name</th>
+        <th>Admin surname</th>
         <th>Edit</th>
         <th>Remove</th>
         </thead>
         <tbody id="table_body">
-        <tr class = "table_row" th:each="el: ${coaches}">
+        <tr class = "table_row" th:each="el: ${admins}">
             <td th:text="${el.name}"></td>
             <td th:text="${el.surname}"></td>
             <td><button class="form_btn form_btn_first btn btn-success edit_button" type="submit" th:value="${el.id}">Edit</button></td>
@@ -57,7 +57,7 @@
 
 
             var data = {
-                role: "COACH"
+                role: "ADMIN"
             };
             if(document.getElementById('select_complex')!=null) data["complex"] = $(this).find('[name=select_complex]').val();
 
@@ -73,7 +73,6 @@
                 success: function (response) {
                     document.getElementById('trener_code').innerText=response;
                     document.getElementById('result').style.display='block';
-
                 },
                 error: function (request, textStatus, errorThrown) {
                     alert(request.getResponseHeader('error'));
@@ -89,7 +88,7 @@
             };
             console.log(id);
             $.ajax({
-                url: '/remove_coach',
+                url: '/remove_admin',
                 type: "post",
                 dataType: 'json',
                 data: JSON.stringify(data),
@@ -109,7 +108,7 @@
         $(document).on("click",".edit_button",function(e) {
             var id = e.target.value;
             console.log(id);
-            window.location.href = "edit_coach?id="+id;
+            window.location.href = "edit_admin?id="+id;
         });
 
     });

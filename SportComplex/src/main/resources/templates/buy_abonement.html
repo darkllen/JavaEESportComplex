@@ -32,7 +32,7 @@
                     <option th:value="${el.id}" th:text="${el.name}"></option>
                 </div>
             </select>
-            <p th:unless="${#authorization.expression('isAuthenticated()')}">Phone number : </p>
+            <p th:unless="${#authorization.expression('isAuthenticated()')}" id="phone">Phone number : </p>
             <input type="tel" placeholder="Phone number" name="phone" th:unless="${#authorization.expression('isAuthenticated()')}">
             <h3 id="price">Price: </h3>
             <button class="form_btn btn btn-success" type="submit">Buy</button>
@@ -85,12 +85,16 @@
             e.preventDefault();
 
 
+
+
             var data = {
                 type: $(this).find('[name=select_type]').val()
                 , time_in_month: $(this).find('[name=select_duration]').val()
                 , complex: $(this).find('[name=select_complex]').val()
                 , user_phone: $(this).find('[name=phone]').val()
             };
+            if(document.getElementById('phone')!=null) data["phone"] = $(this).find('[name=phone]').val();
+
                 $.ajax({
                     type: 'POST',
                     url: '/add_abonement',
