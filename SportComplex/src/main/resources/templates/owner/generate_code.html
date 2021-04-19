@@ -29,7 +29,7 @@
 
     </form>
 
-    <h2 id="code"></h2>
+    <div id="result" style="display:none" th:insert="~{fragments/code_generation_result :: code}"></div>
 
 </div>
 
@@ -54,7 +54,8 @@
                     xhr.setRequestHeader('Content-Type', 'application/json')
                 },
                 success: function (response) {
-                    document.getElementById('trener_code').innerText="New code for employee is "+ response;
+                    document.getElementById('trener_code').innerText=response;
+                    document.getElementById('result').style.display='block';
                 },
                 error: function (request, textStatus, errorThrown) {
                     alert(request.getResponseHeader('error'));
