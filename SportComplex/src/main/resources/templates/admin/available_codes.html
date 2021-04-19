@@ -12,34 +12,19 @@
 <body>
 <div class = "header" th:insert="~{fragments/header :: head}"></div>
 
-<div class="col1">
-    <form id="form">
-        <h2>Add trener</h2>
-        <p>Complex : </p>
-        <!--<select id='select_complex' name='select_complex'>-->
-            <!--<div th:each="el: ${complexes}">-->
-                <!--<option th:value="${el.id}" th:text="${el.name}"></option>-->
-            <!--</div>-->
-        <!--</select>-->
-        <button class="form_btn btn btn-success" type="submit">Generate code</button>
-    </form>
-
-    <h2 id="trener_code"></h2>
-</div>
-
 <div class="col2">
     <table id="my_table" class="table table-hover table-bordered">
         <thead>
-        <th>Coach name</th>
-        <th>Coach surname</th>
-        <th>Edit</th>
+        <th>Complex name</th>
+        <th>Role</th>
+        <th>Code</th>
         <th>Remove</th>
         </thead>
         <tbody id="table_body">
-        <tr class = "table_row" th:each="el: ${coaches}">
+        <tr class = "table_row" th:each="el: ${codes}">
             <td th:text="${el.name}"></td>
-            <td th:text="${el.surname}"></td>
-            <td><button class="form_btn form_btn_first btn btn-success edit_button" type="submit" th:value="${el.id}">Edit</button></td>
+            <td th:text="${el.role}"></td>
+            <td th:text="${el.id}"></td>
             <td><button class="form_btn form_btn_first btn btn-danger remove_button" type="submit" th:value="${el.id}">Remove</button></td>
         </tr>
         </tbody>
@@ -47,36 +32,10 @@
 
 </div>
 
+
 <script>
 
-    $(function () {
-
-        $('#form').submit(function (e) {
-            e.preventDefault();
-
-
-            var data = {
-                role: "COACH"
-            };
-            $.ajax({
-                type: 'POST',
-                url: '/generate_code',
-                dataType: 'json',
-                data: JSON.stringify(data),
-
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Content-Type', 'application/json')
-                },
-                success: function (response) {
-                    document.getElementById('trener_code').innerText="New code for trener is "+ response;
-
-                },
-                error: function (request, textStatus, errorThrown) {
-                    alert(request.getResponseHeader('error'));
-                }
-            });
-        });
-
+    $(function() {
 
         $(document).on("click",".remove_button",function(e) {
             var id = e.target.value;
@@ -85,7 +44,7 @@
             };
             console.log(id);
             $.ajax({
-                url: '/remove_coach',
+                url: '/remove_code',
                 type: "post",
                 dataType: 'json',
                 data: JSON.stringify(data),
@@ -102,13 +61,9 @@
 
         });
 
-        $(document).on("click",".edit_button",function(e) {
-            var id = e.target.value;
-            console.log(id);
-            window.location.href = "edit_coach?id="+id;
-        });
-
     });
+
+
 </script>
 
 

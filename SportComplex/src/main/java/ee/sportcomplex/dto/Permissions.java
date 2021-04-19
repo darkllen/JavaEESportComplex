@@ -25,6 +25,7 @@ public class Permissions {
     private PermissionName permission;
 
     public enum PermissionName {
+        OWNER,
         ADMIN,
         CLIENT,
         ADMINISTRATOR,

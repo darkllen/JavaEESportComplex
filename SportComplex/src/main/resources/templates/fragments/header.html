@@ -13,7 +13,9 @@
         <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" id="coaches" class="nav-link" href="/coaches" style="color: white">Coaches</a>
 
         <a th:if="${#authorization.expression('hasAuthority(''OWNER'')')}" id="complexes" class="nav-link" href="/complexes_info" style="color: white">Complexes info</a>
-        <a th:if="${#authorization.expression('hasAuthority(''OWNER'')')}" id="code" class="nav-link" href="/generate_code" style="color: white">Generate registration code</a>
+        <a th:if="${#authorization.expression('hasAuthority(''OWNER'')')}" id="gen_code" class="nav-link" href="/generate_code" style="color: white">Generate registration code</a>
+
+        <a th:if="${#authorization.expression('hasAuthority(''OWNER'')||hasAuthority(''ADMIN'')')}" id="avail_code" class="nav-link" href="/available_codes" style="color: white">Show all available codes</a>
 
         <a th:if="${#authorization.expression('isAuthenticated()')}" id="settings" class="nav-link" href="/settings" style="color: white">Other info</a>
 
