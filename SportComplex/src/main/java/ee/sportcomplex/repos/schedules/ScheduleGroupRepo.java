@@ -12,7 +12,7 @@ import java.util.List;
 public interface ScheduleGroupRepo extends JpaRepository<ScheduleGroup, Integer> {
     List<ScheduleGroup> findAllByDayOfWeek(ScheduleGroup.DayOfWeek day);
 
-    List<ScheduleGroup> findAllByDayOfWeekAndCoach(ScheduleGroup.DayOfWeek day, Coach coach);
+    List<ScheduleGroup> findAllByDayOfWeekAndCoachIn(ScheduleGroup.DayOfWeek day, List<Coach> coach);
 
     @Modifying
     @Transactional

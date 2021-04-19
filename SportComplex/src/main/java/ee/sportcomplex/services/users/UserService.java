@@ -4,10 +4,7 @@ import ee.sportcomplex.dto.Abonement;
 import ee.sportcomplex.dto.Codes;
 import ee.sportcomplex.dto.Permissions;
 import ee.sportcomplex.dto.schedules.ScheduleGroup;
-import ee.sportcomplex.dto.users.Admin;
-import ee.sportcomplex.dto.users.AuthUser;
-import ee.sportcomplex.dto.users.Client;
-import ee.sportcomplex.dto.users.Coach;
+import ee.sportcomplex.dto.users.*;
 import ee.sportcomplex.repos.CodesRepo;
 import ee.sportcomplex.repos.ComplexRepo;
 import ee.sportcomplex.repos.PermissionsRepo;
@@ -95,6 +92,7 @@ public class UserService {
     public AuthUser getAuthByLogin(String name) {
         return authRepo.findUserByLogin(name).orElse(null);
     }
+
 
     @Transactional
     public void upgradeUser(AuthUser old, String code) {
