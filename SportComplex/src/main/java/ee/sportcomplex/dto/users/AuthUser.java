@@ -31,6 +31,20 @@ public class AuthUser {
     @Length(min = 6, max = 40)
     private String password;
 
+    @Column(name = "role")
+    @NotEmpty
+    private String role;
+
+    @Column(name = "name", unique = true)
+    @NotEmpty
+    @Length(min = 3, max = 20)
+    private String name;
+
+    @Column(name = "surname", unique = true)
+    @NotEmpty
+    @Length(min = 3, max = 20)
+    private String surname;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_to_permissions",

@@ -70,7 +70,7 @@ create table schedule_ind
     id              int primary key auto_increment,
     schedule_date   date not null,
     coach_id        int not null,
-    constraint fk_coach_to_schedule_ind foreign key (coach_id) references users(id),
+    constraint fk_coach_to_schedule_ind foreign key (coach_id) references users(id) ON DELETE CASCADE,
     client_id       int not null,
     constraint fk_client_to_schedule_ind foreign key (client_id) references users(id)
 );
@@ -80,7 +80,7 @@ create table schedule_group
     id              int primary key auto_increment,
     name            varchar (20) not null,
     coach_id        int not null,
-    constraint fk_coach_to_schedule_group foreign key (coach_id) references users(id),
+    constraint fk_coach_to_schedule_group foreign key (coach_id) references users(id) ON DELETE CASCADE,
     day_of_week     varchar (10) not null,
     time            time not null,
     for_vip         bit not null
@@ -91,7 +91,7 @@ create table complex_coach
 (
     id          int primary key auto_increment,
     coach_id    int not null,
-    constraint fk_complex_coach_coach foreign key (coach_id) references users(id),
+    constraint fk_complex_coach_coach foreign key (coach_id) references users(id) ON DELETE CASCADE,
     unique uniq_coach (coach_id),
     complex_id  int not null,
     constraint fk_complex_coach_complex foreign key (complex_id) references complex(id)
@@ -100,7 +100,7 @@ create table complex_coach
 
 create table codes
 (
-    id          varchar (20) primary key,
+    id          varchar (40) primary key,
     role        varchar (10) not null,
     complex     int not null
 );
@@ -110,7 +110,7 @@ create table codes
 
 insert into users (login, name, surname, password, role) values
 ('admin', 'Ihor', 'Yankin', 'admin', 'ADMIN'),
-('coach', 'Anna', 'Hinkul', 'coach', 'COACH'),
+('coach', 'Anna', 'Hinkul', 'coachc', 'COACH'),
 ('user', 'Angelina', 'Volkova', 'user', 'CLIENT'),
 ('coach2', 'Ira', 'Linki', 'coach2', 'COACH'),
 ('coach3', 'Inna', 'Ugan', 'coach3', 'COACH'),
