@@ -27,8 +27,7 @@ public class WebCoachController {
 
     @RequestMapping(value = {"/edit_coach"}, method = RequestMethod.GET)
     public String edit_coach(@RequestParam Integer id, Model model){
-        //todo coachService.getCoachById
-//        model.addAttribute("coach", coachService.getCoachById(id));
+        model.addAttribute("coach", userService.getCoachByID(id));
         return "admin/edit_coach";
     }
 }

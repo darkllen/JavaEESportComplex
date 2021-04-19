@@ -45,6 +45,7 @@ public class RestUserController {
     @ResponseBody
     @RequestMapping(value = {"/edit_coach"}, method = RequestMethod.POST)
     public Coach edit_schedule_group(@RequestBody @Valid Coach coach){
+        //TODO test
         return userService.editCoach(coach);
     }
 

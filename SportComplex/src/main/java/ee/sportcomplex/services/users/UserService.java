@@ -74,4 +74,8 @@ public class UserService {
         coachRepo.saveAndFlush(coach);
         return coach;
     }
+
+    public Coach getCoachByID(Integer id) {
+        return coachRepo.getOne(id);
+    }
 }
