@@ -30,6 +30,7 @@
 
 <script>
     var role = "[[${user.role}]]";
+    var id = "[[${user.id}]]";
 
     $(function() {
 
@@ -42,7 +43,8 @@
                 login: $(this).find('[name=login]').val(),
                 name: $(this).find('[name=name]').val(),
                 surname: $(this).find('[name=surname]').val(),
-                role: role
+                role: role,
+                id: id
             };
             if(password!='') data["password"] = password;
 
