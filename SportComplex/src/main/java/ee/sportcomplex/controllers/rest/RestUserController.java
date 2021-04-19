@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -26,8 +27,8 @@ public class RestUserController {
 
     @ResponseBody
     @RequestMapping(value = {"/generate_code"}, method = RequestMethod.POST)
-    public ResponseEntity<String> generate_code(@RequestBody Codes codes){
-        codeService.save(codes);
+    public ResponseEntity<String> generate_code(@RequestBody Codes codes, Principal principal){
+        codeService.save(codes, userService.getAdminByLogin(principal.getName()).orElse(null).getComplex());
         return ResponseEntity.ok().body("\""+codes.getId()+"\"");
     }
 
@@ -55,6 +56,19 @@ public class RestUserController {
     public AuthUser change_user_info(@RequestBody @Valid AuthUser user){
         return userService.editAuthUser(user);
     }
+
+    @ResponseBody
+    @RequestMapping(value = {"/send_code"}, method = RequestMethod.POST)
+    public ResponseEntity<String> send_code(Principal principal, @RequestBody Map<String, String> map){
+        try{
+            userService.upgradeUser(userService.getAuthByLogin(principal.getName()), map.get("code"));
+            return ResponseEntity.ok().body("{\"upgraded\":\"upgraded\"}");
+        } catch (Exception e){
+            return ResponseEntity.badRequest().header("error", "error").body("{\"error\":\"error\"}");
+        }
+    }
+
+
 
 //    private final UserService service;
 //

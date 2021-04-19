@@ -1,5 +1,6 @@
 package ee.sportcomplex.controllers.web;
 
+import ee.sportcomplex.services.CodeService;
 import ee.sportcomplex.services.ComplexService;
 import ee.sportcomplex.services.users.UserService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class WebCodeController {
     private final ComplexService complexService;
+    private final CodeService codeService;
 
     @RequestMapping(value = {"/generate_code"}, method = RequestMethod.GET)
     public String generate_code(Model model){
@@ -23,7 +25,8 @@ public class WebCodeController {
     }
     @RequestMapping(value = {"/available_codes"}, method = RequestMethod.GET)
     public String available_codes(Model model){
-        model.addAttribute("codes", complexService.getComplexes());//todo - return all available codes
+        System.out.println(codeService.getAll());
+        model.addAttribute("codes", codeService.getAll());
         return "admin/available_codes";
     }
 

@@ -22,7 +22,7 @@
         </thead>
         <tbody id="table_body">
         <tr class = "table_row" th:each="el: ${codes}">
-            <td th:text="${el.name}"></td>
+            <td th:text="${el.complex.getName()}"></td>
             <td th:text="${el.role}"></td>
             <td th:text="${el.id}"></td>
             <td><button class="form_btn form_btn_first btn btn-danger remove_button" type="submit" th:value="${el.id}">Remove</button></td>

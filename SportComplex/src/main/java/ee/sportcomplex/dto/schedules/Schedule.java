@@ -20,7 +20,7 @@ import javax.validation.constraints.NotEmpty;
 public abstract class Schedule {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter(AccessLevel.PUBLIC)
     private Integer id;
 

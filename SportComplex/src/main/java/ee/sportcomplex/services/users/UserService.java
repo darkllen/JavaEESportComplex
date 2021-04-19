@@ -1,12 +1,15 @@
 package ee.sportcomplex.services.users;
 
 import ee.sportcomplex.dto.Abonement;
+import ee.sportcomplex.dto.Codes;
 import ee.sportcomplex.dto.Permissions;
 import ee.sportcomplex.dto.schedules.ScheduleGroup;
 import ee.sportcomplex.dto.users.Admin;
 import ee.sportcomplex.dto.users.AuthUser;
 import ee.sportcomplex.dto.users.Client;
 import ee.sportcomplex.dto.users.Coach;
+import ee.sportcomplex.repos.CodesRepo;
+import ee.sportcomplex.repos.ComplexRepo;
 import ee.sportcomplex.repos.PermissionsRepo;
 import ee.sportcomplex.repos.schedules.ScheduleGroupRepo;
 import ee.sportcomplex.repos.users.AdminRepo;
@@ -29,6 +32,8 @@ public class UserService {
     private final AdminRepo adminRepo;
     private final AuthRepo authRepo;
     private final PermissionsRepo permissionsRepo;
+    private final CodesRepo codesRepo;
+    private final ComplexRepo complexRepo;
 
     public List<CoachRepo.CoachShort> getCoachesShort(){
         return coachRepo.getAllShort();
@@ -80,11 +85,38 @@ public class UserService {
     }
 
     public AuthUser editAuthUser(AuthUser user) {
+        if (user.getPassword() == null){
+            user.setPassword(authRepo.getOne(user.getId()).getPassword());
+        }
         authRepo.saveAndFlush(user);
         return user;
     }
 
     public AuthUser getAuthByLogin(String name) {
         return authRepo.findUserByLogin(name).orElse(null);
+    }
+
+    @Transactional
+    public void upgradeUser(AuthUser old, String code) {
+        Codes codes = codesRepo.findById(code).get();
+
+        AuthUser user = new AuthUser();
+        user.setId(old.getId());
+        user.setLogin(old.getLogin());
+        user.setPassword(old.getPassword());
+        user.setName(old.getName());
+        user.setSurname(old.getSurname());
+        user.setRole(codes.getRole());
+        user.setPermissions(List.of(permissionsRepo.getByPermission(Permissions.PermissionName.valueOf(codes.getRole())).get()));
+
+        authRepo.delete(old);
+        authRepo.flush();
+        authRepo.saveAndFlush(user);
+
+        Coach coach = coachRepo.findCoachByLogin(user.getLogin()).get();
+        coach.setComplex(codes.getComplex());
+
+        coachRepo.saveAndFlush(coach);
+
     }
 }

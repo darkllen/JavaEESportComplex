@@ -38,7 +38,7 @@ create table complex
     open_date  date null,
     city       varchar (20) not null,
     admin_id   int null,
-    constraint fk_complex_to_user foreign key (admin_id) references users(id)
+    constraint fk_complex_to_user foreign key (admin_id) references users(id) ON DELETE SET NULL
 );
 
 
@@ -60,7 +60,7 @@ create table abonement
     complex_id      int not null,
     constraint fk_abonement_to_complex foreign key (complex_id) references complex(id),
     user_id         int null,
-    constraint fk_abonement_to_user foreign key (user_id) references users(id),
+    constraint fk_abonement_to_user foreign key (user_id) references users(id) ON DELETE CASCADE ,
     user_phone      varchar (13) null
 );
 
@@ -72,7 +72,7 @@ create table schedule_ind
     coach_id        int not null,
     constraint fk_coach_to_schedule_ind foreign key (coach_id) references users(id) ON DELETE CASCADE,
     client_id       int not null,
-    constraint fk_client_to_schedule_ind foreign key (client_id) references users(id)
+    constraint fk_client_to_schedule_ind foreign key (client_id) references users(id) ON DELETE CASCADE
 );
 
 create table schedule_group
@@ -102,7 +102,8 @@ create table codes
 (
     id          varchar (40) primary key,
     role        varchar (10) not null,
-    complex     int not null
+    complex     int not null,
+    constraint fk_codes_complex foreign key (complex) references complex(id)
 );
 
 
@@ -151,6 +152,9 @@ insert into complex_coach (coach_id, complex_id) values
 (2, 1),
 (5,1),
 (4, 1);
+
+insert into codes (id, role, complex) values
+('aaa', 'COACH', 1);
 
 insert into user_to_permissions (user_id, permission_id) values
 ((select id from users where login = 'admin'), (select id from permissions where permission = 'ADMIN')),
