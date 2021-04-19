@@ -36,7 +36,7 @@ public class WebCodeController {
 
 
         Optional<Admin> admin = userService.getAdminByLogin(principal.getName());
-        admin.ifPresent(value -> model.addAttribute("codes",codeService.getAllByRole("COACH")));
+        admin.ifPresent(value -> model.addAttribute("codes",codeService.getAllByRoleAndComplex("COACH", value.getComplex())));
 
         if (!model.containsAttribute("codes"))
             model.addAttribute("codes", codeService.getAll());

@@ -22,11 +22,15 @@ public class CodeService {
         return repo.getAll();
     }
 
-    public List<Codes> getAllByRole(String role){
-        return repo.getAllByRole(role);
+    public List<Codes> getAllByRoleAndComplex(String role, Complex complex){
+        return repo.getAllByRoleAndComplex(role, complex);
     }
 
     public void removeById(String id) {
         repo.deleteById(id);
+    }
+
+    public void save(Codes codes) {
+        repo.saveAndFlush(codes);
     }
 }

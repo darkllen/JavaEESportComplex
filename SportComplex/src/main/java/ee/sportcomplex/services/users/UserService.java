@@ -2,6 +2,7 @@ package ee.sportcomplex.services.users;
 
 import ee.sportcomplex.dto.Abonement;
 import ee.sportcomplex.dto.Codes;
+import ee.sportcomplex.dto.Complex;
 import ee.sportcomplex.dto.Permissions;
 import ee.sportcomplex.dto.schedules.ScheduleGroup;
 import ee.sportcomplex.dto.users.*;
@@ -96,7 +97,7 @@ public class UserService {
 
     @Transactional
     public void upgradeUser(AuthUser old, String code) {
-        Codes codes = codesRepo.findById(code).get();
+        Codes codes = codesRepo.getOne(code);
 
         AuthUser user = new AuthUser();
         user.setId(old.getId());
@@ -111,10 +112,17 @@ public class UserService {
         authRepo.flush();
         authRepo.saveAndFlush(user);
 
-        Coach coach = coachRepo.findCoachByLogin(user.getLogin()).get();
-        coach.setComplex(codes.getComplex());
-
-        coachRepo.saveAndFlush(coach);
-
+        if (codes.getRole().equals("COACH")){
+            Coach coach = coachRepo.findCoachByLogin(user.getLogin()).get();
+            coach.setComplex(codes.getComplex());
+            coachRepo.saveAndFlush(coach);
+        }else {
+            Admin admin = adminRepo.findAdminByLogin(user.getLogin()).get();
+            Complex complex = codes.getComplex();
+            complex.setAdmin(admin);
+            complexRepo.saveAndFlush(complex);
+        }
+        codesRepo.delete(codes);
+        Admin admin = adminRepo.findAdminByLogin(user.getLogin()).get();
     }
 }

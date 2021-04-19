@@ -2,6 +2,7 @@ package ee.sportcomplex.controllers.rest;
 
 import ee.sportcomplex.dto.Codes;
 import ee.sportcomplex.dto.schedules.ScheduleGroup;
+import ee.sportcomplex.dto.users.Admin;
 import ee.sportcomplex.dto.users.AuthUser;
 import ee.sportcomplex.dto.users.Coach;
 import ee.sportcomplex.dto.users.User;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,7 +30,10 @@ public class RestUserController {
     @ResponseBody
     @RequestMapping(value = {"/generate_code"}, method = RequestMethod.POST)
     public ResponseEntity<String> generate_code(@RequestBody Codes codes, Principal principal){
-        codeService.save(codes, userService.getAdminByLogin(principal.getName()).orElse(null).getComplex());
+        Optional<Admin> admin = userService.getAdminByLogin(principal.getName());
+        admin.ifPresentOrElse(v-> codeService.save(codes, v.getComplex()), ()->codeService.save(codes));
+
+
         return ResponseEntity.ok().body("\""+codes.getId()+"\"");
     }
 

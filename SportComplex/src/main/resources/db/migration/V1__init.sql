@@ -154,7 +154,9 @@ insert into complex_coach (coach_id, complex_id) values
 (4, 1);
 
 insert into codes (id, role, complex) values
-('aaa', 'COACH', 1);
+('aaa', 'COACH', 1),
+('ccc', 'COACH', 2),
+('bbb', 'ADMIN', 2);
 
 insert into user_to_permissions (user_id, permission_id) values
 ((select id from users where login = 'admin'), (select id from permissions where permission = 'ADMIN')),

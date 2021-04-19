@@ -55,7 +55,7 @@ public class Complex {
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admin_id", referencedColumnName = "id")
-    private User admin;
+    private Admin admin;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy="complex")
