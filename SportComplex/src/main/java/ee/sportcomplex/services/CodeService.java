@@ -22,6 +22,10 @@ public class CodeService {
         return repo.getAll();
     }
 
+    public List<Codes> getAllByRole(String role){
+        return repo.getAllByRole(role);
+    }
+
     public void removeById(String id) {
         repo.deleteById(id);
     }
