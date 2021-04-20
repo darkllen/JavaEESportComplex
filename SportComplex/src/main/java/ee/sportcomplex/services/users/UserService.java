@@ -92,6 +92,7 @@ public class UserService {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
         user.setRole(authRepo.getOne(user.getId()).getRole());
+        user.setPermissions(authRepo.getOne(user.getId()).getPermissions());
         authRepo.saveAndFlush(user);
         return user;
     }
