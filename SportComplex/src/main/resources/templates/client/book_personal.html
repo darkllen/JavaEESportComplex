@@ -40,7 +40,7 @@
 
             var date =  $(this).find('[name=date]').val();
             var time =  $(this).find('[name=time]').val();
-            var date_time = date+'T'+time+':00';//.000+00:00';
+            var date_time = date+'T'+time+':00';
 
             // console.log(date_time);
             var current = (new Date ((new Date((new Date(new Date())).toISOString() )).getTime() - ((new Date()).getTimezoneOffset()*60000))).toISOString().slice(0, 19);
@@ -48,7 +48,7 @@
             if(current>date_time)
                 alert("Date and time must be less than current date and time");
             else{
-                date_time += ':00.000+00:00';
+                date_time += '.0000';
 
                 var data = {
                     coach: $(this).find('[name=select_coach]').val()
