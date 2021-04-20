@@ -1,6 +1,8 @@
 package ee.sportcomplex.controllers.web;
 
+import ee.sportcomplex.dto.users.Admin;
 import ee.sportcomplex.dto.users.Client;
+import ee.sportcomplex.services.ComplexService;
 import ee.sportcomplex.services.ScheduleService;
 import ee.sportcomplex.services.users.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class WebUserController {
     private final UserService userService;
     private final ScheduleService scheduleService;
+    private final ComplexService complexService;
 
     @RequestMapping(value = {"/book_personal"}, method = RequestMethod.GET)
     public String book_personal(Model model, Principal principal){
@@ -67,6 +70,12 @@ public class WebUserController {
     public String settings(Model model, Principal principal){
         Optional<Client> client = userService.getClientByLogin(principal.getName());
         client.ifPresent(v-> model.addAttribute("abonements", v.getAbonements()));
+
+        Optional<Admin> admin = userService.getAdminByLogin(principal.getName());
+        admin.ifPresent(v-> model.addAttribute("coaches_num", v.getComplex().getCoaches().size()));
+
+        if (!model.containsAttribute("abonements") && !model.containsAttribute("coaches_num"))
+            model.addAttribute("complexes_num", complexService.getComplexes().size());
         return "client/settings";
     }
 
