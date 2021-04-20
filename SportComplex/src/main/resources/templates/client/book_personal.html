@@ -48,13 +48,14 @@
             if(current>date_time)
                 alert("Date and time must be less than current date and time");
             else{
-                date_time += '.0000';
+                date_time += '.0000+03:00';
 
                 var data = {
                     coach: $(this).find('[name=select_coach]').val()
                     , scheduleDate: date_time
                 };
 
+                console.log(data)
                 $.ajax({
                     type: 'POST',
                     url: '/add_schedule_ind',
