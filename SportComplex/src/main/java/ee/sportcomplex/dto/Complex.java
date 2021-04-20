@@ -25,29 +25,29 @@ public class Complex {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name", unique = true)
+    @Column(name = "name")
     @NotEmpty
     @Length(min = 3, max = 25)
     private String name;
 
-    @Column(name = "description", unique = true)
+    @Column(name = "description")
     @Length(max = 100)
     private String description;
 
-    @Column(name = "space", unique = true)
+    @Column(name = "space")
     @Min(10)
     @Max(10000)
     private int space;
 
-    @Column(name = "floors_num", unique = true)
+    @Column(name = "floors_num")
     @Min(1)
     @Max(10)
     private int floors_num;
 
-    @Column(name = "open_date", unique = true)
+    @Column(name = "open_date")
     private Date open_date;
 
-    @Column(name = "city", unique = true)
+    @Column(name = "city")
     @NotEmpty
     @Length(min = 3, max = 20)
     private String city;

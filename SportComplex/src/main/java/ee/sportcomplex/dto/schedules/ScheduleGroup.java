@@ -30,7 +30,7 @@ public class ScheduleGroup extends Schedule{
     @Column(name = "time")
     LocalTime time;
 
-    @Column(name = "for_vip", unique = true)
+    @Column(name = "for_vip")
     private boolean for_vip;
 
     public enum DayOfWeek {

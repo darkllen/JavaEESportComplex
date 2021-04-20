@@ -35,12 +35,12 @@ public class User {
     @Length(min = 3, max = 20)
     private String login;
 
-    @Column(name = "name", unique = true)
+    @Column(name = "name")
     @NotEmpty
     @Length(min = 3, max = 20)
     private String name;
 
-    @Column(name = "surname", unique = true)
+    @Column(name = "surname")
     @NotEmpty
     @Length(min = 3, max = 20)
     private String surname;

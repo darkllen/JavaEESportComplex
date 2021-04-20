@@ -21,7 +21,7 @@ public class Permissions {
     private Integer id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "permission", unique = true)
+    @Column(name = "permission")
     private PermissionName permission;
 
     public enum PermissionName {

@@ -63,7 +63,7 @@ public class Abonement {
     @JoinColumn(name="user_id", nullable=true)
     private Client client;
 
-    @Column(name = "user_phone", unique = true)
+    @Column(name = "user_phone")
     @Length(min = 10, max = 13)
     private String user_phone;
 
