@@ -38,7 +38,7 @@
         <p>Is VIP : </p>
         <select id='select_vip' name='select_vip'>
             <option value="true">Yes</option>
-            <option value="true">False</option>
+            <option value="false">No</option>
         </select>
         <button class="form_btn btn btn-success" type="submit">Add</button>
     </form>
@@ -72,6 +72,9 @@
                     xhr.setRequestHeader('Content-Type', 'application/json')
                 },
                 success: function (response) {
+                    // $(this).closest('form').find("input, textarea").val("");
+                    document.getElementById('form').reset();
+
                     alert("Success");
                 },
                 error: function (request, textStatus, errorThrown) {
