@@ -28,7 +28,7 @@ public class WebAdminController {
     @RequestMapping(value = {"/edit_admin"}, method = RequestMethod.GET)
     public String edit_admin(@RequestParam Integer id, Model model){
         model.addAttribute("admin", userService.getAdminByID(id));
-        return "admin/edit_admin";
+        return "owner/edit_admin";
     }
 
 }
