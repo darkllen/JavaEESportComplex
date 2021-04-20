@@ -64,9 +64,10 @@
                 description: $(this).find('[name=description]').val(),
                 space: $(this).find('[name=space]').val(),
                 floors_num: $(this).find('[name=floors_num]').val(),
-                open_date: $(this).find('[name=open_date]').val(),
+                open_date: $(this).find('[name=date]').val(),
                 city: $(this).find('[name=city]').val()
             };
+            console.log(data);
             $.ajax({
                 type: 'POST',
                 url: '/add_complex',
@@ -80,6 +81,10 @@
                     document.getElementById('form').reset();
                     // $(this).closest('form').find("input, textarea").val("");
                     alert("Success");
+                    document.getElementById('table_body').innerHTML+=' <td>'+response.name+'</td>' +
+                        '<td>'+response.city+'</td>' +
+                        '<td><button class="form_btn form_btn_first btn btn-success edit_button" type="submit" value="'+response.id+'">Edit</button></td>' +
+                        '<td><button class="form_btn form_btn_first btn btn-danger remove_button" type="submit" value="'+response.id+'">Remove</button></td>';
                 },
                 error: function (request, textStatus, errorThrown) {
                     alert(request.getResponseHeader('error'));
