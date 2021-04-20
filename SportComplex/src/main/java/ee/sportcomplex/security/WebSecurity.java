@@ -26,8 +26,52 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http
                 .authenticationProvider(authProvider())
                 .authorizeRequests()
-                .antMatchers("/favourites").authenticated()
-                .antMatchers("/add_book").hasAuthority(Permissions.PermissionName.ADMIN.name())
+                .antMatchers(
+                        "/add_existing_abonement",
+                        "/*_schedule_ind",
+                        "/book_personal",
+                        "/show_personal"
+                        ).hasAuthority(Permissions.PermissionName.CLIENT.name())
+                .antMatchers(
+                        "/show_personal_coach"
+                ).hasAuthority(Permissions.PermissionName.COACH.name())
+                .antMatchers(
+                        "/*_schedule_group"
+                ).hasAuthority(Permissions.PermissionName.ADMIN.name())
+                .antMatchers(
+                        "/add_complex",
+                        "/remove_complex",
+                        "/remove_admin",
+                        "/edit_admin",
+                        "/admins"
+                ).hasAuthority(Permissions.PermissionName.OWNER.name())
+
+                .antMatchers(
+                        "/edit_complex",
+                        "/generate_code",
+                        "/remove_coach",
+                        "/edit_coach",
+                        "/remove_code",
+                        "/coaches",
+                        "/available_codes"
+                ).hasAnyAuthority(Permissions.PermissionName.ADMIN.name(),
+                                    Permissions.PermissionName.OWNER.name())
+                .antMatchers(
+                        "/add_abonement",
+                        "/buy_abonement"
+                ).not().hasAnyAuthority(Permissions.PermissionName.ADMIN.name(),
+                                        Permissions.PermissionName.COACH.name(),
+                                        Permissions.PermissionName.OWNER.name())
+                .antMatchers(
+                        "/send_code"
+                ).hasAnyAuthority(Permissions.PermissionName.ADMIN.name(),
+                                    Permissions.PermissionName.COACH.name(),
+                                    Permissions.PermissionName.CLIENT.name())
+                .antMatchers(
+                        "/change_user_info",
+                        "/settings"
+                ).authenticated()
+
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().permitAll()

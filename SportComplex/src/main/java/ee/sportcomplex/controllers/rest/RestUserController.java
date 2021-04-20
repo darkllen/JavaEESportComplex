@@ -90,15 +90,4 @@ public class RestUserController {
         return userService.createAuthUser(user);
     }
 
-
-
-
-//    private final UserService service;
-//
-//    @ResponseBody
-//    @RequestMapping(value = {"/get_all_coaches_short"}, method = RequestMethod.GET)
-//    public List<Coach> get_all_coaches_short(){
-//        service.getCoaches().forEach(System.out::println);
-//        return service.getCoaches();
-//    }
 }
