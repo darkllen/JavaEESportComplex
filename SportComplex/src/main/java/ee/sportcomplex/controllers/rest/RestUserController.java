@@ -52,8 +52,12 @@ public class RestUserController {
 
     @ResponseBody
     @RequestMapping(value = {"/edit_coach", "/edit_admin", "/change_user_info"}, method = RequestMethod.POST)
-    public AuthUser edit_coach(@RequestBody @Valid AuthUser user){
-        return userService.editAuthUser(user);
+    public ResponseEntity<AuthUser> edit_coach(@RequestBody @Valid AuthUser user){
+        try{
+        return ResponseEntity.ok().body(userService.editAuthUser(user));
+        } catch (Exception e){
+            return ResponseEntity.badRequest().header("error", e.getMessage()).body(null);
+        }
     }
 
     @ResponseBody
