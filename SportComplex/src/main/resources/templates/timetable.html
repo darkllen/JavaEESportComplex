@@ -11,7 +11,7 @@
 <body>
 <div class = "header" th:insert="~{fragments/header :: head}"></div>
 
-<div class="info_container">
+<div th:if="${#authorization.expression('isAuthenticated()')}" class="info_container">
     <h2 class="main_h2">Personal trainings</h2>
 </div>
 
@@ -46,12 +46,15 @@
 <div th:if="${#authorization.expression('hasAuthority(''COACH'')')}" id="is_coach"></div>
 <div th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" id="is_admin"></div>
 
-<div th:each="trainings_day,iter : ${trainings}" class="info_container" th:id="'info_container_'+${iter.index}" style="display: none">
+<div th:each="trainings_day,iter : ${trainings}" class="info_container list" th:id="'list_'+${iter.index}" style="display: none">
     <div th:each="el : ${trainings_day}">
         <div class="group_training">
             <h3 th:text="${#temporals.format(el.time, 'HH:mm')}"></h3>
             <h2 th:text="${el.name}"></h2>
+
             <p th:unless="${#authorization.expression('isAuthenticated()')}" th:text="'Complex: '+${el.coach.complex.name}"></p>
+            <p th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}" th:text="'Complex: '+${el.coach.complex.name}"></p>
+
             <p th:unless="${#authorization.expression('hasAuthority(''COACH'')')}" th:text="'Coach: '+${el.coach.name}+' '+${el.coach.surname}"></p>
             <p th:if="${el.for_vip}">(Only for VIP abonements)</p>
             <button th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" class="form_btn form_btn_first btn btn-success edit_button" type="submit" th:value="${el.id}">Edit</button>
@@ -67,11 +70,11 @@
 
 
     function getTimetable(t){
-        document.querySelectorAll('.info_container').forEach(function(el) {
+        document.querySelectorAll('.list').forEach(function(el) {
             el.style.display='none';
         });
 
-        document.getElementById('info_container_'+t).style.display='block';
+        document.getElementById('list_'+t).style.display='block';
     }
     $(function () {
          getTimetable(0);

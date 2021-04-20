@@ -11,9 +11,16 @@
 <body>
 <div class = "header" th:insert="~{fragments/header :: head}"></div>
 
-<div class="col1" style="width:40%">
-    <h2>Your abonement number is:</h2>
-    <h2>Other info...</h2>
+<div th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}" class="col1" style="width:40%">
+    <h2>Your abonements :</h2>
+    <div class="abonement" th:each="el: ${abonements}">
+        <i class="abonement_field" th:if="${el.type.vip}">VIP</i>
+        <i class="abonement_field" th:text="'Abonement number: '+${el.id}"></i>
+        <i class="abonement_field" th:text="'Price: '+${el.price}"></i>
+        <i class="abonement_field" th:text="'Type: '+${el.type.name}"></i>
+        <i class="abonement_field" th:text="'Complex: '+${el.complex.name}"></i>
+    </div>
+
 </div>
 <div class="col2" style="width: 45%" th:if="${#authorization.expression('isAuthenticated()')}">
     <button class="form_btn btn btn-warning" type="submit" onclick="window.location.replace('/change_user_info');">Change user info</button>
