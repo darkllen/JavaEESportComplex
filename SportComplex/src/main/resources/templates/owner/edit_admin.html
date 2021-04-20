@@ -37,7 +37,8 @@
                 id: id,
                 name: $(this).find('[name=name]').val(),
                 surname: $(this).find('[name=surname]').val(),
-                login: login
+                login: login,
+                role: "ADMIN"
             };
             $.ajax({
                 type: 'POST',

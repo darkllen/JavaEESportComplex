@@ -26,7 +26,7 @@
     <button class="form_btn btn btn-warning" type="submit" onclick="window.location.replace('/change_user_info');">Change user info</button>
 
     <br>
-    <form id="form_coach">
+    <form id="form_coach" th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}">
         <h2>Enter special code to become the coach/admin</h2>
         <input id="code" type="text" placeholder="Code" name="code">
         <button class="form_btn btn btn-success" type="submit">Submit</button>
