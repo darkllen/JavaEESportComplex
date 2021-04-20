@@ -4,7 +4,7 @@ create table users
     login    varchar(30) not null,
     name     varchar (20) not null,
     surname  varchar (20) not null,
-    password varchar(40) not null,
+    password varchar(80) not null,
     role     varchar (10) not null,
     unique uniq_login (login)
 );
@@ -68,7 +68,7 @@ create table abonement
 create table schedule_ind
 (
     id              int primary key auto_increment,
-    schedule_date   date not null,
+    schedule_date   datetime not null,
     coach_id        int not null,
     constraint fk_coach_to_schedule_ind foreign key (coach_id) references users(id) ON DELETE CASCADE,
     client_id       int not null,
@@ -110,12 +110,12 @@ create table codes
 
 
 insert into users (login, name, surname, password, role) values
-('admin', 'Ihor', 'Yankin', 'admin', 'ADMIN'),
-('coach', 'Anna', 'Hinkul', 'coachc', 'COACH'),
-('user', 'Angelina', 'Volkova', 'user', 'CLIENT'),
-('coach2', 'Ira', 'Linki', 'coach2', 'COACH'),
-('coach3', 'Inna', 'Ugan', 'coach3', 'COACH'),
-('owner', 'Maria', 'Kovaleva', 'owner', 'OWNER');
+('admin', 'Ihor', 'Yankin', '$2a$10$957Pu18NxE3XtTA2sFh/rOEV9OwQRtSiC99kD5JfedyKes00wiqLy', 'ADMIN'),
+('coach', 'Anna', 'Hinkul', '$2a$10$957Pu18NxE3XtTA2sFh/rOEV9OwQRtSiC99kD5JfedyKes00wiqLy', 'COACH'),
+('user', 'Angelina', 'Volkova', '$2a$10$957Pu18NxE3XtTA2sFh/rOEV9OwQRtSiC99kD5JfedyKes00wiqLy', 'CLIENT'),
+('coach2', 'Ira', 'Linki', '$2a$10$957Pu18NxE3XtTA2sFh/rOEV9OwQRtSiC99kD5JfedyKes00wiqLy', 'COACH'),
+('coach3', 'Inna', 'Ugan', '$2a$10$957Pu18NxE3XtTA2sFh/rOEV9OwQRtSiC99kD5JfedyKes00wiqLy', 'COACH'),
+('owner', 'Maria', 'Kovaleva', '$2a$10$957Pu18NxE3XtTA2sFh/rOEV9OwQRtSiC99kD5JfedyKes00wiqLy', 'OWNER');
 
 
 insert into permissions (permission) values

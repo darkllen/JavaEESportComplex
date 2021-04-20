@@ -15,6 +15,7 @@ import ee.sportcomplex.repos.users.AuthRepo;
 import ee.sportcomplex.repos.users.ClientRepo;
 import ee.sportcomplex.repos.users.CoachRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -32,6 +33,8 @@ public class UserService {
     private final PermissionsRepo permissionsRepo;
     private final CodesRepo codesRepo;
     private final ComplexRepo complexRepo;
+
+    private final PasswordEncoder passwordEncoder;
 
     public List<CoachRepo.CoachShort> getCoachesShort(){
         return coachRepo.getAllShort();
@@ -85,13 +88,17 @@ public class UserService {
     public AuthUser editAuthUser(AuthUser user) {
         if (user.getPassword() == null){
             user.setPassword(authRepo.getOne(user.getId()).getPassword());
+        } else {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
+        user.setRole(authRepo.getOne(user.getId()).getRole());
         authRepo.saveAndFlush(user);
         return user;
     }
 
     public AuthUser createAuthUser(AuthUser user) {
         user.setPermissions(List.of(permissionsRepo.getByPermission(Permissions.PermissionName.CLIENT)));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         authRepo.saveAndFlush(user);
         return user;
     }
@@ -136,7 +143,6 @@ public class UserService {
             adminRepo.saveAndFlush(admin);
         }
         codesRepo.delete(codes);
-        Admin admin = adminRepo.findAdminByLogin(user.getLogin()).get();
     }
 
     public Admin getAdminByID(Integer id) {
