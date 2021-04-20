@@ -77,7 +77,8 @@
                     xhr.setRequestHeader('Content-Type', 'application/json')
                 },
                 success: function (response) {
-                    $(this).closest('form').find("input, textarea").val("");
+                    document.getElementById('form').reset();
+                    // $(this).closest('form').find("input, textarea").val("");
                     alert("Success");
                 },
                 error: function (request, textStatus, errorThrown) {

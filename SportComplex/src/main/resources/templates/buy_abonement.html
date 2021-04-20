@@ -112,6 +112,8 @@
                     success: function (response) {
                         document.getElementById('abonement_number').innerText=response;
                         document.getElementById('abonement_number_container').style.display='block';
+                        document.getElementById('form').reset();
+
                     },
                     error: function (request, textStatus, errorThrown) {
                         alert(request.getResponseHeader('error'));
@@ -136,6 +138,7 @@
                 },
                 success: function (response) {
                     alert("Success");
+                    document.getElementById('form_existing').reset();
 
                 },
                 error: function (request, textStatus, errorThrown) {

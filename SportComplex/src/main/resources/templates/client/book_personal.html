@@ -65,7 +65,7 @@
                     },
                     success: function (response) {
                         alert("Success");
-
+                        document.getElementById('form').reset();
                     },
                     error: function (request, textStatus, errorThrown) {
                         alert(request.getResponseHeader('error'));
