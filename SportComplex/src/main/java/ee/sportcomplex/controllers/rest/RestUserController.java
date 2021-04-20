@@ -56,7 +56,7 @@ public class RestUserController {
         try{
         return ResponseEntity.ok().body(userService.editAuthUser(user));
         } catch (Exception e){
-            return ResponseEntity.badRequest().header("error", e.getMessage()).body(null);
+            return ResponseEntity.badRequest().header("error", "login is in usage").body(null);
         }
     }
 
