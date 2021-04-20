@@ -22,8 +22,6 @@ public class RestScheduleController {
     @ResponseBody
     @RequestMapping(value = {"/get_schedule_by_day_of_week_with_trener"}, method = RequestMethod.GET)
     public List<ScheduleGroup> get_schedule_by_day_of_week_with_trener(@RequestParam String day_of_week){
-        List<ScheduleGroup> scheduleGroups= service.getScheduleByDay(ScheduleGroup.DayOfWeek.valueOf(day_of_week));
-//        scheduleGroups.forEach(x->System.out.println(x.getCoach().getName()));
         return service.getScheduleByDay(ScheduleGroup.DayOfWeek.valueOf(day_of_week));
     }
 
