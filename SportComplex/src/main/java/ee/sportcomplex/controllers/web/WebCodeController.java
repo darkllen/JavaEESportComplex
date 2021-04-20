@@ -21,12 +21,7 @@ public class WebCodeController {
     private final ComplexService complexService;
     private final UserService userService;
     private final CodeService codeService;
-
-    @RequestMapping(value = {"/generate_code"}, method = RequestMethod.GET)
-    public String generate_code(Model model){
-        model.addAttribute("complexes", complexService.getComplexes());
-        return "owner/generate_code";
-    }
+    
     @RequestMapping(value = {"/available_codes"}, method = RequestMethod.GET)
     public String available_codes(Principal principal, Model model){
         if (principal == null){
