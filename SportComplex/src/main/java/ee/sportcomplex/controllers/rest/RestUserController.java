@@ -32,8 +32,6 @@ public class RestUserController {
     public ResponseEntity<String> generate_code(@RequestBody Codes codes, Principal principal){
         Optional<Admin> admin = userService.getAdminByLogin(principal.getName());
         admin.ifPresentOrElse(v-> codeService.save(codes, v.getComplex()), ()->codeService.save(codes));
-
-
         return ResponseEntity.ok().body("\""+codes.getId()+"\"");
     }
 

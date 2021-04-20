@@ -45,12 +45,9 @@ public class RestAbonementController {
                 service.addAbonement(abonement);
                 return ResponseEntity.ok().body("\"ok\"");
             }
-
         }catch (Exception e){
             return ResponseEntity.badRequest().header("error", "impossible to add").body("error");
         }
     }
 
-
-//    add_abonement
 }

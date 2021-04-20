@@ -1,5 +1,6 @@
 package ee.sportcomplex.controllers.web;
 
+import ee.sportcomplex.dto.users.Client;
 import ee.sportcomplex.services.ScheduleService;
 import ee.sportcomplex.services.users.UserService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.security.Principal;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -62,8 +64,9 @@ public class WebUserController {
     }
 
     @RequestMapping(value = {"/settings"}, method = RequestMethod.GET)
-    public String settings(Model model){
-        //todo return "abonement"  in model attribute (if user=client)
+    public String settings(Model model, Principal principal){
+        Optional<Client> client = userService.getClientByLogin(principal.getName());
+        client.ifPresent(v-> model.addAttribute("abonements", v.getAbonements()));
         return "client/settings";
     }
 
