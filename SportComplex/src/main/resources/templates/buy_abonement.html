@@ -110,8 +110,12 @@
                         xhr.setRequestHeader('Content-Type', 'application/json')
                     },
                     success: function (response) {
-                        document.getElementById('abonement_number').innerText=response;
-                        document.getElementById('abonement_number_container').style.display='block';
+                        if(document.getElementById('abonement_number_container')!=null) {
+                            document.getElementById('abonement_number').innerText = response;
+                            document.getElementById('abonement_number_container').style.display = 'block';
+                        } else{
+                            alert("Success");
+                        }
                         document.getElementById('form').reset();
 
                     },

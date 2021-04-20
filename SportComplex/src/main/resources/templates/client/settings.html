@@ -12,9 +12,13 @@
 <div class = "header" th:insert="~{fragments/header :: head}"></div>
 
 <div th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}" class="col1" style="width:40%">
-    <h2>Your abonement numbers :</h2>
-    <div th:each="el: ${abonements}">
-        <i th:text="${el.id}"></i>
+    <h2>Your abonements :</h2>
+    <div class="abonement" th:each="el: ${abonements}">
+        <i class="abonement_field" th:if="${el.type.vip}">VIP</i>
+        <i class="abonement_field" th:text="'Abonement number: '+${el.id}"></i>
+        <i class="abonement_field" th:text="'Price: '+${el.price}"></i>
+        <i class="abonement_field" th:text="'Type: '+${el.type.name}"></i>
+        <i class="abonement_field" th:text="'Complex: '+${el.complex.name}"></i>
     </div>
 
 </div>
