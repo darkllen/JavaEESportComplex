@@ -28,7 +28,7 @@ public class RestAbonementController {
     public ResponseEntity<String> add_existing_abonement(@RequestBody Map<String, Integer> map, Principal principal){
         try{
             service.addExistingAbonement(map.get("id"), userService.getClientByLogin(principal.getName()).orElse(null));
-            return ResponseEntity.ok().body("ok");
+            return ResponseEntity.ok().body("\"ok\"");
         }catch (Exception e){
             return ResponseEntity.badRequest().header("error", "impossible to add").body("error");
         }
