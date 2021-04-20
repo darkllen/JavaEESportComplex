@@ -21,15 +21,13 @@ public class WebAdminController {
     @RequestMapping(value = {"/admins"}, method = RequestMethod.GET)
     public String admins(Model model, Principal principal){
         model.addAttribute("complexes", complexService.getComplexesShort());
-        //todo - return admins, not coaches
-        model.addAttribute("admins", userService.getAdminByLogin(principal.getName()).orElse(null).getComplex().getCoaches());
+        model.addAttribute("admins", userService.getAllAdmins());
         return "owner/admins";
     }
 
     @RequestMapping(value = {"/edit_admin"}, method = RequestMethod.GET)
     public String edit_admin(@RequestParam Integer id, Model model){
-        //todo - get admin by id, not coach
-        model.addAttribute("admin", userService.getCoachByID(id));
+        model.addAttribute("admin", userService.getAdminByID(id));
         return "owner/edit_admin";
     }
 

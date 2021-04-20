@@ -132,4 +132,12 @@ public class UserService {
         codesRepo.delete(codes);
         Admin admin = adminRepo.findAdminByLogin(user.getLogin()).get();
     }
+
+    public Admin getAdminByID(Integer id) {
+        return adminRepo.getOne(id);
+    }
+
+    public List<Admin> getAllAdmins() {
+        return  adminRepo.findAll();
+    }
 }

@@ -39,7 +39,7 @@ public class RestUserController {
 
 
     @ResponseBody
-    @RequestMapping(value = {"/remove_coach"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/remove_coach", "/remove_admin"}, method = RequestMethod.POST)
     public ResponseEntity<String> remove_coach(@RequestBody Map<String, Integer> map){
         try{
             userService.setToClient(map.get("id"));
@@ -49,16 +49,10 @@ public class RestUserController {
         }
     }
 
-    @ResponseBody
-    @RequestMapping(value = {"/edit_coach"}, method = RequestMethod.POST)
-    public AuthUser edit_coach(@RequestBody @Valid AuthUser user){
-        //TODO test
-        return userService.editAuthUser(user);
-    }
 
     @ResponseBody
-    @RequestMapping(value = {"/change_user_info"}, method = RequestMethod.POST)
-    public AuthUser change_user_info(@RequestBody @Valid AuthUser user){
+    @RequestMapping(value = {"/edit_coach", "/edit_admin", "/change_user_info"}, method = RequestMethod.POST)
+    public AuthUser edit_coach(@RequestBody @Valid AuthUser user){
         return userService.editAuthUser(user);
     }
 

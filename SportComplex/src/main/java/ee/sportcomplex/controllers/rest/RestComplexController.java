@@ -17,17 +17,10 @@ public class RestComplexController {
     private final ComplexService service;
 
     @ResponseBody
-    @RequestMapping(value = {"/edit_complex"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/edit_complex", "/add_complex"}, method = RequestMethod.POST)
     public Complex edit_complex(@RequestBody @Valid Complex complex){
         return service.editComplex(complex);
     }
-
-    @ResponseBody
-    @RequestMapping(value = {"/add_complex"}, method = RequestMethod.POST)
-    public Complex add_complex(@RequestBody @Valid Complex complex){
-        return service.editComplex(complex);
-    }
-    
 
     @ResponseBody
     @RequestMapping(value = {"/remove_complex"}, method = RequestMethod.POST)
