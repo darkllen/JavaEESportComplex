@@ -10,6 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
@@ -26,5 +27,6 @@ public class ScheduleInd extends Schedule {
     private Client client;
 
     @Column(name = "schedule_date")
+    @Future
     private Date scheduleDate;
 }
