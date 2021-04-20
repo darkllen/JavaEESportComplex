@@ -66,7 +66,7 @@ public class UserService {
         user.setName(old.getName());
         user.setSurname(old.getSurname());
         user.setRole("CLIENT");
-        user.setPermissions(List.of(permissionsRepo.getByPermission(Permissions.PermissionName.CLIENT).get()));
+        user.setPermissions(List.of(permissionsRepo.getByPermission(Permissions.PermissionName.CLIENT)));
 
         authRepo.delete(old);
         authRepo.flush();
@@ -86,6 +86,12 @@ public class UserService {
         if (user.getPassword() == null){
             user.setPassword(authRepo.getOne(user.getId()).getPassword());
         }
+        authRepo.saveAndFlush(user);
+        return user;
+    }
+
+    public AuthUser createAuthUser(AuthUser user) {
+        user.setPermissions(List.of(permissionsRepo.getByPermission(Permissions.PermissionName.CLIENT)));
         authRepo.saveAndFlush(user);
         return user;
     }
@@ -110,7 +116,7 @@ public class UserService {
         user.setName(old.getName());
         user.setSurname(old.getSurname());
         user.setRole(codes.getRole());
-        user.setPermissions(List.of(permissionsRepo.getByPermission(Permissions.PermissionName.valueOf(codes.getRole())).get()));
+        user.setPermissions(List.of(permissionsRepo.getByPermission(Permissions.PermissionName.valueOf(codes.getRole()))));
 
         authRepo.delete(old);
         authRepo.flush();

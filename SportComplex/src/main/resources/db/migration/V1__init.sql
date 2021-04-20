@@ -120,7 +120,6 @@ insert into users (login, name, surname, password, role) values
 
 insert into permissions (permission) values
 ('ADMIN'),
-('ADMINISTRATOR'),
 ('COACH'),
 ('CLIENT'),
 ('OWNER');

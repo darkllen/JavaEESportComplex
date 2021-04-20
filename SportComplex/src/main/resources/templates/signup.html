@@ -39,7 +39,8 @@
                 login: $(this).find('[name=login]').val(),
                 password: $(this).find('[name=password]').val(),
                 name: $(this).find('[name=name]').val(),
-                surname: $(this).find('[name=surname]').val()
+                surname: $(this).find('[name=surname]').val(),
+                role: "CLIENT"
             };
             $.ajax({
                 type: 'POST',

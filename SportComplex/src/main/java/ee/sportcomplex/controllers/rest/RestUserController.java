@@ -76,6 +76,14 @@ public class RestUserController {
         }
     }
 
+    @ResponseBody
+    @RequestMapping(value = {"/signup"}, method = RequestMethod.POST)
+    public AuthUser signup(@RequestBody @Valid AuthUser user){
+        if (!user.getRole().equals("CLIENT")) return null;
+        return userService.createAuthUser(user);
+    }
+
+
 
 
 //    private final UserService service;

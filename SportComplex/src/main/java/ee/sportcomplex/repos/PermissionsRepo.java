@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface PermissionsRepo extends JpaRepository<Permissions, Integer> {
     List<Permissions> findAllBy();
-    Optional<Permissions> getByPermission(Permissions.PermissionName permission);
+    Permissions getByPermission(Permissions.PermissionName permission);
 }

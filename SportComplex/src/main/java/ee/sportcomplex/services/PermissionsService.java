@@ -11,6 +11,6 @@ public class PermissionsService {
     private final PermissionsRepo repo;
 
     public Permissions getPermission(Permissions.PermissionName name){
-        return repo.getByPermission(name).orElse(null);
+        return repo.getByPermission(name);
     }
 }
