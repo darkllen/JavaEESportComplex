@@ -29,8 +29,6 @@
     </div>
 
     <div class="group_training" th:each="el: ${trainings}">
-        <h3 th:text="${el.scheduleDate}"></h3>
-
         <h3 th:text="${#dates.format(el.scheduleDate, 'dd-MM-yyyy HH:mm')}"></h3>
         <p th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}" th:text="'Coach: ' + ${el.coach.name}+' '+ ${el.coach.surname}"></p>
         <p th:if="${#authorization.expression('hasAuthority(''COACH'')')}" th:text="'Client: ' + ${el.client.name}+' '+ ${el.client.surname}"></p>
