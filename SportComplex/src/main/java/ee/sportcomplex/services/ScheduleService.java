@@ -57,4 +57,9 @@ public class ScheduleService {
         groupRepo.saveAndFlush(group);
         return group;
     }
+
+    public ScheduleInd addInd(ScheduleInd ind) {
+        indRepo.saveAndFlush(ind);
+        return ind;
+    }
 }

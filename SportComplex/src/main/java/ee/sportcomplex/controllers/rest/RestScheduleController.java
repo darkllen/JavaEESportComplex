@@ -2,6 +2,7 @@ package ee.sportcomplex.controllers.rest;
 
 import ee.sportcomplex.dto.Complex;
 import ee.sportcomplex.dto.schedules.ScheduleGroup;
+import ee.sportcomplex.dto.schedules.ScheduleInd;
 import ee.sportcomplex.services.ScheduleService;
 import ee.sportcomplex.services.users.UserService;
 import lombok.RequiredArgsConstructor;
@@ -51,6 +52,13 @@ public class RestScheduleController {
     @RequestMapping(value = {"/edit_schedule_group", "/add_schedule_group"}, method = RequestMethod.POST)
     public ScheduleGroup edit_schedule_group(@RequestBody @Valid ScheduleGroup group){
         return service.editGroup(group);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = {"/add_schedule_ind"}, method = RequestMethod.POST)
+    public ScheduleInd add_schedule_ind(@RequestBody @Valid ScheduleInd ind, Principal principal){
+        ind.setClient(userService.getClientByLogin(principal.getName()).get());
+        return service.addInd(ind);
     }
 
 
