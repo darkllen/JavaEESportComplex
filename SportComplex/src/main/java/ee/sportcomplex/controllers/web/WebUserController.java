@@ -2,6 +2,7 @@ package ee.sportcomplex.controllers.web;
 
 import ee.sportcomplex.dto.users.Admin;
 import ee.sportcomplex.dto.users.Client;
+import ee.sportcomplex.dto.users.Coach;
 import ee.sportcomplex.services.ComplexService;
 import ee.sportcomplex.services.ScheduleService;
 import ee.sportcomplex.services.users.UserService;
@@ -73,8 +74,12 @@ public class WebUserController {
 
         Optional<Admin> admin = userService.getAdminByLogin(principal.getName());
         admin.ifPresent(v-> model.addAttribute("coaches_num", v.getComplex().getCoaches().size()));
+        admin.ifPresent(v-> model.addAttribute("complex", v.getComplex()));
 
-        if (!model.containsAttribute("abonements") && !model.containsAttribute("coaches_num"))
+        Optional<Coach> coach = userService.getCoachByLogin(principal.getName());
+            coach.ifPresent(v-> model.addAttribute("complex", v.getComplex()));
+
+        if (!model.containsAttribute("abonements") && !model.containsAttribute("coaches_num") && !model.containsAttribute("complex"))
             model.addAttribute("complexes_num", complexService.getComplexes().size());
         return "client/settings";
     }
