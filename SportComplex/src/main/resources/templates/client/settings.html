@@ -11,9 +11,9 @@
 <body>
 <div class = "header" th:insert="~{fragments/header :: head}"></div>
 
-<div th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}" class="col1" style="width:40%">
-    <h2>Your abonements :</h2>
-    <div class="abonement" th:each="el: ${abonements}">
+<div class="col1" style="width:40%">
+    <h2 th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}">Your abonements :</h2>
+    <div th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}" class="abonement" th:each="el: ${abonements}">
         <i class="abonement_field" th:if="${el.type.vip}">VIP</i>
         <i class="abonement_field" th:text="'Abonement number: '+${el.id}"></i>
         <i class="abonement_field" th:text="'Price: '+${el.price}"></i>
@@ -21,15 +21,15 @@
         <i class="abonement_field" th:text="'Complex: '+${el.complex.name}"></i>
     </div>
 
+    <h2 th:if="${#authorization.expression('hasAuthority(''COACH'')')}" th:text="'You are coach in complex '+${complex.name}"></h2>
+
+    <h2 th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" th:text="'You are admin in complex '+${complex.name}"></h2>
+    <h2 th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" th:text="'Number of coaches in this complex : '+${coaches_num}"></h2>
+
+    <h2 th:if="${#authorization.expression('hasAuthority(''OWNER'')')}" th:text="'Number of complexes : '+${complexes_num}"></h2>
+
 </div>
 
-<div th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" class="col1" style="width:40%">
-    <h2 th:text="'Number of coaches in this complex : '+${coaches_num}"></h2>
-</div>
-
-<div th:if="${#authorization.expression('hasAuthority(''OWNER'')')}" class="col1" style="width:40%">
-    <h2 th:text="'Number of complexes : '+${complexes_num}"></h2>
-</div>
 
 <div class="col2" style="width: 45%" th:if="${#authorization.expression('isAuthenticated()')}">
     <button class="form_btn btn btn-warning" type="submit" onclick="window.location.replace('/change_user_info');">Change user info</button>
