@@ -38,6 +38,11 @@
             <button class="form_btn btn btn-success" type="submit">Buy</button>
 
         </form>
+        <div th:unless="${#authorization.expression('isAuthenticated()')}" id="abonement_number_container" style="display: none;">
+            <p>Your abonement number is:</p>
+            <i id="abonement_number"></i>
+        </div>
+
     </div>
     <div class="col2" style="width: 45%" th:if="${#authorization.expression('isAuthenticated()')}">
         <h2>Add existing abonement to this account</h2>
@@ -105,8 +110,8 @@
                         xhr.setRequestHeader('Content-Type', 'application/json')
                     },
                     success: function (response) {
-                        alert("Success");
-
+                        document.getElementById('abonement_number').innerText=response;
+                        document.getElementById('abonement_number_container').style.display='block';
                     },
                     error: function (request, textStatus, errorThrown) {
                         alert(request.getResponseHeader('error'));
