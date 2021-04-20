@@ -58,7 +58,7 @@
                 },
                 success: function (response) {
                     alert("Success");
-
+                    window.location.href = "/login";
                 },
                 error: function (request, textStatus, errorThrown) {
                     alert(request.getResponseHeader('error'));
