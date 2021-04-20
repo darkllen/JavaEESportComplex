@@ -29,6 +29,8 @@ public class ComplexService {
     }
 
     public Complex editComplex(Complex complex) {
+        if (complex.getId()!=null)
+            complex.setAdmin(repo.getOne(complex.getId()).getAdmin());
         repo.saveAndFlush(complex);
         return complex;
     }

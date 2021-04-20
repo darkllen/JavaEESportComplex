@@ -13,8 +13,10 @@ import ee.sportcomplex.services.ComplexService;
 import ee.sportcomplex.services.users.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
@@ -59,6 +61,7 @@ public class RestUserController {
     public ResponseEntity<String> send_code(Principal principal, @RequestBody Map<String, String> map){
         try{
             userService.upgradeUser(userService.getAuthByLogin(principal.getName()), map.get("code"));
+            SecurityContextHolder.clearContext();
             return ResponseEntity.ok().body("{\"upgraded\":\"upgraded\"}");
         } catch (Exception e){
             return ResponseEntity.badRequest().header("error", e.getMessage()).body("{\"error\":\"error\"}");

@@ -18,15 +18,15 @@ public class Type {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name", unique = true)
+    @Column(name = "name")
     @NotEmpty
     @Length(min = 1, max = 20)
     private String name;
 
-    @Column(name = "vip", unique = true)
+    @Column(name = "vip")
     private boolean vip;
 
-    @Column(name = "price", unique = true)
+    @Column(name = "price")
     @Min(0)
     private int price;
 }

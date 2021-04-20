@@ -19,6 +19,7 @@ public class RestComplexController {
     @ResponseBody
     @RequestMapping(value = {"/edit_complex", "/add_complex"}, method = RequestMethod.POST)
     public Complex edit_complex(@RequestBody @Valid Complex complex){
+
         return service.editComplex(complex);
     }
 
