@@ -136,6 +136,7 @@ insert into type (name, vip, price) values
 
 insert into abonement (price, time_in_month, type_id, complex_id, user_id, user_phone) values
 (8000, 12, 1, 1,3, null),
+(8200, 6, 1, 2,3, null),
 (1200, 6, 2, 2,null, '0661534986');
 
 insert into schedule_ind (schedule_date, coach_id, client_id) values

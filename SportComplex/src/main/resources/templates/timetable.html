@@ -51,7 +51,10 @@
         <div class="group_training">
             <h3 th:text="${#temporals.format(el.time, 'HH:mm')}"></h3>
             <h2 th:text="${el.name}"></h2>
+
             <p th:unless="${#authorization.expression('isAuthenticated()')}" th:text="'Complex: '+${el.coach.complex.name}"></p>
+            <p th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}" th:text="'Complex: '+${el.coach.complex.name}"></p>
+
             <p th:unless="${#authorization.expression('hasAuthority(''COACH'')')}" th:text="'Coach: '+${el.coach.name}+' '+${el.coach.surname}"></p>
             <p th:if="${el.for_vip}">(Only for VIP abonements)</p>
             <button th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" class="form_btn form_btn_first btn btn-success edit_button" type="submit" th:value="${el.id}">Edit</button>

@@ -11,9 +11,12 @@
 <body>
 <div class = "header" th:insert="~{fragments/header :: head}"></div>
 
-<div class="col1" style="width:40%">
-    <h2>Your abonement number is:</h2>
-    <h2>Other info...</h2>
+<div th:if="${#authorization.expression('hasAuthority(''CLIENT'')')}" class="col1" style="width:40%">
+    <h2>Your abonement numbers :</h2>
+    <div th:each="el: ${abonements}">
+        <i th:text="${el.id}"></i>
+    </div>
+
 </div>
 <div class="col2" style="width: 45%" th:if="${#authorization.expression('isAuthenticated()')}">
     <button class="form_btn btn btn-warning" type="submit" onclick="window.location.replace('/change_user_info');">Change user info</button>
