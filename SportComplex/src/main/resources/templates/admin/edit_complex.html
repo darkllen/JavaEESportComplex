@@ -48,8 +48,8 @@
                 description: $(this).find('[name=description]').val(),
                 space: $(this).find('[name=space]').val(),
                 floors_num: $(this).find('[name=floors_num]').val(),
-                open_date: $(this).find('[name=open_date]').val(),
-                city: $(this).find('[name=city]').val(),
+                open_date: $(this).find('[name=date]').val(),
+                city: $(this).find('[name=city]').val()
             };
             $.ajax({
                 type: 'POST',
